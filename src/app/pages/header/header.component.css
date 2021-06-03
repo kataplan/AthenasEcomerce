@@ -1,0 +1,66 @@
+.mat-toolbar {
+  background-color: #212833;
+  border-top: 1px solid #444444;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+h1 {
+  color: white;
+}
+
+input {
+  height: 1rem;
+  width: 40vw;
+  border: 0px;
+  outline: none;
+}
+
+#busqueda {
+  background-color: white;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0px 10px 0px 10px;
+  height: 2.5rem;
+}
+
+.btn-icon-text {
+  color: #a09e9e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 2.5rem;
+}
+
+.btn-icon-text:hover {
+  color: white;
+}
+
+.btn-icon {
+  margin-bottom: -10px;
+  padding: 0px;
+}
+
+.btn-text {
+  font-size: 0.8rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+/*# sourceMappingURL=header.component.css.map */
