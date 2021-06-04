@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="column">
+    <h2>CLIENTES REGISTRADOS</h2>
+    <div class="box">
+      <h2></h2>
+      <div class="text">
+        Si tiene una cuenta, inicie sesión con su dirección de correo
+        electrónico.
+      </div>
+      <form action="">
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-flat-button color="accent" type="submit">
+            INICIAR SESION
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="column">
+    <h2>NUEVOS CLIENTES</h2>
+    <div class="box">
+     
+      <div>
+        <div class="text">
+          Crear una cuenta tiene muchos beneficios: Pago más rápido, guardar más
+          de una dirección, seguimiento de pedidos y mucho más.
+        </div>
+        <div>
+          <button mat-flat-button color="accent" type="submit">
+            CREAR CUENTA
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
