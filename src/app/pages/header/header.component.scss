@@ -1,12 +1,18 @@
 @import "../../app.component.scss";
+.mat-toolbar-row,
 .mat-toolbar {
   background-color: $area;
   border-top: 1px solid #444444;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
-h1{
-    color: white;
+#second-row {
+  border-bottom: 2px solid $primary;
+  height: 42px;
+}
+h1 {
+  color: white;
 }
 input {
   height: 1rem;
@@ -14,29 +20,96 @@ input {
   border: 0px;
   outline: none;
 }
-#busqueda {
+#busqueda,
+#sub-busqueda {
   background-color: white;
   border-radius: 20px;
-  display: flex;
   align-items: center;
   padding: 0px 10px 0px 10px;
   height: 2.5rem;
 }
-.btn-icon-text {
+#busqueda {
+  display: flex;
+}
+
+#btn-search,
+#hambuger-menu,
+#sub-busqueda {
+  display: none;
+}
+
+.btn-icon-text,
+#btn-search,
+#hambuger-menu {
   color: rgb(160, 158, 158);
+  height: 2.5rem;
+}
+
+.btn-icon-text:hover,
+#btn-search:hover {
+  color: rgb(255, 255, 255);
+}
+.btn-icon-text {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 2.5rem;
 }
-.btn-icon-text:hover {
-  color: rgb(255, 255, 255);
-}
+
 .btn-icon {
+  height: 2.5rem;
   margin-bottom: -10px;
-  padding: 0px;
 }
 .btn-text {
   font-size: 0.8rem;
-  height: fit-content;
+  display: flex;
+}
+.header-content {
+  padding: 0px 2%;
+  display: flex;
+  align-items: center;
+}
+#profile-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#categorys {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tab-content {
+  color: white;
+  font-size: 0.8em;
+  font: bold;
+  padding: 0 10px 0px 10px;
+  margin-bottom: 5px;
+  padding: 0 1vw;
+}
+.tab-content:hover {
+  border-bottom: 8px solid $primary;
+  transform: translateY(4px);
+}
+
+@media screen and (max-width: 600px) {
+  #busqueda,
+  #arrow-down,
+  .btn-text,
+  #profile-menu,
+  #categorys,
+  #second-row {
+    display: none;
+  }
+
+  #btn-search,
+  #hambuger-menu,
+  #sub-busqueda {
+    display: flex;
+  }
+
+  .btn-icon {
+    font-size: 2rem;
+    margin-bottom: 0px;
+    transform: translatey(3px);
+  }
 }

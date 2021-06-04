@@ -1,26 +1,74 @@
 <mat-toolbar>
-  <div>
-    <h1>Athenas</h1>
-  </div>
+  <mat-toolbar-row>
+    <div class="header-content" id="hambuger-menu">
+      <button mat-button class="btn-header" [matMenuTriggerFor]="Category">
+        <mat-icon class="btn-icon">menu</mat-icon>
+      </button>
+      <mat-menu #Category="matMenu">
+        <button mat-menu-item>Football</button>
+        <button mat-menu-item>Basketball</button>
+        <button mat-menu-item>Rugby</button>
+        <button mat-menu-item>Handball</button>
+        <button mat-menu-item>Ciclismo</button>
+        <button mat-menu-item>Boxeo</button>
+        <button mat-menu-item>Tenis</button>
+      </mat-menu>
+    </div>
 
-  <div id="busqueda">
-    <input placeholder="Busca en nuestra tienda..." />
-    <mat-icon matSuffix>search</mat-icon>
-  </div>
-  <div>
-    <button mat-button>
-      <div class="btn-icon-text">
-        <mat-icon class="btn-icon">person_outline</mat-icon>
-        <span class="btn-text">MI PERFIL</span>
-      </div>
-    </button>
- 
-    <button mat-button>
-      <div class="btn-icon-text">
-        <mat-icon class="btn-icon">shopping_cart_outline</mat-icon>
-        <span class="btn-text">CARRITO</span>
-      </div>
-    </button>
-  </div>
-  
+    <div class="header-content">
+      <h1>ATHENAS</h1>
+    </div>
+
+    <div id="busqueda" class="header-content">
+      <input placeholder="Busca en nuestra tienda..." />
+      <mat-icon matSuffix>search</mat-icon>
+    </div>
+
+    <div class="header-content">
+      <button mat-button class="btn-header" id="btn-search" (click)="name()">
+        <mat-icon class="btn-icon">search</mat-icon>
+      </button>
+
+      <button mat-button class="btn-header">
+        <div class="btn-icon-text">
+          <mat-icon class="btn-icon">shopping_cart_outline</mat-icon>
+          <div class="btn-text">CARRITO</div>
+        </div>
+      </button>
+
+      <button
+        mat-button
+        [matMenuTriggerFor]="menu"
+        id="btn-profile"
+        class="btn-header"
+      >
+        <div class="btn-icon-text">
+          <mat-icon class="btn-icon">person_outline</mat-icon>
+          <div id="profile-menu">
+            <div class="btn-text">MI PERFIL</div>
+            <mat-icon id="arrow-down">keyboard_arrow_down</mat-icon>
+          </div>
+        </div>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Iniciar Sesión</button>
+        <button mat-menu-item>Crear Cuenta</button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row id="second-row">
+    <div id="sub-busqueda" class="header-content">
+      <input placeholder="Busca en nuestra tienda..." />
+      <mat-icon matSuffix>search</mat-icon>
+    </div>
+    <div id="categorys">
+      <div class="tab-content">FOOTBALL</div>
+      <div class="tab-content">BASKETBALL</div>
+      <div class="tab-content">RUGBY</div>
+      <div class="tab-content">HANDBALL</div>
+      <div class="tab-content">CICLISMO</div>
+      <div class="tab-content">BOXEO</div>
+      <div class="tab-content">TENIS</div>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
