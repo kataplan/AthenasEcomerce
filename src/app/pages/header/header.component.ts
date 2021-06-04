@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  display:boolean=false;
+  display:boolean=true;
   name() {
     if(this.display){
       document.getElementById('second-row')!.style.display ="flex";
