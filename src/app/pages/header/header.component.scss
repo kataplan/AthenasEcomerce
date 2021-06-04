@@ -11,9 +11,13 @@
   border-bottom: 2px solid $primary;
   height: 42px;
 }
-h1 {
-  color: white;
+img {
+  width: 20vw;
+  max-width: 180px;
+  min-width: 150px;
+  z-index: 0;
 }
+
 input {
   height: 1rem;
   width: 40vw;
@@ -54,7 +58,11 @@ input {
   flex-direction: column;
   align-items: center;
 }
-
+.btn-header {
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0 40px;
+}
 .btn-icon {
   height: 2.5rem;
   margin-bottom: -10px;
@@ -64,7 +72,6 @@ input {
   display: flex;
 }
 .header-content {
-  padding: 0px 2%;
   display: flex;
   align-items: center;
 }
@@ -106,10 +113,32 @@ input {
   #sub-busqueda {
     display: flex;
   }
-
+  .mat-icon-button i,
+  .mat-icon-button .mat-icon {
+    line-height: normal;
+  }
+  #btn-search:focus,
+  #sub-busqueda_focus {
+    color: rgb(255, 255, 255);
+  }
+  #btn-search:focus {
+    display: flex;
+  }
   .btn-icon {
-    font-size: 2rem;
-    margin-bottom: 0px;
+    font-size: 1.8rem;
+    margin: 0px;
     transform: translatey(3px);
+  }
+  .btn-header {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+  
+  .header-content {
+    padding: 0px;
   }
 }

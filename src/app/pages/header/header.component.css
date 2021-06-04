@@ -18,8 +18,11 @@
   height: 42px;
 }
 
-h1 {
-  color: white;
+img {
+  width: 20vw;
+  max-width: 180px;
+  min-width: 150px;
+  z-index: 0;
 }
 
 input {
@@ -77,6 +80,12 @@ input {
           align-items: center;
 }
 
+.btn-header {
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0 40px;
+}
+
 .btn-icon {
   height: 2.5rem;
   margin-bottom: -10px;
@@ -90,7 +99,6 @@ input {
 }
 
 .header-content {
-  padding: 0px 2%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -155,11 +163,37 @@ input {
     display: -ms-flexbox;
     display: flex;
   }
+  .mat-icon-button i,
+  .mat-icon-button .mat-icon {
+    line-height: normal;
+  }
+  #btn-search:focus,
+  #sub-busqueda_focus {
+    color: white;
+  }
+  #btn-search:focus {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
   .btn-icon {
-    font-size: 2rem;
-    margin-bottom: 0px;
+    font-size: 1.8rem;
+    margin: 0px;
     -webkit-transform: translatey(3px);
             transform: translatey(3px);
+  }
+  .btn-header {
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .header-content {
+    padding: 0px;
   }
 }
 /*# sourceMappingURL=header.component.css.map */

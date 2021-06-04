@@ -13,8 +13,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  display:boolean=false;
   name() {
-    if(document.getElementById('btn-search')?.toggleAttribute)
-    document.getElementById('second-row')!.style.display ="flex";
+    if(this.display){
+      document.getElementById('second-row')!.style.display ="flex";
+      this.display=false;
+    }else{
+      document.getElementById('second-row')!.style.display ="none";
+      this.display=true;
+    }
+    
   }
 }
