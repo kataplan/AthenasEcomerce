@@ -4,10 +4,22 @@ $lighter-area:#ffff;
 $light-area:rgb(247, 247, 247);
 $strong-font: 'SuperGrotesk-Bold', Arial, sans-serif;
 
-
+.content-wrapper{
+    width: 100%;
+    background-color: $light-area;
+}
+.box{
+    background-color: $lighter-area;
+    border: solid 0.8px rgb(173, 173, 173);
+    border-radius: 10px;
+    padding: 20px 20px;
+}
 .btn-standar{
     border-radius: 20px;
     height: 3rem;
     width: 50%;
     min-width: 200px;
 }
+.input-container {
+    width: 100%;
+  }

@@ -1,7 +1,23 @@
+.content-wrapper {
+  width: 100%;
+  background-color: #f7f7f7;
+}
+
+.box {
+  background-color: #ffff;
+  border: solid 0.8px #adadad;
+  border-radius: 10px;
+  padding: 20px 20px;
+}
+
 .btn-standar {
   border-radius: 20px;
   height: 3rem;
   width: 50%;
   min-width: 200px;
+}
+
+.input-container {
+  width: 100%;
 }
 /*# sourceMappingURL=app.component.css.map */

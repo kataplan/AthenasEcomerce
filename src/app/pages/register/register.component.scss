@@ -21,54 +21,51 @@ input.example-right-align {
 }
 
 .box {
-    background-color: $lighter-area;
-    border: solid 0.8px rgb(173, 173, 173);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 20px;
-    width: 60%;
-    min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  min-width: 300px;
 }
-.container {
-  padding: 40px 10px;
+.content-wrapper {
+  padding: 40px 20px;
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
   background-color: $light-area;
 }
-.mat-form-field {
-  width: 100% !important;
-}
+
 .text {
   margin-bottom: 20px;
 }
-h1{
-    padding-left: 10px;
-    font-weight: 600;
-    font-family:$strong-font;
-    color:$area;
-    font-size: 1.5rem;
-    
+h1 {
+  padding-left: 10px;
+  font-weight: 600;
+  font-family: $strong-font;
+  color: $area;
+  font-size: 1.5rem;
 }
-
-@media screen and (max-width: 714px) {
-  .container, .box {
+.mat-form-field{
+  width: 100%;
+}
+@media screen and (max-width: 600px) {
+  .container,
+  .box {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
-  form{
+  form {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
     justify-content: center;
   }
-  .input-container{
+  .input-container {
     width: 100%;
   }
-  h1{
+  h1 {
     text-align: center;
   }
 }

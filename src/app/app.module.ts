@@ -16,6 +16,7 @@ import { LoginComponent } from './pages/login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { RegisterComponent } from './pages/register/register.component';
     MatListModule,
     MatMenuModule,
     MatFormFieldModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

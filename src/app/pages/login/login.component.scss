@@ -22,24 +22,18 @@ input.example-right-align {
 .column {
   display: flex;
   flex-direction: column;
-  
   width: 40%;
-  
   height: fit-content;
 }
 .box {
-    background-color: $lighter-area;
-    border: solid 0.8px rgb(173, 173, 173);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
 }
-.container {
+.content-wrapper {
   padding: 40px 10px;
   display: flex;
   justify-content: space-evenly;
-  background-color: $light-area;
 }
 .mat-form-field {
   width: 90%;
@@ -47,15 +41,16 @@ input.example-right-align {
 .text {
   margin-bottom: 20px;
 }
-h2{
-    padding-left: 10px;
-    font-weight: 600;
-    font-family:sans-serif;
-    color:$area;
+h2 {
+  padding-left: 10px;
+  font-weight: 600;
+  font-family: sans-serif;
+  color: $area;
 }
 
 @media screen and (max-width: 714px) {
-  .container {
+  .content-wrapper, form, .box, .box div{
+    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
@@ -63,5 +58,8 @@ h2{
   .column {
     width: 80%;
     margin-bottom: 40px;
+  }
+  form{
+    width: 100%;
   }
 }

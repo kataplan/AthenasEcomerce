@@ -1,1 +1,12 @@
-/* No CSS *//*# sourceMappingURL=home.component.css.map */
+.btn-standar {
+  border-radius: 20px;
+  height: 3rem;
+  width: 50%;
+  min-width: 200px;
+}
+
+ngb-carousel, img {
+  width: 100%;
+  height: auto;
+}
+/*# sourceMappingURL=home.component.css.map */

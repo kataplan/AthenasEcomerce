@@ -1,4 +1,4 @@
-<div class="container">
+<div class="content-wrapper">
   <div class="column">
     <h2>CLIENTES REGISTRADOS</h2>
     <div class="box">
@@ -8,14 +8,14 @@
         electrónico.
       </div>
       <form action="">
-        <div>
-          <mat-form-field appearance="fill">
+        <div class="input-container">
+          <mat-form-field appearance="outline">
             <mat-label>Correo electrónico</mat-label>
             <input matInput />
           </mat-form-field>
         </div>
-        <div>
-          <mat-form-field appearance="fill">
+        <div class="input-container">
+          <mat-form-field appearance="outline">
             <mat-label>Enter your password</mat-label>
             <input matInput [type]="hide ? 'password' : 'text'" />
             <button
@@ -24,14 +24,18 @@
               (click)="hide = !hide"
               [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide"
-            
             >
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
           </mat-form-field>
         </div>
-        <div>
-          <button mat-flat-button color="accent" type="submit" class="btn-standar">
+        <div >
+          <button
+            mat-flat-button
+            color="accent"
+            type="submit"
+            class="btn-standar"
+          >
             INICIAR SESION
           </button>
         </div>
@@ -48,9 +52,16 @@
           de una dirección, seguimiento de pedidos y mucho más.
         </div>
         <div>
-          <button mat-flat-button color="accent" type="submit" class="btn-standar">
-            CREAR CUENTA
-          </button>
+          <div>
+            <button
+              mat-flat-button
+              color="accent"
+              type="submit"
+              class="btn-standar"
+            >
+              CREAR CUENTA
+            </button>
+          </div>
         </div>
       </div>
     </div>
