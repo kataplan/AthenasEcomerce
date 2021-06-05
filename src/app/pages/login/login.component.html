@@ -24,13 +24,14 @@
               (click)="hide = !hide"
               [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide"
+            
             >
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
           </mat-form-field>
         </div>
         <div>
-          <button mat-flat-button color="accent" type="submit">
+          <button mat-flat-button color="accent" type="submit" class="btn-standar">
             INICIAR SESION
           </button>
         </div>
@@ -47,7 +48,7 @@
           de una dirección, seguimiento de pedidos y mucho más.
         </div>
         <div>
-          <button mat-flat-button color="accent" type="submit">
+          <button mat-flat-button color="accent" type="submit" class="btn-standar">
             CREAR CUENTA
           </button>
         </div>

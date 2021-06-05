@@ -1,28 +1,28 @@
-<div>
+<div class=container>
   <h1>CREAR NUEVA CUENTA DE CLIENTE</h1>
-  <div>
+  <div class=box>
     <form action="">
-      <div>
+      <div class="input-container">
         <mat-form-field appearance="fill">
           <mat-label>Nombre</mat-label>
           <input matInput />
         </mat-form-field>
       </div>
-      <div>
+      <div class="input-container">
         <mat-form-field appearance="fill">
           <mat-label>Apellidos</mat-label>
           <input matInput />
         </mat-form-field>
       </div>
-      <div>
+      <div class="input-container">
         <mat-form-field appearance="fill">
           <mat-label>Rut</mat-label>
           <input matInput />
         </mat-form-field>
       </div>
-      <div>
+      <div class="input-container">
         <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label>
+          <mat-label>Ingrese su contraseña</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" />
           <button
             mat-icon-button
@@ -34,12 +34,14 @@
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
         </mat-form-field>
+      </div>
+      <div class="input-container">
         <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label>
+          <mat-label>Ingrese nuevamente su contraseña</mat-label>
           <input matInput [type]="hideAlways ? 'password' : 'text'" />
         </mat-form-field>
       </div>
-      <button mat-flat-button color="accent" type="submit">
+      <button mat-flat-button color="accent" type="submit" class="btn-standar">
         CREAR UNA CUENTA
       </button>
     </form>
