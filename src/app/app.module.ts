@@ -19,11 +19,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { FooterComponent } from './pages/footer/footer.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, LoginComponent, HomeComponent, RegisterComponent],
+  declarations: [AppComponent, HeaderComponent, LoginComponent, HomeComponent, RegisterComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
