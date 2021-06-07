@@ -47,7 +47,10 @@ input {
 
 .btn-icon-text:hover,
 #btn-search:hover,
-#hambuger-menu:hover {
+#hambuger-menu:hover
+.btn-icon-text:focus,
+#btn-search:focus,
+#hambuger-menu:focus {
   color: rgb(255, 255, 255);
 }
 .btn-icon-text {
@@ -94,6 +97,7 @@ input {
   border-bottom: 8px solid $primary;
 }
 
+
 @media screen and (max-width: 600px) {
   #busqueda,
   #arrow-down,
@@ -113,13 +117,8 @@ input {
   .mat-icon-button .mat-icon {
     line-height: normal;
   }
-  #btn-search:focus,
-  #sub-busqueda_focus {
-    color: rgb(255, 255, 255);
-  }
-  #btn-search:focus {
-    display: flex;
-  }
+  
+
   .btn-icon {
     font-size: 1.8rem;
     margin: 0px;

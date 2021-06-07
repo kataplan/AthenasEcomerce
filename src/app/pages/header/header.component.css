@@ -88,7 +88,10 @@ input {
 
 .btn-icon-text:hover,
 #btn-search:hover,
-#hambuger-menu:hover {
+#hambuger-menu:hover
+.btn-icon-text:focus,
+#btn-search:focus,
+#hambuger-menu:focus {
   color: white;
 }
 
@@ -190,15 +193,6 @@ input {
   .mat-icon-button i,
   .mat-icon-button .mat-icon {
     line-height: normal;
-  }
-  #btn-search:focus,
-  #sub-busqueda_focus {
-    color: white;
-  }
-  #btn-search:focus {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
   }
   .btn-icon {
     font-size: 1.8rem;

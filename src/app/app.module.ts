@@ -21,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FooterComponent } from './pages/footer/footer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HomeComponent,
     RegisterComponent,
     FooterComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
