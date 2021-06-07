@@ -1,4 +1,5 @@
 $primary: #2196f3;
+$accent: #ff4081;
 $area: #212833;
 $lighter-area: #ffff;
 $light-area: rgb(247, 247, 247);
@@ -7,12 +8,10 @@ $strong-font: "SuperGrotesk-Bold", Arial, sans-serif;
 .content-wrapper {
   background-color: $light-area;
   width: 100%;
-  min-height: 71%;
+  min-height: 68%;
 }
 #btn-logo {
-  
   width: 180px;
-
 }
 .box {
   background-color: $lighter-area;

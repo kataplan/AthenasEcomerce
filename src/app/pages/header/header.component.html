@@ -28,7 +28,10 @@
 
       <div id="busqueda" class="search-content">
         <input placeholder="Busca en nuestra tienda..." />
-        <mat-icon matSuffix>search</mat-icon>
+        <button mat-icon-button (click)=search()>
+          <mat-icon matSuffix>search</mat-icon>
+        </button>
+        
       </div>
     </div>
 
@@ -66,7 +69,10 @@
     
     <div id="sub-busqueda" class="search-content">
       <input placeholder="Busca en nuestra tienda..." />
-      <mat-icon matSuffix>search</mat-icon>
+      <button mat-icon-button (click)=search()>
+        <mat-icon matSuffix>search</mat-icon>
+      </button>
+      
     </div>
 
     <div id="categorys">

@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit {
   goRegister(){
     this.router.navigate([`/register`])
   }
-  
+  search(){
+    this.router.navigate([`/search`])
+  }
 
 }

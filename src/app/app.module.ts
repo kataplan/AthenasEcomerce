@@ -22,6 +22,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { FooterComponent } from './pages/footer/footer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchComponent } from './pages/search/search.component';
+import { ProductComponent } from './pages/product/product.component';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { SearchComponent } from './pages/search/search.component';
     RegisterComponent,
     FooterComponent,
     SearchComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,7 @@ import { SearchComponent } from './pages/search/search.component';
     MatGridListModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

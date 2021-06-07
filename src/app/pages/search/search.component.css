@@ -1,1 +1,56 @@
-/* No CSS *//*# sourceMappingURL=search.component.css.map */
+.content-wrapper {
+  background-color: #f7f7f7;
+  width: 100%;
+  min-height: 68%;
+}
+
+#btn-logo {
+  width: 180px;
+}
+
+.box {
+  background-color: #ffff;
+  border: solid 0.8px #adadad;
+  border-radius: 10px;
+  padding: 20px 20px;
+}
+
+.btn-standar {
+  border-radius: 20px;
+  height: 3rem;
+  width: 50%;
+  min-width: 200px;
+}
+
+.input-container {
+  width: 100%;
+}
+
+.content-wrapper {
+  padding: 40px 20px;
+}
+
+#content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 10px;
+}
+
+#productos {
+  padding-left: 20px;
+}
+
+.precio {
+  color: #ff4081;
+  font-size: 1.4rem;
+}
+
+.titulo {
+  color: black;
+}
+
+.btn-producto:hover {
+  background-color: none;
+}
+/*# sourceMappingURL=search.component.css.map */

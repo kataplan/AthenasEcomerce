@@ -1,0 +1,55 @@
+@import "../../app.component.scss";
+.content-wrapper {
+  padding: 40px 20px;
+}
+#content {
+  display: flex;
+  padding-left: 10px;
+}
+#productos {
+  padding-left: 20px;
+}
+.precio {
+  color: $accent;
+  font-size: 1.4rem;
+}
+.titulo {
+  color: black;
+}
+.btn-producto {
+  background: transparent;
+  border: none !important;
+  font-size: 0;
+}
+
+#productos{
+  width: 100%;
+  padding: 20px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 15px;
+}
+.card {
+  transition: box-shadow 0.1s ease-in;
+}
+#productos div {
+    
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    object-fit: cover;
+}
+.card:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+#productos-wrapper{
+    width: 100%;
+   
+}
+@media screen and (max-width: 600px) {
+#content, .content-wrapper, .column{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+}
