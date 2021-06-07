@@ -7,17 +7,17 @@
         Si tiene una cuenta, inicie sesión con su dirección de correo
         electrónico.
       </div>
-      <form action="">
+      <form [formGroup]="formulario">
         <div class="input-container">
           <mat-form-field appearance="outline">
             <mat-label>Correo electrónico</mat-label>
-            <input matInput />
+            <input matInput formControlName="email" />
           </mat-form-field>
         </div>
         <div class="input-container">
           <mat-form-field appearance="outline">
             <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" />
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"/>
             <button
               mat-icon-button
               matSuffix

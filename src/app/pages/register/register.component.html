@@ -1,29 +1,35 @@
 <div class="content-wrapper">
   <h1>CREAR NUEVA CUENTA DE CLIENTE</h1>
   <div class=box>
-    <form action="">
+    <form [formGroup]="formulario">
       <div class="input-container">
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
-          <input matInput />
+          <input matInput formControlName="name"/>
         </mat-form-field>
       </div>
       <div class="input-container">
         <mat-form-field appearance="outline">
           <mat-label>Apellidos</mat-label>
-          <input matInput />
+          <input matInput formControlName="firstname" />
         </mat-form-field>
       </div>
       <div class="input-container">
         <mat-form-field appearance="outline">
           <mat-label>Rut</mat-label>
-          <input matInput />
+          <input matInput formControlName="rut" />
+        </mat-form-field>
+      </div>
+      <div class="input-container">
+        <mat-form-field appearance="outline">
+          <mat-label>correo electrónico</mat-label>
+          <input matInput formControlName="email" type="email" />
         </mat-form-field>
       </div>
       <div class="input-container">
         <mat-form-field appearance="outline">
           <mat-label>Ingrese su contraseña</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
+          <input matInput [type]="hide ? 'password' : 'text'" type="password" />
           <button
             mat-icon-button
             matSuffix
@@ -38,7 +44,7 @@
       <div class="input-container">
         <mat-form-field appearance="outline">
           <mat-label>Ingrese nuevamente su contraseña</mat-label>
-          <input matInput [type]="hideAlways ? 'password' : 'text'" />
+          <input matInput [type]="hideAlways ? 'password' : 'text' "type="password" />
         </mat-form-field>
       </div>
       <button mat-flat-button color="accent" type="submit" class="btn-standar">

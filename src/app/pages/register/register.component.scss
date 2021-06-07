@@ -25,9 +25,10 @@ input.example-right-align {
   flex-direction: column;
   width: 70%;
   min-width: 300px;
+  
 }
 .content-wrapper {
-  padding: 40px 20px;
+  padding: 40px 10%;
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
