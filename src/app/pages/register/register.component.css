@@ -1,6 +1,11 @@
 .content-wrapper {
-  width: 100%;
   background-color: #f7f7f7;
+  width: 100%;
+  min-height: 71%;
+}
+
+#btn-logo {
+  width: 180px;
 }
 
 .box {

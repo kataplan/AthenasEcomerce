@@ -20,7 +20,15 @@ export class HeaderComponent implements OnInit {
       this.display = true;
     }
   }
-
+  goHome(){
+    this.router.navigate([`/home`])
+  }
+  goLogin(){
+    this.router.navigate([`/login`])
+  }
+  goRegister(){
+    this.router.navigate([`/register`])
+  }
   
 
 }

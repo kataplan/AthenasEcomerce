@@ -1,0 +1,93 @@
+.content-wrapper {
+  background-color: #f7f7f7;
+  width: 100%;
+  min-height: 71%;
+}
+
+#btn-logo {
+  width: 180px;
+}
+
+.box {
+  background-color: #ffff;
+  border: solid 0.8px #adadad;
+  border-radius: 10px;
+  padding: 20px 20px;
+}
+
+.btn-standar {
+  border-radius: 20px;
+  height: 3rem;
+  width: 50%;
+  min-width: 200px;
+}
+
+.input-container {
+  width: 100%;
+}
+
+.area {
+  background-color: #212833;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 20%;
+}
+
+#text {
+  color: #ffff;
+}
+
+.svg-rrss {
+  width: 25px;
+  height: 25px;
+  color: #212833;
+}
+
+.btn-rrss {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 20px;
+}
+
+.btn-rrss {
+  margin: 0 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .area {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+/*# sourceMappingURL=footer.component.css.map */

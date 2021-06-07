@@ -1,3 +1,31 @@
+.content-wrapper {
+  background-color: #f7f7f7;
+  width: 100%;
+  min-height: 71%;
+}
+
+#btn-logo {
+  width: 180px;
+}
+
+.box {
+  background-color: #ffff;
+  border: solid 0.8px #adadad;
+  border-radius: 10px;
+  padding: 20px 20px;
+}
+
+.btn-standar {
+  border-radius: 20px;
+  height: 3rem;
+  width: 50%;
+  min-width: 200px;
+}
+
+.input-container {
+  width: 100%;
+}
+
 .mat-toolbar-row,
 .mat-toolbar {
   background-color: #212833;
@@ -15,21 +43,15 @@
 
 #second-row {
   border-bottom: 2px solid #2196f3;
-  height: 42px;
-}
-
-img {
-  width: 20vw;
-  max-width: 180px;
-  min-width: 150px;
-  z-index: 0;
+  height: 48px;
 }
 
 input {
   height: 1rem;
-  width: 40vw;
+  width: 30vw;
   border: 0px;
   outline: none;
+  font-size: small;
 }
 
 #busqueda,
@@ -58,12 +80,15 @@ input {
 .btn-icon-text,
 #btn-search,
 #hambuger-menu {
+  -webkit-transition: color 0.1s ease;
+  transition: color 0.1s ease;
   color: #a09e9e;
   height: 2.5rem;
 }
 
 .btn-icon-text:hover,
-#btn-search:hover {
+#btn-search:hover,
+#hambuger-menu:hover {
   color: white;
 }
 
@@ -136,15 +161,14 @@ input {
   color: white;
   font-size: 0.8em;
   font: bold;
-  padding: 0 10px 0px 10px;
-  margin-bottom: 5px;
-  padding: 0 1vw;
+  padding: 0px 1vw;
+  -webkit-transition: border-bottom 0.1s ease-in;
+  transition: border-bottom 0.1s ease-in;
+  border-bottom: 8px solid #212833;
 }
 
 .tab-content:hover {
   border-bottom: 8px solid #2196f3;
-  -webkit-transform: translateY(4px);
-          transform: translateY(4px);
 }
 
 @media screen and (max-width: 600px) {

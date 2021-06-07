@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -24,4 +26,5 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     
   }
+  
 }

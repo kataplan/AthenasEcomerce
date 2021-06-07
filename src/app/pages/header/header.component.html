@@ -16,7 +16,7 @@
     </div>
 
     <div class="header-content">
-      <button mat-button id="btn-logo">
+      <button mat-button id="btn-logo" (click)="goHome()">
         <img src="../../../assets/img/logo_01.svg" alt="" />
       </button>
     </div>
@@ -57,8 +57,8 @@
         </div>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Iniciar Sesión</button>
-        <button mat-menu-item>Crear Cuenta</button>
+        <button mat-menu-item (click)="goLogin()">Iniciar Sesión</button>
+        <button mat-menu-item (click)="goRegister()">Crear Cuenta</button>
       </mat-menu>
     </div>
   </mat-toolbar-row>

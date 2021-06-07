@@ -1,6 +1,11 @@
 .content-wrapper {
-  width: 100%;
   background-color: #f7f7f7;
+  width: 100%;
+  min-height: 71%;
+}
+
+#btn-logo {
+  width: 180px;
 }
 
 .box {
@@ -19,10 +24,6 @@
 
 .input-container {
   width: 100%;
-}
-
-li {
-  list-style: none;
 }
 
 .example-container .mat-form-field + .mat-form-field {
