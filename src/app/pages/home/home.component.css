@@ -40,11 +40,21 @@ img {
   background-size: cover;
 }
 
+#gallery-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .gallery {
   width: 100%;
+  max-width: 900px;
   padding: 20px 20px;
-  display: -ms-inline-grid;
-  display: inline-grid;
+  display: -ms-grid;
+  display: grid;
   -ms-grid-columns: (minmax(200px, 1.5fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(200px, 1.5fr));
   grid-gap: 15px;
