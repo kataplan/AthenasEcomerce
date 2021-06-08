@@ -6,14 +6,14 @@
   display: flex;
   padding-left: 10px;
 }
-#productos {
+#products {
   padding-left: 20px;
 }
-.precio {
+.price {
   color: $accent;
   font-size: 1.4rem;
 }
-.titulo {
+.title {
   color: black;
 }
 .btn-producto {
@@ -22,34 +22,38 @@
   font-size: 0;
 }
 
-#productos{
+#products{
   width: 100%;
   padding: 20px 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   grid-gap: 15px;
 }
 .card {
   transition: box-shadow 0.1s ease-in;
 }
-#productos div {
-    
+#products div {
     width: 100%;
     height: 100%;
-    max-width: 200px;
+    min-width: 250px;
+    max-width: 300px;
     object-fit: cover;
 }
 .card:hover {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
-#productos-wrapper{
+#products-wrapper{
     width: 100%;
    
 }
 @media screen and (max-width: 600px) {
-#content, .content-wrapper, .column{
-    flex-direction: column;
+#content, .content-wrapper, .column , #products{
+    display: flex;
+   flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+#filter{
+  width: 80%;
 }
 }
