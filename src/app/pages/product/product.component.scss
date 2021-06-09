@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   padding: 20px 0;
-  width:100%;
+  width: 100%;
 }
 .card {
   padding: 0px;
@@ -28,32 +28,37 @@
 }
 .box {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: 15px 0px;
-  width: 80%;
-  
+  padding: 15px 5px;
+  width: 100%;
+  max-width: 350px;
 }
-
+.available-stock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .mat-form-field {
   width: 4rem;
 }
-.quantity-wrapper{
-    display: flex;
-    align-items: center;
-    width: 50%;
+.quantity-wrapper {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
 }
-.quantity-manager{
-justify: right;
-}
+
 .quantity-manager {
   display: flex;
   align-items: center;
   width: fit-content;
 }
 
-
 .quantity {
+  display: flex;
+  width: 100%;
   justify-content: space-evenly;
 }
 .quantity-manager {
@@ -63,9 +68,16 @@ justify: right;
 }
 
 .available {
-  color: rgb(131, 202, 23);
+  font-family: $strong-font;
+  font-weight: bold;
+  color: $accent;
+  letter-spacing: 0.4px;
+  font-size: 1rem;
 }
-
+.stock {
+  display: flex;
+  height: fit-content;
+}
 #quantity-number {
   width: 30px;
   text-align: center;
@@ -73,24 +85,32 @@ justify: right;
 .mat-icon-button {
   font-size: 1.5rem;
 }
-.star-rating{
-    font-size: 1.8rem;
-    color:$primary;
+.star-rating {
+  font-size: 1.8rem;
+  color: $primary;
 }
 
 @media screen and (max-width: 600px) {
+  .product-wrapper,
   .content-wrapper,
   #img-product,
   .quantity-wrapper,
-  .column {
+  .column,
+  .available-stock {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
   .column {
     width: 80%;
   }
   .product-name {
     text-align: center;
+  }
+}
+@media screen and (max-width: 790px) {
+  .quantity-wrapper {
+    flex-direction: column;
   }
 }

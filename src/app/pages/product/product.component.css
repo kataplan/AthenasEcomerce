@@ -13,6 +13,7 @@
   border: solid 0.8px #adadad;
   border-radius: 10px;
   padding: 20px 20px;
+  margin: 5px 0;
 }
 
 .btn-standar {
@@ -36,7 +37,19 @@
       justify-self: right;
 }
 
-.content-wrapper {
+.card {
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in;
+  transition: -webkit-box-shadow 0.1s ease-in;
+  transition: box-shadow 0.1s ease-in;
+  transition: box-shadow 0.1s ease-in, -webkit-box-shadow 0.1s ease-in;
+}
+
+.card:hover {
+  -webkit-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,10 +57,28 @@
       -ms-flex-pack: center;
           justify-content: center;
   padding: 20px 0;
+  width: 100%;
+}
+
+.card {
+  padding: 0px;
+  max-width: 800px;
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #img-product {
-  width: 100%;
+  width: 90%;
+  height: 100%;
+  margin: 0px;
 }
 
 .column {
@@ -63,29 +94,21 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 15px 0px;
+  padding: 15px 5px;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
 }
 
-.mat-form-field {
-  width: 4rem;
-}
-
-.quantity, .available-stock, .quantity-manager, .quantity-wrapper {
+.available-stock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-.available-stock, .quantity-wrapper {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -93,9 +116,45 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mat-form-field {
+  width: 4rem;
+}
+
+.quantity-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.quantity-manager {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .quantity {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -110,7 +169,20 @@
 }
 
 .available {
-  color: #83ca17;
+  font-family: "SuperGrotesk-Bold", Arial, sans-serif;
+  font-weight: bold;
+  color: #ff4081;
+  letter-spacing: 0.4px;
+  font-size: 1rem;
+}
+
+.stock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 #quantity-number {
@@ -122,8 +194,18 @@
   font-size: 1.5rem;
 }
 
+.star-rating {
+  font-size: 1.8rem;
+  color: #2196f3;
+}
+
 @media screen and (max-width: 600px) {
-  .content-wrapper, #img-product, .quantity-wrapper, .column {
+  .product-wrapper,
+  .content-wrapper,
+  #img-product,
+  .quantity-wrapper,
+  .column,
+  .available-stock {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -134,12 +216,24 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
   .column {
     width: 80%;
   }
   .product-name {
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .quantity-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
 }
 /*# sourceMappingURL=product.component.css.map */
