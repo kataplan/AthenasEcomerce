@@ -1,73 +1,96 @@
 @import "../../app.component.scss";
 
-.content-wrapper{
-    display:flex;
-    justify-content: center;
-    padding:20px 0;
+.product-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  width:100%;
 }
-#img-product{
-    width: 100%;
-    
+.card {
+  padding: 0px;
+  max-width: 800px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.column{
-    margin:0 10px;
-    width: 40%
+#img-product {
+  width: 90%;
+  height: 100%;
+  margin: 0px;
 }
-.price{
-    font-size: 1.6rem;
+.column {
+  margin: 0 10px;
+  width: 40%;
 }
-.box{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 15px 0px;
-    width: 100%;
-    max-width: 300px;
+.price {
+  font-size: 1.6rem;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px 0px;
+  width: 80%;
+  
 }
 
-.mat-form-field{
-    width: 4rem;
-    
+.mat-form-field {
+  width: 4rem;
 }
-.quantity, .available-stock, .quantity-manager, .quantity-wrapper{
+.quantity-wrapper{
     display: flex;
-}
-
-.available-stock, .quantity-wrapper{
-    flex-direction:column;
-    align-items:center;
-}
-.quantity{
-    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
 }
 .quantity-manager{
-    border: solid 0.8px rgb(173, 173, 173);
-    border-radius: 30px;
-    align-items: center;
+justify: right;
+}
+.quantity-manager {
+  display: flex;
+  align-items: center;
+  width: fit-content;
 }
 
-.available{
-    color:rgb(131, 202, 23)
+
+.quantity {
+  justify-content: space-evenly;
+}
+.quantity-manager {
+  border: solid 0.8px rgb(173, 173, 173);
+  border-radius: 30px;
+  align-items: center;
 }
 
-#quantity-number{
-    width:30px;
-    text-align:center;
+.available {
+  color: rgb(131, 202, 23);
 }
-.mat-icon-button{
-   font-size:1.5rem;
-   
+
+#quantity-number {
+  width: 30px;
+  text-align: center;
 }
+.mat-icon-button {
+  font-size: 1.5rem;
+}
+.star-rating{
+    font-size: 1.8rem;
+    color:$primary;
+}
+
 @media screen and (max-width: 600px) {
-    .content-wrapper, #img-product, .quantity-wrapper, .column {
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .column{
-        width: 80%;
-    }
-    .product-name{
-        text-align: center;
-      }
+  .content-wrapper,
+  #img-product,
+  .quantity-wrapper,
+  .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .column {
+    width: 80%;
+  }
+  .product-name {
+    text-align: center;
+  }
 }

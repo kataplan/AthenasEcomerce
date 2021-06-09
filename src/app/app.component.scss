@@ -36,3 +36,9 @@ $strong-font: "SuperGrotesk-Bold", Arial, sans-serif;
   margin:10px 0px;
   justify-self:right ;
 }
+.card {
+  transition: box-shadow 0.1s ease-in;
+}
+.card:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}

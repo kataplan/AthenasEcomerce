@@ -31,9 +31,7 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 15px;
 }
-.card {
-  transition: box-shadow 0.1s ease-in;
-}
+
 #products div {
   justify-self: center;
     width: 100%;
@@ -42,9 +40,7 @@
     max-width: 300px;
     object-fit: cover;
 }
-.card:hover {
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-}
+
 #products-wrapper{
     width: 100%;
    

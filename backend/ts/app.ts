@@ -21,7 +21,7 @@ connection.connect( (error:any)=>{
 
 app.get('/', (req: any, res: any) => {
     const sql = 'SELECT * FROM categoria'
-    connection.query(sql,(error,results)=>{
+    connection.query(sql,(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
             res.json(results)
@@ -34,4 +34,4 @@ app.get('/', (req: any, res: any) => {
 app.listen(port, hostname, () => {
     console.log('SERVIDOR EJECUTÁNDOSE EN http://localhost:' + port);
 });
-const aa = 'xd'
+

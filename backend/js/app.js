@@ -35,4 +35,3 @@ app.get('/', function (req, res) {
 app.listen(port, hostname, function () {
     console.log('SERVIDOR EJECUTÁNDOSE EN http://localhost:' + port);
 });
-var aa = 'xd';

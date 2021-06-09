@@ -63,6 +63,8 @@ CREATE TABLE productoPedido(
 CREATE TABLE comentario(
     idComentario INT (11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     comentario VARCHAR(250) NOT NULL,
+    valoracion FLOAT(5),
+    idProducto INT(11),
     idUsuario INT(11),
     FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario)
 )
