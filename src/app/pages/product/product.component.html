@@ -1,1 +1,29 @@
-<p>product works!</p>
+<div class="content-wrapper">
+    <div class="column">
+        <img src="../../../assets/img/bicicleta.png" alt="" id="img-product">
+    </div>
+    <div class="column">
+        <h2 class="product-name"><b>BICICLETA MTB HILAND XT275 NARANJA</b></h2>
+        <p class="price">$289.900</p>
+        <p class="valoration">3/5</p>
+        <div class="box">
+            <div class="quantity">
+                <div class="quantity-wrapper">
+                    <div>Cantidad</div>
+                    <div class="quantity-manager">
+                        <button mat-icon-button (click)="minus()" id="btn-minus">-</button>
+                        <input type="number" min="1" id="quantity-number" value="1"/>
+                        <button mat-icon-button (click)="plus()"id="btn-plus">+</button>
+                    </div>
+                    
+                
+                </div>
+                <div class="available-stock">
+                    <p class="available">disponible</p>
+                    <div class="stock">30</div>
+                </div>
+            </div>   
+        </div>
+        <button mat-raised-button color="accent" class="btn-standar">AGREGAR AL CARRITO</button>
+    </div>
+</div>

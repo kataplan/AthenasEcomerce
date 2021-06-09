@@ -1,6 +1,9 @@
 @import "../../app.component.scss";
 .content-wrapper {
-  padding: 40px 20px;
+  padding: 20px 20px;
+}
+#filter-selector{
+  width: 100%;
 }
 #content {
   display: flex;
@@ -10,7 +13,6 @@
   padding-left: 20px;
 }
 .price {
-  color: $accent;
   font-size: 1.4rem;
 }
 .title {
@@ -26,13 +28,14 @@
   width: 100%;
   padding: 20px 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 15px;
 }
 .card {
   transition: box-shadow 0.1s ease-in;
 }
 #products div {
+  justify-self: center;
     width: 100%;
     height: 100%;
     min-width: 250px;
@@ -46,14 +49,19 @@
     width: 100%;
    
 }
-@media screen and (max-width: 600px) {
-#content, .content-wrapper, .column , #products{
+@media screen and (max-width: 768px) {
+#content, .content-wrapper, .column {
+    width: 100%;
     display: flex;
-   flex-direction: column;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 #filter{
   width: 80%;
 }
+.card{
+  margin: 5px 0;
+}
+
 }

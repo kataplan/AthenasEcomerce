@@ -20,11 +20,19 @@ $strong-font: "SuperGrotesk-Bold", Arial, sans-serif;
   padding: 20px 20px;
 }
 .btn-standar {
-  border-radius: 20px;
+  border-radius: 30px;
   height: 3rem;
   width: 50%;
   min-width: 200px;
 }
 .input-container {
   width: 100%;
+
+}
+.price {
+  color: $accent;
+}
+.btn-standar{
+  margin:10px 0px;
+  justify-self:right ;
 }

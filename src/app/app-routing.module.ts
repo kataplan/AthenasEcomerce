@@ -13,6 +13,13 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
   { path: 'product', component: ProductComponent },
+  { path: 'categoria/football', component: SearchComponent},
+  { path: 'categoria/basketball', component: SearchComponent},
+  { path: 'categoria/rugby', component: SearchComponent},
+  { path: 'categoria/handball', component: SearchComponent},
+  { path: 'categoria/ciclismo', component: SearchComponent},
+  { path: 'categoria/boxeo', component: SearchComponent},
+  { path: 'categoria/tenis', component: SearchComponent}
 ];
 
 @NgModule({

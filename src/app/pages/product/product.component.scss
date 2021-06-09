@@ -1,0 +1,73 @@
+@import "../../app.component.scss";
+
+.content-wrapper{
+    display:flex;
+    justify-content: center;
+    padding:20px 0;
+}
+#img-product{
+    width: 100%;
+    
+}
+.column{
+    margin:0 10px;
+    width: 40%
+}
+.price{
+    font-size: 1.6rem;
+}
+.box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 0px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.mat-form-field{
+    width: 4rem;
+    
+}
+.quantity, .available-stock, .quantity-manager, .quantity-wrapper{
+    display: flex;
+}
+
+.available-stock, .quantity-wrapper{
+    flex-direction:column;
+    align-items:center;
+}
+.quantity{
+    justify-content: space-evenly;
+}
+.quantity-manager{
+    border: solid 0.8px rgb(173, 173, 173);
+    border-radius: 30px;
+    align-items: center;
+}
+
+.available{
+    color:rgb(131, 202, 23)
+}
+
+#quantity-number{
+    width:30px;
+    text-align:center;
+}
+.mat-icon-button{
+   font-size:1.5rem;
+   
+}
+@media screen and (max-width: 600px) {
+    .content-wrapper, #img-product, .quantity-wrapper, .column {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .column{
+        width: 80%;
+    }
+    .product-name{
+        text-align: center;
+      }
+}
