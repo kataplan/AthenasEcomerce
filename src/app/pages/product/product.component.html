@@ -1,14 +1,14 @@
 <div class="content-wrapper">
   <div class="product-wrapper">
     <div class="column">
-        <mat-card class="card">
+        
           <img
             mat-card-image
             src="../../../assets/img/bicicleta.png"
             alt="foto productos"
             id="img-product"
           />
-        </mat-card>
+       
       </div>
       <div class="column">
         <h2 class="product-name"><b>BICICLETA MTB HILAND XT275 NARANJA</b></h2>
@@ -20,26 +20,29 @@
             <mat-icon class="star-rating">star_border</mat-icon>
             <mat-icon class="star-rating">star_border</mat-icon>
         </div>
-    
-        <div class="box">
-          <div class="quantity">
-            <div class="quantity-wrapper">
-              <div>Cantidad</div>
-              <div class="quantity-manager">
-                <button mat-icon-button (click)="minus()" id="btn-minus">-</button>
-                <div id="quantity-number">1</div>
-                <button mat-icon-button (click)="plus()" id="btn-plus">+</button>
+        <div class="box" >
+          <div id="description">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum doloribus cumque non quisquam, nobis expedita qui. Pariatur voluptas quasi cumque aperiam laboriosam, eaque, corrupti quidem aliquam reprehenderit saepe dolore est.
+          </div>
+          <div class="box-gray">
+            <div class="quantity">
+              <div class="quantity-wrapper">
+                <div>Cantidad&nbsp;</div>
+                <div class="quantity-manager">
+                  <button mat-icon-button (click)="minus()" id="btn-minus">-</button>
+                  <div id="quantity-number">1</div>
+                  <button mat-icon-button (click)="plus()" id="btn-plus">+</button>
+                </div>
               </div>
-            </div>
-            <div class="available-stock">
-              <div class="available">Disponibles: </div>
-              <div class="stock">Solo quedan:&nbsp; <div>30</div></div>
+              <div class="available-stock">
+                <div class="available">Disponibles: </div>
+                <div class="stock">Solo quedan:&nbsp; <div>30</div></div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="box" id="descripción">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum doloribus cumque non quisquam, nobis expedita qui. Pariatur voluptas quasi cumque aperiam laboriosam, eaque, corrupti quidem aliquam reprehenderit saepe dolore est.
-        </div>
+        
+        
         <button mat-raised-button color="accent" class="btn-standar">
           AGREGAR AL CARRITO
         </button>
