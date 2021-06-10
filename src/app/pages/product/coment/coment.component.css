@@ -68,7 +68,7 @@
 }
 
 .star-widget label {
-  padding: 7px;
+  padding-right: 7px;
   cursor: pointer;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
@@ -91,5 +91,59 @@ input:checked ~ label .mat-icon {
 
 input#rate-5:checked ~ label .mat-icon {
   color: #2196f3;
+}
+
+.btn-standar {
+  float: right;
+}
+
+.review,
+#comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 40px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-card {
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  .review {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 /*# sourceMappingURL=coment.component.css.map */

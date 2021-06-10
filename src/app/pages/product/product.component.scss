@@ -120,6 +120,9 @@
     flex-direction: column;
   }
 }
+app-comment{
+  width: 100vw;
+}
 @media screen and (max-width: 300px) {
   .quantity {
     flex-direction: column;

@@ -1,37 +1,63 @@
 @import "../../../app.component.scss";
 
-.star{
-    display: none;
+.star {
+  display: none;
 }
-#rate-star label{
-    font-size: 4rem;
+#rate-star label {
+  font-size: 4rem;
 }
- .star-widget input{
-    display: none;
-  }
-  .star-wrapper{
-      display: flex;
-  }
-  .star-widget label{
-   
-    padding: 7px;
-    cursor:pointer;
-    transition: all 0.2s ease;
+.star-widget input {
+  display: none;
+}
+.star-wrapper {
+  display: flex;
+}
+.star-widget label {
+  padding-right: 7px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  float: right;
+}
+.star-widget label .mat-icon {
+  font-size: 30px;
+  color: #444;
+}
+input:not(:checked) ~ label:hover .mat-icon,
+input:not(:checked) ~ label:hover ~ label .mat-icon {
+  color: $primary;
+}
+input:checked ~ label .mat-icon {
+  color: $primary;
+}
+input#rate-5:checked ~ label .mat-icon {
+  color: $primary;
+}
+.btn-standar{
     float: right;
-  }
-  .star-widget label .mat-icon{
-    font-size: 30px;
-    color: #444;
-
-  }
-  input:not(:checked) ~ label:hover .mat-icon ,
-input:not(:checked) ~ label:hover ~ label .mat-icon{
-  color:$primary;
 }
-input:checked ~ label .mat-icon{
-    color: $primary;
+.review,
+#comment {
+  display: flex;
+  padding: 0 40px;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+.mat-form-field {
+  width: 100%;
+}
+.mat-card{
+    margin-top: 15px;
+}
+@media screen and (max-width: 600px) {
+  .review {
+    align-items: center;
+    justify-content: center;
   }
-input#rate-5:checked ~ label .mat-icon{
-    color: $primary;
-   
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
+}
