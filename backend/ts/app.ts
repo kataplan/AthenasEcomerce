@@ -19,8 +19,8 @@ connection.connect( (error:any)=>{
     console.log('Base de datos conectada')
 })
 
-app.get('/', (req: any, res: any) => {
-    const sql = 'SELECT * FROM categoria'
+app.get('/productos', (req: any, res: any) => {
+    const sql = 'SELECT * FROM producto'
     connection.query(sql,(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){

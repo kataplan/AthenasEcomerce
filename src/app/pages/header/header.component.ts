@@ -32,6 +32,9 @@ export class HeaderComponent implements OnInit {
   search(){
     this.router.navigate([`/search`])
   }
+  goFootball(){
+    this.router.navigate([`/`])
+  }
   goCategory(str:string){
     this.router.navigate([`/categoria`,str])
   }

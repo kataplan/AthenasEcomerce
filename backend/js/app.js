@@ -19,8 +19,8 @@ dbconfig_1.connection.connect(function (error) {
         throw error;
     console.log('Base de datos conectada');
 });
-app.get('/', function (req, res) {
-    var sql = 'SELECT * FROM categoria';
+app.get('/productos', function (req, res) {
+    var sql = 'SELECT * FROM producto';
     dbconfig_1.connection.query(sql, function (error, results) {
         if (error)
             throw error;
