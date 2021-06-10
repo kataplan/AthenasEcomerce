@@ -1,0 +1,95 @@
+.content-wrapper {
+  background-color: #f7f7f7;
+  width: 100%;
+  min-height: 68%;
+}
+
+#btn-logo {
+  width: 180px;
+}
+
+.box {
+  background-color: #ffff;
+  border: solid 0.8px #adadad;
+  border-radius: 10px;
+  padding: 20px 20px;
+  margin: 5px 0;
+}
+
+.btn-standar {
+  border-radius: 30px;
+  height: 3rem;
+  width: 50%;
+  min-width: 200px;
+}
+
+.input-container {
+  width: 100%;
+}
+
+.price {
+  color: #ff4081;
+}
+
+.btn-standar {
+  margin: 10px 0px;
+  -ms-grid-column-align: right;
+      justify-self: right;
+}
+
+.card {
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in;
+  transition: -webkit-box-shadow 0.1s ease-in;
+  transition: box-shadow 0.1s ease-in;
+  transition: box-shadow 0.1s ease-in, -webkit-box-shadow 0.1s ease-in;
+}
+
+.card:hover {
+  -webkit-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.star {
+  display: none;
+}
+
+#rate-star label {
+  font-size: 4rem;
+}
+
+.star-widget input {
+  display: none;
+}
+
+.star-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.star-widget label {
+  padding: 7px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  float: right;
+}
+
+.star-widget label .mat-icon {
+  font-size: 30px;
+  color: #444;
+}
+
+input:not(:checked) ~ label:hover .mat-icon,
+input:not(:checked) ~ label:hover ~ label .mat-icon {
+  color: #2196f3;
+}
+
+input:checked ~ label .mat-icon {
+  color: #2196f3;
+}
+
+input#rate-5:checked ~ label .mat-icon {
+  color: #2196f3;
+}
+/*# sourceMappingURL=coment.component.css.map */

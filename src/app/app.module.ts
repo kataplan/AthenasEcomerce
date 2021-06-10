@@ -24,6 +24,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchComponent } from './pages/search/search.component';
 import { ProductComponent } from './pages/product/product.component';
 import {MatSelectModule} from '@angular/material/select';
+import { ComentComponent } from './pages/product/coment/coment.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {MatSelectModule} from '@angular/material/select';
     FooterComponent,
     SearchComponent,
     ProductComponent,
+    ComentComponent,
   ],
   imports: [
     BrowserModule,

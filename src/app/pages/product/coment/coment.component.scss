@@ -1,0 +1,37 @@
+@import "../../../app.component.scss";
+
+.star{
+    display: none;
+}
+#rate-star label{
+    font-size: 4rem;
+}
+ .star-widget input{
+    display: none;
+  }
+  .star-wrapper{
+      display: flex;
+  }
+  .star-widget label{
+   
+    padding: 7px;
+    cursor:pointer;
+    transition: all 0.2s ease;
+    float: right;
+  }
+  .star-widget label .mat-icon{
+    font-size: 30px;
+    color: #444;
+
+  }
+  input:not(:checked) ~ label:hover .mat-icon ,
+input:not(:checked) ~ label:hover ~ label .mat-icon{
+  color:$primary;
+}
+input:checked ~ label .mat-icon{
+    color: $primary;
+  }
+input#rate-5:checked ~ label .mat-icon{
+    color: $primary;
+   
+  }
