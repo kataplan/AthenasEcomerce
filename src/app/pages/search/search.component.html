@@ -22,26 +22,33 @@
     <div class="column" id="products-wrapper">
       <h2>Productos</h2>
       <div id="products">
-        <div>
+        <div *ngFor="let item of servicioProductos.listaProductos">
+          
           <mat-card class="card">
             <button class="btn-producto">
               <img
                 mat-card-image
-                src="../../../assets/img/bicicleta.png"
+                src="../../../assets/img/{{servicioProductos.catBusqueda}}/{{item.idProducto}}.jpg"
                 alt="foto productos"
               />
               <mat-card-content>
-                <b class="titulo"></b>
+                <b class="titulo">{{item.nombreProducto}}</b>
               </mat-card-content>
             </button>
 
-            <mat-card-content class="price"></mat-card-content>
-            <div class="rating">
+            <mat-card-content class="price">$ {{item.precio}}</mat-card-content>
+            <div class="rating" id="{{item.idProducto}}">
+              <div>
+                {{rate(item.valoracion,item.idProducto)}}
+              </div>
+               <div>({{item.valoracion}})</div>
+             <!--- <mat-icon class="star-rating">star_border</mat-icon>
               <mat-icon class="star-rating">star_border</mat-icon>
               <mat-icon class="star-rating">star_border</mat-icon>
               <mat-icon class="star-rating">star_border</mat-icon>
-              <mat-icon class="star-rating">star_border</mat-icon>
-              <mat-icon class="star-rating">star_border</mat-icon>
+              <mat-icon class="star-rating">star_border</mat-icon> -->
+              
+
             </div>
           </mat-card>
         </div>

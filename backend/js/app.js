@@ -20,7 +20,7 @@ dbconfig_1.connection.connect(function (error) {
     console.log('Base de datos conectada');
 });
 app.get('/football', function (req, res) {
-    var sql = 'SELECT * FROM producto WHERE idCategoria = 1';
+    var sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE idCategoria = 1';
     dbconfig_1.connection.query(sql, function (error, results) {
         if (error)
             throw error;

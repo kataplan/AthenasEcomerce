@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Productos } from '../interfaces/productos'
+import { Producto } from '../interfaces/productos'
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Productos } from '../interfaces/productos'
 export class ProductoService {
   
   server = 'http://localhost:3000/';
-  listaProductos: Array<Productos> = [];
+  listaProductos: Array<Producto> = [];
   catBusqueda = '';
   
   constructor(private servicio: HttpClient) { }
@@ -17,7 +17,7 @@ export class ProductoService {
   obtenerProductos(str:string) {
     this.listaProductos = [];
     return this.servicio.get(`${this.server}${str}`).subscribe((dato:any)=>{
-      this.listaProductos.push(dato)
+      this.listaProductos=dato
     });
   }
 

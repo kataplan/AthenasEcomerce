@@ -20,7 +20,7 @@ connection.connect( (error:any)=>{
 })
 
 app.get('/football', (req: any, res: any) => {
-    const sql = 'SELECT * FROM producto WHERE idCategoria = 1'
+    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE idCategoria = 1'
     connection.query(sql,(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
