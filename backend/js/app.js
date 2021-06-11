@@ -19,8 +19,86 @@ dbconfig_1.connection.connect(function (error) {
         throw error;
     console.log('Base de datos conectada');
 });
-app.get('/productos', function (req, res) {
-    var sql = 'SELECT * FROM producto';
+app.get('/football', function (req, res) {
+    var sql = 'SELECT * FROM producto WHERE idCategoria = 1';
+    dbconfig_1.connection.query(sql, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
+app.get('/basketball', function (req, res) {
+    var sql = 'SELECT * FROM producto WHERE idCategoria = 2';
+    dbconfig_1.connection.query(sql, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
+app.get('/rugby', function (req, res) {
+    var sql = 'SELECT * FROM producto WHERE idCategoria = 3';
+    dbconfig_1.connection.query(sql, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
+app.get('/handball', function (req, res) {
+    var sql = 'SELECT * FROM producto WHERE idCategoria = 4';
+    dbconfig_1.connection.query(sql, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
+app.get('/ciclismo', function (req, res) {
+    var sql = 'SELECT * FROM producto WHERE idCategoria = 5';
+    dbconfig_1.connection.query(sql, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
+app.get('/boxeo', function (req, res) {
+    var sql = 'SELECT * FROM producto WHERE idCategoria = 6';
+    dbconfig_1.connection.query(sql, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
+app.get('/tenis', function (req, res) {
+    var sql = 'SELECT * FROM producto WHERE idCategoria = 7';
     dbconfig_1.connection.query(sql, function (error, results) {
         if (error)
             throw error;

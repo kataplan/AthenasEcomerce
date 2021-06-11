@@ -10,12 +10,15 @@ export class ProductoService {
   
   server = 'http://localhost:3000/';
   listaProductos: Array<Productos> = [];
-
+  catBusqueda = '';
+  
   constructor(private servicio: HttpClient) { }
 
-  obtenerProductos() {
+  obtenerProductos(str:string) {
     this.listaProductos = [];
-    return this.servicio.get(`${this.server}/productos`);
+    return this.servicio.get(`${this.server}${str}`).subscribe((dato:any)=>{
+      this.listaProductos.push(dato)
+    });
   }
 
 }

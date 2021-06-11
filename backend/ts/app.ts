@@ -19,8 +19,76 @@ connection.connect( (error:any)=>{
     console.log('Base de datos conectada')
 })
 
-app.get('/productos', (req: any, res: any) => {
-    const sql = 'SELECT * FROM producto'
+app.get('/football', (req: any, res: any) => {
+    const sql = 'SELECT * FROM producto WHERE idCategoria = 1'
+    connection.query(sql,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+});
+app.get('/basketball', (req: any, res: any) => {
+    const sql = 'SELECT * FROM producto WHERE idCategoria = 2'
+    connection.query(sql,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+});
+app.get('/rugby', (req: any, res: any) => {
+    const sql = 'SELECT * FROM producto WHERE idCategoria = 3'
+    connection.query(sql,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+});
+app.get('/handball', (req: any, res: any) => {
+    const sql = 'SELECT * FROM producto WHERE idCategoria = 4'
+    connection.query(sql,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+});
+app.get('/ciclismo', (req: any, res: any) => {
+    const sql = 'SELECT * FROM producto WHERE idCategoria = 5'
+    connection.query(sql,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+});
+
+app.get('/boxeo', (req: any, res: any) => {
+    const sql = 'SELECT * FROM producto WHERE idCategoria = 6'
+    connection.query(sql,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+});
+
+app.get('/tenis', (req: any, res: any) => {
+    const sql = 'SELECT * FROM producto WHERE idCategoria = 7'
     connection.query(sql,(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){

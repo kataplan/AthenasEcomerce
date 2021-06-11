@@ -1,13 +1,16 @@
- import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import {ProductoService} from '../../services/producto.service' 
+import {Productos} from '../../interfaces/productos'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(public servicioProductos:ProductoService,private router: Router) {
+    
+  }
 
   ngOnInit(): void {}
   display: boolean = true;
@@ -30,13 +33,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([`/register`])
   }
   search(){
-    this.router.navigate([`/search`])
+    this.router.navigate([`/search`,])
   }
-  goFootball(){
-    this.router.navigate([`/`])
-  }
-  goCategory(str:string){
-    this.router.navigate([`/categoria`,str])
+   
+  goCategory(category:string){
+    this.servicioProductos.catBusqueda=category;
+    this.servicioProductos.obtenerProductos(category)
+    this.router.navigate([`/categoria`,category])
   }
 
 }

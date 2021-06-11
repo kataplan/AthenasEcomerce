@@ -25,8 +25,8 @@ import { SearchComponent } from './pages/search/search.component';
 import { ProductComponent } from './pages/product/product.component';
 import {MatSelectModule} from '@angular/material/select';
 import { ComentComponent } from './pages/product/coment/coment.component';
-
-
+import {ProductoService} from './services/producto.service'
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,8 +58,9 @@ import { ComentComponent } from './pages/product/coment/coment.component';
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ProductoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
