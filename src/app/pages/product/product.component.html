@@ -4,25 +4,26 @@
         
           <img
             mat-card-image
-            src="../../../assets/img/bicicleta.png"
+            src="../../../assets/img/{{servicioProductos.catBusqueda}}/{{this.servicioProductos.productoVisto.idProducto}}.jpg"
             alt="foto productos"
             id="img-product"
           />
        
       </div>
       <div class="column">
-        <h2 class="product-name"><b>BICICLETA MTB HILAND XT275 NARANJA</b></h2>
-        <p class="price">$289.900</p>
+        <h2 class="product-name"><b>{{this.servicioProductos.productoVisto.nombreProducto}}</b></h2>
+        <p class="price">${{this.servicioProductos.productoVisto.precio}}</p>
         <div class="rating">
             <mat-icon class="star-rating">star_border</mat-icon>
             <mat-icon class="star-rating">star_border</mat-icon>
             <mat-icon class="star-rating">star_border</mat-icon>
             <mat-icon class="star-rating">star_border</mat-icon>
             <mat-icon class="star-rating">star_border</mat-icon>
+            ({{this.servicioProductos.productoVisto.valoracion}})
         </div>
         <div class="box" >
           <div id="description">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum doloribus cumque non quisquam, nobis expedita qui. Pariatur voluptas quasi cumque aperiam laboriosam, eaque, corrupti quidem aliquam reprehenderit saepe dolore est.
+            {{this.servicioProductos.productoVisto.descripcion}}
           </div>
           <div class="box-gray">
             <div class="quantity">
@@ -36,7 +37,7 @@
               </div>
               <div class="available-stock">
                 <div class="available">Disponibles: </div>
-                <div class="stock">Solo quedan:&nbsp; <div>30</div></div>
+                <div class="stock">Solo quedan:&nbsp; <div>{{this.servicioProductos.productoVisto.stock}}</div></div>
               </div>
             </div>
           </div>

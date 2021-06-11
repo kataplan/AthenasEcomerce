@@ -11,7 +11,8 @@ export class ProductoService {
   server = 'http://localhost:3000/';
   listaProductos: Array<Producto> = [];
   catBusqueda = '';
-  
+  productoVisto: Producto = this.listaProductos[0];
+
   constructor(private servicio: HttpClient) { }
 
   obtenerProductos(str:string) {

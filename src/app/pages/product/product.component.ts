@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductoService } from '../../services/producto.service';
 
 @Component({
   selector: 'app-product',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  constructor() {}
+  constructor(public servicioProductos: ProductoService) {}
 
   ngOnInit(): void {
-    this.rating(4.8);
+    this.rating(this.servicioProductos.productoVisto.valoracion);
   }
   plus() {
     var input = document.getElementById('quantity-number')!;
@@ -26,22 +27,26 @@ export class ProductComponent implements OnInit {
     input.innerText = num + '';
   }
   rating(valoration: number) {
+    
     var starArray = document.getElementsByClassName('star-rating');
-    var i: number = 0;
+    var i: number = starArray.length-5;
     while (valoration > 0) {
       if (valoration < 1 && valoration > 0.7) {
+        
         starArray[i].textContent = 'star';
       }
       if (valoration <= 0.7 && valoration > 0.3) {
         starArray[i].textContent = 'star_half';
+        console.log("estrella")
       }
       if (valoration >= 1) {
         starArray[i].textContent = 'star';
+        
       }
+      console.log(valoration)
       valoration--;
       i++;
     }
-
-    
+    console.log(starArray)
   }
 }

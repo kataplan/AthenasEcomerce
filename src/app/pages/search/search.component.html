@@ -24,7 +24,7 @@
       <div id="products">
         <div *ngFor="let item of servicioProductos.listaProductos">
           
-          <mat-card class="card">
+          <mat-card class="card" (click)="verProducto(item)">
             <button class="btn-producto">
               <img
                 mat-card-image
@@ -38,16 +38,16 @@
 
             <mat-card-content class="price">$ {{item.precio}}</mat-card-content>
             <div class="rating" id="{{item.idProducto}}">
-              <div>
+              <!--<div>
                 {{rate(item.valoracion,item.idProducto)}}
-              </div>
-               <div>({{item.valoracion}})</div>
-             <!--- <mat-icon class="star-rating">star_border</mat-icon>
+              </div>-->  
+               
+             <mat-icon class="star-rating">star_border</mat-icon>
               <mat-icon class="star-rating">star_border</mat-icon>
               <mat-icon class="star-rating">star_border</mat-icon>
               <mat-icon class="star-rating">star_border</mat-icon>
-              <mat-icon class="star-rating">star_border</mat-icon> -->
-              
+              <mat-icon class="star-rating">star_border</mat-icon> 
+              <div>({{item.valoracion}})</div>
 
             </div>
           </mat-card>
