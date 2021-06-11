@@ -27,6 +27,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { ComentComponent } from './pages/product/coment/coment.component';
 import {ProductoService} from './services/producto.service'
 import { HttpClientModule } from '@angular/common/http';
+import { CartComponent } from './pages/cart/cart.component';
+import {MatTableModule} from '@angular/material/table';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     SearchComponent,
     ProductComponent,
     ComentComponent,
+    CartComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
   ],
   providers: [ProductoService],
   bootstrap: [AppComponent],

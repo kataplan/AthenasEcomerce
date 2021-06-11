@@ -23,6 +23,9 @@ export class HeaderComponent implements OnInit {
       this.display = true;
     }
   }
+  goCart(){
+    this.router.navigate([`/carrito`])
+  }
   goHome(){
     this.router.navigate([`/home`])
   }
@@ -35,7 +38,6 @@ export class HeaderComponent implements OnInit {
   search(){
     this.router.navigate([`/search`,])
   }
-   
   goCategory(category:string){
     this.servicioProductos.catBusqueda=category;
     this.servicioProductos.obtenerProductos(category)
