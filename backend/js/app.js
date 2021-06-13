@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var dbconfig_1 = require("./dbconfig");
+var dbconfig_1 = require("./config/dbconfig");
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -18,6 +18,32 @@ dbconfig_1.connection.connect(function (error) {
     if (error)
         throw error;
     console.log('Base de datos conectada');
+});
+app.post('/registrar', function (req, res) {
+    if (req.body === '') {
+        res.status(500).json({ message: 'ERROR AL REGISTRAR' });
+    }
+    else {
+        var newUser = req.body;
+        var sql = "INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion,contrasena) VALUES('" + newUser.nombres + "','" + newUser.apellidos + "','" + newUser.rut + "','" + newUser.email + "','" + newUser.region + "','" + newUser.comuna + "','" + newUser.direccion + "','" + newUser.password + "') ";
+        dbconfig_1.connection.query(sql, function (error, results) {
+            if (error)
+                throw error;
+            console.log("1 usuario registrado");
+        });
+        res.status(201).json({ message: 'USUARIO CREADO CON EXITO' });
+    }
+});
+app.get('/regiones', function (req, res) {
+    fs.readFile('backend/database/regiones-comunas.json', 'utf8', function (err, data) {
+        if (err) {
+            console.log("Error al leer el archivo:'" + err);
+        }
+        else {
+            var dataRegiones = JSON.parse(data);
+            res.send(dataRegiones);
+        }
+    });
 });
 app.get('/football', function (req, res) {
     var sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE idCategoria = 1';

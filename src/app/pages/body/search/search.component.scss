@@ -3,9 +3,6 @@
   padding: 20px 20px;
 }
 
-#filter-selector{
-  width: 100%;
-}
 #content {
   display: flex;
   padding-left: 10px;
@@ -54,7 +51,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 #filter{

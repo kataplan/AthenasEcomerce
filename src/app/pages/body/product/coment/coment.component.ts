@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductoService } from '../../../../services/producto.service';
+
 
 @Component({
   selector: 'app-coment',
@@ -8,7 +10,7 @@ import {  FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ComentComponent implements OnInit {
 
-  constructor() 
+  constructor(public servicioProductos: ProductoService) 
   {this.formulario =this.createFormGroup();}
   createFormGroup(){
     return new FormGroup({
@@ -32,6 +34,9 @@ export class ComentComponent implements OnInit {
       return;
     }
     
+  }
+  rate(valor:number) {
+    this.servicioProductos.valorRating=valor;
   }
   }
 

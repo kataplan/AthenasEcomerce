@@ -72,17 +72,15 @@
     </button>
   </form>
   <mat-divider></mat-divider>
+
   <h3>Comentarios de otros Clientes:</h3>
   <mat-card>
     <mat-card-title>
       <div class="nombreCliente">Fulanito</div>
     </mat-card-title>
     <mat-card-subtitle>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
+      {{rate(3)}}
+      <app-star></app-star>
     </mat-card-subtitle>
     <mat-card-content>
       <p>
@@ -97,11 +95,8 @@
       <div class="nombreCliente">Fulanito</div>
     </mat-card-title>
     <mat-card-subtitle>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
-      <mat-icon>star</mat-icon>
+      {{rate(4)}}
+      <app-star></app-star>
     </mat-card-subtitle>
     <mat-card-content>
       <p>

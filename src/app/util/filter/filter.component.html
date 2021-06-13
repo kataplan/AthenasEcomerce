@@ -1,0 +1,71 @@
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Filtros </mat-panel-title>
+      <mat-panel-description>
+        Filtre su búsqueda
+        <mat-icon>filter_list</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field appearance="outline" class="filter-selector">
+      <mat-label>Categoria:</mat-label>
+      <mat-select>
+        <mat-option value="option">Football</mat-option>
+        <mat-option value="option">Basketball</mat-option>
+        <mat-option value="option">Rugby</mat-option>
+        <mat-option value="option">Handball</mat-option>
+        <mat-option value="option">Ciclismo</mat-option>
+        <mat-option value="option">Boxeo</mat-option>
+        <mat-option value="option">Tenis</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="filter-selector">
+      <mat-label>Ordenar por</mat-label>
+      <mat-select>
+        <mat-option value="option">Precio menor a mayor</mat-option>
+        <mat-option value="option">Precio mayor a menor</mat-option>
+        <mat-option value="option">Valoracion menor a mayor</mat-option>
+        <mat-option value="option">Valoracion mayor a menor</mat-option>
+        <mat-option value="option">Alfabético A->Z</mat-option>
+        <mat-option value="option">Alfabético Z->A</mat-option>
+      
+      </mat-select>
+    </mat-form-field>
+
+
+    <label id="example-name-label" class="example-name-label">Valor mínimo:&nbsp;</label>
+    <label class="example-value-label" >$ {{moneyFormating(minValue)}}</label>
+
+    <mat-slider
+        id="min-slider"
+        class="filter-selector"
+        [disabled]="disabled"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+        [tickInterval]="getSliderTickInterval()"
+        [(ngModel)]="minValue"
+        thumbLabel
+        [displayWith]="formatLabel"
+        aria-labelledby="example-name-label">
+    </mat-slider>
+    <label id="example-name-label" class="example-name-label">Valor máximo:&nbsp;</label>
+    <label class="example-value-label" >$ {{moneyFormating(maxValue)}}</label>
+
+    <mat-slider
+        id="min-slider"
+        class="filter-selector"
+        [disabled]="disabled"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+        [tickInterval]="getSliderTickInterval()"
+        [(ngModel)]="maxValue"
+        thumbLabel
+        [displayWith]="formatLabel"
+        aria-labelledby="example-name-label">
+    </mat-slider>
+  </mat-expansion-panel>
+</mat-accordion>

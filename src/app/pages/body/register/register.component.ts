@@ -4,7 +4,12 @@ import {
   Validators,
   FormControl,
   FormBuilder,
+  FormControlName
 } from '@angular/forms';
+import {RegistroUsuarioService} from '../../../services/registro-usuario.service'
+import {RegionesService} from '../../../services/regiones.service'
+import {Usuario} from '../../../interfaces/usuario'
+import { Region} from '../../../interfaces/region'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -12,19 +17,54 @@ import {
 })
 export class RegisterComponent implements OnInit {
   hide = true;
-  hideAlways = true;
+  hide2 = true;
+  comunas:Array<String> =[];
   formulario: FormGroup;
-  constructor( public fb: FormBuilder) {this.formulario = fb.group({
-    name: new FormControl('', [Validators.required]),
-    firstname: new FormControl('', [Validators.required]),
+  constructor( public fb: FormBuilder, public servicioRegistro:RegistroUsuarioService,public servicioRegiones:RegionesService ) {
+    this.formulario = fb.group({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
     rut: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
+    address: new FormControl('',[Validators.required]),
+    region: new FormControl('',[Validators.required]),
+    comuna: new FormControl('',[Validators.required],),
+    email: new FormControl('', [Validators.required,Validators.email]),
     password: new FormControl('', [Validators.required]),
     repeatPassword: new FormControl('', [Validators.required]),
   });
 } 
 
   ngOnInit(): void {
+    this.servicioRegiones.getRegiones();
+  }
+
+  onSubmit(){
+    const nuevoUsuario:Usuario={
+      nombres:this.formulario.controls['firstName'].value,
+      apellidos:this.formulario.controls['lastName'].value,
+      rut:this.formulario.controls['rut'].value,
+      email:this.formulario.controls['email'].value,
+      region:this.formulario.controls['region'].value,
+      comuna:this.formulario.controls['comuna'].value,
+      direccion:this.formulario.controls['address'].value,
+      password:this.formulario.controls['password'].value  
+      
+    }
+
+    const password=this.formulario.controls['password'].value;
+    const repPassword=this.formulario.controls['repeatPassword'].value;
+    if(password === repPassword){
+      nuevoUsuario.password=password;
+    }else{
+      alert('Las contraseñas no coinciden')
+    }
+
+    this.servicioRegistro.registrarUsuario(nuevoUsuario);
+    alert('Registrado con éxito!!')
+  }
+  seleccionarRegion(region:Region){
+    this.comunas = region.comunas;
+    console.log(this.comunas)
   }
 
 }

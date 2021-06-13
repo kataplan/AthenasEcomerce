@@ -1,8 +1,20 @@
 <div class="rating">
-    <mat-icon class="star-rating">star_border</mat-icon>
-    <mat-icon class="star-rating">star_border</mat-icon>
-    <mat-icon class="star-rating">star_border</mat-icon>
-    <mat-icon class="star-rating">star_border</mat-icon>
-    <mat-icon class="star-rating">star_border</mat-icon> 
+    <mat-icon class="star-rating" *ngIf="fullStar(0)">star</mat-icon>
+    <mat-icon class="star-rating" *ngIf="fullStar(1)">star</mat-icon>
+    <mat-icon class="star-rating" *ngIf="fullStar(2)">star</mat-icon>
+    <mat-icon class="star-rating" *ngIf="fullStar(3)">star</mat-icon>
+    <mat-icon class="star-rating" *ngIf="fullStar(4)">star</mat-icon>
+    <mat-icon class="star-rating" *ngIf="halfStar(0)">star_half</mat-icon>
+    <mat-icon class="star-rating" *ngIf="halfStar(1)">star_half</mat-icon>
+    <mat-icon class="star-rating" *ngIf="halfStar(2)">star_half</mat-icon>
+    <mat-icon class="star-rating" *ngIf="halfStar(3)">star_half</mat-icon>
+    <mat-icon class="star-rating" *ngIf="halfStar(4)">star_half</mat-icon>
+    <mat-icon class="star-rating" *ngIf="emptyStar(0)">star_border</mat-icon>
+    <mat-icon class="star-rating" *ngIf="emptyStar(1)">star_border</mat-icon>
+    <mat-icon class="star-rating" *ngIf="emptyStar(2)">star_border</mat-icon>
+    <mat-icon class="star-rating" *ngIf="emptyStar(3)">star_border</mat-icon>
+    <mat-icon class="star-rating" *ngIf="emptyStar(4)">star_border</mat-icon>
+
+
     <div>({{this.servicioProductos.valorRating}})</div>
 </div>

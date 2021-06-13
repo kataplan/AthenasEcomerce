@@ -23,13 +23,18 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchComponent } from './pages/body/search/search.component';
 import { ProductComponent } from './pages/body/product/product.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { ComentComponent } from './pages/body/product/coment/coment.component';
-import {ProductoService} from './services/producto.service'
+import { ProductoService } from './services/producto.service'
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './pages/body/cart/cart.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { StarComponent } from './util/star/star.component';
+import { FilterComponent } from './util/filter/filter.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSliderModule} from '@angular/material/slider';
+
+
 
 @NgModule({
   declarations: [
@@ -44,6 +49,7 @@ import { StarComponent } from './util/star/star.component';
     ComentComponent,
     CartComponent,
     StarComponent,
+    FilterComponent,
     
   ],
   imports: [
@@ -67,6 +73,8 @@ import { StarComponent } from './util/star/star.component';
     MatSelectModule,
     HttpClientModule,
     MatTableModule,
+    MatExpansionModule,
+    MatSliderModule,
   ],
   providers: [ProductoService],
   bootstrap: [AppComponent],

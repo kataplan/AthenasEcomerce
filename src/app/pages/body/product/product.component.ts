@@ -54,4 +54,13 @@ export class ProductComponent implements OnInit {
   moneyFormating(num:number){
     return Intl.NumberFormat('de-DE').format(num);
  }
+ rate(valor:number) {
+  this.servicioProductos.valorRating=valor;
+}
+stock(stock:number){
+   if(stock==0){
+     return true;
+   }
+   return false;
+}
 }

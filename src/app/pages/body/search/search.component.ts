@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit {
   constructor(public servicioProductos: ProductoService, private router: Router) {}
 
   ngOnInit(): void {
+    
   }
   verProducto(item:Producto){
     this.servicioProductos.productoVisto =  item;

@@ -1,4 +1,7 @@
-import {connection} from './dbconfig'
+import { connection } from './config/dbconfig'
+import { Regiones } from './interfaces/regiones';
+import { Usuario } from './interfaces/usuario'
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -17,6 +20,34 @@ app.use(express.urlencoded());
 connection.connect( (error:any)=>{
     if (error) throw error;
     console.log('Base de datos conectada')
+})
+
+app.post('/registrar',(req:any,res:any)=>{
+    if(req.body===''){
+        res.status(500).json({ message: 'ERROR AL REGISTRAR' });
+    }else{
+        
+        const newUser:Usuario= req.body
+        const sql = `INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion,contrasena) VALUES('${newUser.nombres}','${newUser.apellidos}','${newUser.rut}','${newUser.email}','${newUser.region}','${newUser.comuna}','${newUser.direccion}','${newUser.password}') `        
+        connection.query(sql,(error:any,results:any)=>{
+            if (error) throw error;
+            console.log("1 usuario registrado");
+        })
+        res.status(201).json({ message: 'USUARIO CREADO CON EXITO' });
+    }
+    
+})
+
+app.get('/regiones',(req:any, res:any)=>{
+    
+    fs.readFile('backend/database/regiones-comunas.json', 'utf8', (err: any, data: any) => {
+        if (err) {
+          console.log(`Error al leer el archivo:'${err}`);
+        } else {
+            const dataRegiones: Regiones = JSON.parse(data);
+            res.send(dataRegiones)
+        }
+    });
 })
 
 app.get('/football', (req: any, res: any) => {

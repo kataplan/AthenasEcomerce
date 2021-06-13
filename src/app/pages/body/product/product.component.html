@@ -13,14 +13,9 @@
       <div class="column">
         <h2 class="product-name"><b>{{this.servicioProductos.productoVisto.nombreProducto}}</b></h2>
         <p class="price">$ {{moneyFormating(this.servicioProductos.productoVisto.precio)}}</p>
-        <div class="rating">
-            <mat-icon class="star-rating">star_border</mat-icon>
-            <mat-icon class="star-rating">star_border</mat-icon>
-            <mat-icon class="star-rating">star_border</mat-icon>
-            <mat-icon class="star-rating">star_border</mat-icon>
-            <mat-icon class="star-rating">star_border</mat-icon>
-            ({{this.servicioProductos.productoVisto.valoracion}})
-        </div>
+        {{rate(this.servicioProductos.productoVisto.valoracion)}}
+        <app-star></app-star>
+      
         <div class="box" >
           <div id="description">
             {{this.servicioProductos.productoVisto.descripcion}}
@@ -42,12 +37,14 @@
             </div>
           </div>
         </div>
-         
-
-        <button mat-raised-button color="accent" class="btn-standar" >
+      
+        <button mat-raised-button disabled class="btn-standar" *ngIf="stock(this.servicioProductos.productoVisto.stock)" >
+          AGREGAR AL CARRITO
+        </button>
+        <button mat-raised-button color="accent" class="btn-standar" *ngIf="this.servicioProductos.productoVisto.stock" >
           AGREGAR AL CARRITO
         </button>
       </div>
-  </div>
+    </div>
   <app-coment></app-coment>
 </div>

@@ -61,4 +61,8 @@
 .rating span {
   font-size: 1.1rem;
 }
+
+.star-rating {
+  color: #2196f3;
+}
 /*# sourceMappingURL=star.component.css.map */
