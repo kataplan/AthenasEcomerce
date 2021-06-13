@@ -12,6 +12,7 @@ export class ProductoService {
   listaProductos: Array<Producto> = [];
   catBusqueda = '';
   productoVisto: Producto = this.listaProductos[0];
+  valorRating:number=0;
 
   constructor(private servicio: HttpClient) { }
 

@@ -23,8 +23,8 @@ export class SearchComponent implements OnInit {
      return Intl.NumberFormat('de-DE').format(num);
   }
 
-  rate() {
-    return 
+  rate(valor:number) {
+    this.servicioProductos.valorRating=valor;
   }
 
 }

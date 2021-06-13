@@ -29,6 +29,7 @@ import {ProductoService} from './services/producto.service'
 import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './pages/body/cart/cart.component';
 import {MatTableModule} from '@angular/material/table';
+import { StarComponent } from './util/star/star.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MatTableModule} from '@angular/material/table';
     ProductComponent,
     ComentComponent,
     CartComponent,
+    StarComponent,
     
   ],
   imports: [
