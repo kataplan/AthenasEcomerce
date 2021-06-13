@@ -12,22 +12,22 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './pages/body/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { HomeComponent } from './pages/body/home/home.component';
+import { RegisterComponent } from './pages/body/register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FooterComponent } from './pages/footer/footer.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SearchComponent } from './pages/search/search.component';
-import { ProductComponent } from './pages/product/product.component';
+import { SearchComponent } from './pages/body/search/search.component';
+import { ProductComponent } from './pages/body/product/product.component';
 import {MatSelectModule} from '@angular/material/select';
-import { ComentComponent } from './pages/product/coment/coment.component';
+import { ComentComponent } from './pages/body/product/coment/coment.component';
 import {ProductoService} from './services/producto.service'
 import { HttpClientModule } from '@angular/common/http';
-import { CartComponent } from './pages/cart/cart.component';
+import { CartComponent } from './pages/body/cart/cart.component';
 import {MatTableModule} from '@angular/material/table';
 
 @NgModule({

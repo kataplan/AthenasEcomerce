@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductoService } from '../../services/producto.service';
+import { ProductoService } from '../../../services/producto.service';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +15,9 @@ export class ProductComponent implements OnInit {
   plus() {
     var input = document.getElementById('quantity-number')!;
     var num: number = parseInt(input.innerText);
-    num++;
+    if(num < this.servicioProductos.productoVisto.stock){
+      num++;
+    }
     input.innerText = num + '';
   }
   minus() {
@@ -37,16 +39,19 @@ export class ProductComponent implements OnInit {
       }
       if (valoration <= 0.7 && valoration > 0.3) {
         starArray[i].textContent = 'star_half';
-        console.log("estrella")
+
       }
       if (valoration >= 1) {
         starArray[i].textContent = 'star';
         
       }
-      console.log(valoration)
+    
       valoration--;
       i++;
     }
-    console.log(starArray)
+  
   }
+  moneyFormating(num:number){
+    return Intl.NumberFormat('de-DE').format(num);
+ }
 }

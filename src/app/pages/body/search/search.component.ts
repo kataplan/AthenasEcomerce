@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductoService } from '../../services/producto.service';
+import { ProductoService } from '../../../services/producto.service';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/interfaces/productos';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 
 
 @Component({
@@ -18,15 +19,12 @@ export class SearchComponent implements OnInit {
     this.servicioProductos.productoVisto =  item;
     this.router.navigate([`/product/`]);
   }
- /* rate(valoration: number, id:number) {
-    let classVal:Array[]= <HTMLElement>document.getElementsByClassName('rating');
-    console.log(classVal);
-    
+  moneyFormating(num:number){
+     return Intl.NumberFormat('de-DE').format(num);
   }
-  */
+
+  rate() {
+    return 
+  }
+
 }
-/*
-rate2(){
-  let arrayClases = document.getElementsByClassName("rating");
-  console.log(arrayClases)
-}*/

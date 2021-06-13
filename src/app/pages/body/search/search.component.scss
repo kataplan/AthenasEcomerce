@@ -1,4 +1,4 @@
-@import "../../app.component.scss";
+@import "../../../app.component.scss";
 .content-wrapper {
   padding: 20px 20px;
 }
@@ -24,7 +24,10 @@
 }
 .title {
   color: black;
+  height: 70px;
+  text-overflow: ellipsis;
 }
+
 .btn-producto {
   background: transparent;
   border: none !important;
