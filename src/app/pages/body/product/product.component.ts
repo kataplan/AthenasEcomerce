@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../../services/producto.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -7,10 +8,18 @@ import { ProductoService } from '../../../services/producto.service';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  constructor(public servicioProductos: ProductoService) {}
-
+  constructor(public servicioProductos: ProductoService, private route:ActivatedRoute) {}
+  public id:any;
   ngOnInit(): void {
+    
+    this.route.paramMap.subscribe( (paramMap:any) =>{
+      const {params} = paramMap
+      this.servicioProductos.obtenerProductoPorID(params.producto)
+    
+    })
+    
     this.rating(this.servicioProductos.productoVisto.valoracion);
+    
   }
   plus() {
     var input = document.getElementById('quantity-number')!;

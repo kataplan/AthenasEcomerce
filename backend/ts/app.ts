@@ -129,6 +129,31 @@ app.get('/tenis', (req: any, res: any) => {
         }
     })
 });
+app.get('/producto/:id', (req: any, res: any) => {
+    let id=req.params.id;
+    const sql = 'SELECT * FROM producto WHERE idProducto = ?'
+    connection.query(sql,id,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+});
+app.get('/categoria/:id', (req: any, res: any) => {
+    let id=req.params.id;
+    const sql = 'SELECT * FROM categoria WHERE idCategoria = ?'
+    connection.query(sql,id,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+    
+});
 
 app.listen(port, hostname, () => {
     console.log('SERVIDOR EJECUTÁNDOSE EN http://localhost:' + port);

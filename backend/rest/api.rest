@@ -10,3 +10,6 @@ GET http://localhost:3000/basketball
 
 ###
 GET http://localhost:3000/regiones
+
+###
+GET  http://localhost:3000/categoria/1

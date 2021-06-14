@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
   }
   verProducto(item:Producto){
     this.servicioProductos.productoVisto =  item;
-    this.router.navigate([`/product/`]);
+    this.router.navigate([`/product/${item.idProducto}`]);
   }
   moneyFormating(num:number){
      return Intl.NumberFormat('de-DE').format(num);

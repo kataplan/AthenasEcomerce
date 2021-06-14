@@ -136,6 +136,34 @@ app.get('/tenis', function (req, res) {
         }
     });
 });
+app.get('/producto/:id', function (req, res) {
+    var id = req.params.id;
+    var sql = 'SELECT * FROM producto WHERE idProducto = ?';
+    dbconfig_1.connection.query(sql, id, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
+app.get('/categoria/:id', function (req, res) {
+    var id = req.params.id;
+    var sql = 'SELECT * FROM categoria WHERE idCategoria = ?';
+    dbconfig_1.connection.query(sql, id, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
 app.listen(port, hostname, function () {
     console.log('SERVIDOR EJECUTÁNDOSE EN http://localhost:' + port);
 });

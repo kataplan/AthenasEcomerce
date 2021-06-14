@@ -2,7 +2,11 @@
 .content-wrapper {
   padding: 20px 20px;
 }
-
+#filter{
+  width: 80%;
+  padding-right: 10px;
+  max-width: 400px;
+}
 #content {
   display: flex;
   padding-left: 10px;
