@@ -4,11 +4,16 @@
 }
 #categoria{
   font-family:$strong-font;
+  text-transform: uppercase;
+  color: $area;
+  font-size: 2.5rem;
+  padding: 0 10px;
+  margin:10px 0;
 }
 #filter{
   width: 80%;
   padding: 20px 10px 0 0;
-  max-width: 400px;
+  max-width: 300px;
 }
 #content {
   display: flex;
@@ -62,7 +67,7 @@
 }
 #filter{
 
-  width: 80%;
+  max-width: 80%;
 }
 .card{
   margin: 5px 0;

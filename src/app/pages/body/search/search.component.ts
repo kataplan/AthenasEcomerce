@@ -10,12 +10,15 @@ import { Producto } from 'src/app/interfaces/productos';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  
+  busqueda:any;
+  
   constructor(public servicioProductos: ProductoService, private router: Router, private ActiveRoute:ActivatedRoute) {}
-
+  
   ngOnInit(): void {
     this.ActiveRoute.paramMap.subscribe( (paramMap:any) =>{      
       const {params} = paramMap
-      console.log(params)
+      this.busqueda=params.busqueda
       this.servicioProductos.obtenerProductoPorNombre(params.busqueda)
       this.servicioProductos.catBusqueda=params.categoria;
     })

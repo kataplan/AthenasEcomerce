@@ -1,21 +1,24 @@
 <div class="content-wrapper">
   <div>
-    <h1>{{this.servicioProductos.catBusqueda}}</h1>
+    <h1 id="busqueda">Resultados de la busqueda: {{this.busqueda}}</h1>
   </div> 
   <div id="content">
     <div id="filter" class="column">
      <app-filter></app-filter>
     </div>
     <div class="column" id="products-wrapper">
-      <h2>Productos</h2>
+      
       <div id="products">
+        <div id="no-results" *ngIf="servicioProductos.listaProductos.length === 0">  
+          <h3>No hay resultados para la busqueda de: {{this.busqueda}}</h3>
+        </div>
         <div *ngFor="let item of servicioProductos.listaProductos">
           
           <mat-card class="card" (click)="verProducto(item)">
             <button class="btn-producto">
               <img
                 mat-card-image
-                src="../../../assets/img/{{servicioProductos.catBusqueda}}/{{item.idProducto}}.jpg"
+                src="../../../assets/img/productos/{{item.idProducto}}.jpg"
                 alt="foto productos"
               />
               <mat-card-content class="title">
