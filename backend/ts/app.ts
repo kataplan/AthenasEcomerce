@@ -23,9 +23,9 @@ connection.connect( (error:any)=>{
 })
 
 app.get('/search/:nombreProducto',(req:any, res:any)=>{
-    let prodBusqueda = req.nombreProducto;
-    console.log(prodBusqueda)
-    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto = ? '
+    let prodBusqueda = "%"+req.params.nombreProducto+"%";
+    const sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto LIKE ? "
+    
     connection.query(sql,prodBusqueda,(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
