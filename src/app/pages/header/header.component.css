@@ -186,7 +186,8 @@ input {
 .tab-content {
   color: white;
   font-size: 0.8em;
-  font: bold;
+  font-family: "Poppins";
+  font-weight: 600;
   padding: 0px 1vw;
   -webkit-transition: border-bottom 0.1s ease-in;
   transition: border-bottom 0.1s ease-in;

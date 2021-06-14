@@ -11,7 +11,7 @@ export class ProductComponent implements OnInit {
   constructor(public servicioProductos: ProductoService, private route:ActivatedRoute) {}
   public id:any;
   ngOnInit(): void {
-    
+    document.documentElement.scrollTop
     this.route.paramMap.subscribe( (paramMap:any) =>{
       const {params} = paramMap
       this.servicioProductos.obtenerProductoPorID(params.producto)

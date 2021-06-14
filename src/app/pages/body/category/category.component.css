@@ -55,12 +55,16 @@
 
 #categoria {
   font-family: "Anton", Arial, sans-serif;
+  text-transform: uppercase;
+  color: #212833;
+  font-size: 2.5rem;
+  margin: 2px 0 30px 0;
 }
 
 #filter {
-  width: 80%;
+  width: 100%;
   padding: 20px 10px 0 0;
-  max-width: 400px;
+  max-width: 300px;
 }
 
 #content {
@@ -68,10 +72,14 @@
   display: -ms-flexbox;
   display: flex;
   padding-left: 10px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-#products {
-  padding-left: 20px;
+#products-wrapper {
+  width: 100%;
+  max-width: 1090px;
 }
 
 .price {
@@ -95,8 +103,8 @@
   padding: 20px 20px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  -ms-grid-columns: (minmax(200px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 15px;
 }
 
@@ -105,8 +113,8 @@
       justify-self: center;
   width: 100%;
   height: 100%;
-  min-width: 250px;
-  max-width: 300px;
+  min-width: 200px;
+  max-width: 250px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -115,7 +123,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 930px) {
   #content, .content-wrapper, .column {
     width: 100%;
     display: -webkit-box;
@@ -129,8 +137,12 @@
         -ms-flex-align: center;
             align-items: center;
   }
+  #categoria {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
   #filter {
-    width: 80%;
+    max-width: 80%;
   }
   .card {
     margin: 5px 0;

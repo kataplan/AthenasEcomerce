@@ -1,14 +1,16 @@
 <div class="content-wrapper">
-    <div>
-      <h1 id="categoria">{{this.servicioProductos.catBusqueda}}</h1>
-    </div> 
+  
     <div id="content">
       <div id="filter" class="column">
-       <app-filter></app-filter>
+        <div>
+          <h1 id="categoria">{{this.servicioProductos.catBusqueda}}</h1>
+        </div> 
+        <app-filter></app-filter>
       </div>
       <div class="column" id="products-wrapper">
-       
+  
         <div id="products">
+      
           <div *ngFor="let item of servicioProductos.listaProductos">
             
             <mat-card class="card" (click)="verProducto(item)">
