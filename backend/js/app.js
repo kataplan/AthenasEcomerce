@@ -19,20 +19,48 @@ dbconfig_1.connection.connect(function (error) {
         throw error;
     console.log('Base de datos conectada');
 });
+app.get('/search/:nombreProducto', function (req, res) {
+    var prodBusqueda = req.nombreProducto;
+    var sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto = ? ';
+    dbconfig_1.connection.query(sql, prodBusqueda, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
+});
 app.post('/registrar', function (req, res) {
     if (req.body === '') {
         res.status(500).json({ message: 'ERROR AL REGISTRAR' });
     }
     else {
         var newUser = req.body;
-        var sql = "INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion,contrasena) VALUES('" + newUser.nombres + "','" + newUser.apellidos + "','" + newUser.rut + "','" + newUser.email + "','" + newUser.region + "','" + newUser.comuna + "','" + newUser.direccion + "','" + newUser.password + "') ";
-        dbconfig_1.connection.query(sql, function (error, results) {
+        var sql = "INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion,contrasena) VALUES(?,?,?,?,?,?,?,?) ";
+        dbconfig_1.connection.query(sql, newUser.nombres, newUser.apellidos, newUser.email, newUser.region, newUser.comuna, newUser.direccion, newUser.password, function (error, results) {
             if (error)
                 throw error;
             console.log("1 usuario registrado");
         });
         res.status(201).json({ message: 'USUARIO CREADO CON EXITO' });
     }
+});
+app.get('/categoria/:categoria', function (req, res) {
+    var categoria = req.params.categoria;
+    var sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto INNER JOIN categoria ON categoria.nombreCategoria = ? WHERE producto.idCategoria = categoria.idCategoria';
+    dbconfig_1.connection.query(sql, categoria, function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            res.json(results);
+        }
+        else {
+            res.send('No hay resultados');
+        }
+    });
 });
 app.get('/regiones', function (req, res) {
     fs.readFile('backend/database/regiones-comunas.json', 'utf8', function (err, data) {
@@ -42,97 +70,6 @@ app.get('/regiones', function (req, res) {
         else {
             var dataRegiones = JSON.parse(data);
             res.send(dataRegiones);
-        }
-    });
-});
-app.get('/football', function (req, res) {
-    var sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE idCategoria = 1';
-    dbconfig_1.connection.query(sql, function (error, results) {
-        if (error)
-            throw error;
-        if (results.length > 0) {
-            res.json(results);
-        }
-        else {
-            res.send('No hay resultados');
-        }
-    });
-});
-app.get('/basketball', function (req, res) {
-    var sql = 'SELECT * FROM producto WHERE idCategoria = 2';
-    dbconfig_1.connection.query(sql, function (error, results) {
-        if (error)
-            throw error;
-        if (results.length > 0) {
-            res.json(results);
-        }
-        else {
-            res.send('No hay resultados');
-        }
-    });
-});
-app.get('/rugby', function (req, res) {
-    var sql = 'SELECT * FROM producto WHERE idCategoria = 3';
-    dbconfig_1.connection.query(sql, function (error, results) {
-        if (error)
-            throw error;
-        if (results.length > 0) {
-            res.json(results);
-        }
-        else {
-            res.send('No hay resultados');
-        }
-    });
-});
-app.get('/handball', function (req, res) {
-    var sql = 'SELECT * FROM producto WHERE idCategoria = 4';
-    dbconfig_1.connection.query(sql, function (error, results) {
-        if (error)
-            throw error;
-        if (results.length > 0) {
-            res.json(results);
-        }
-        else {
-            res.send('No hay resultados');
-        }
-    });
-});
-app.get('/ciclismo', function (req, res) {
-    var sql = 'SELECT * FROM producto WHERE idCategoria = 5';
-    dbconfig_1.connection.query(sql, function (error, results) {
-        if (error)
-            throw error;
-        if (results.length > 0) {
-            res.json(results);
-        }
-        else {
-            res.send('No hay resultados');
-        }
-    });
-});
-app.get('/boxeo', function (req, res) {
-    var sql = 'SELECT * FROM producto WHERE idCategoria = 6';
-    dbconfig_1.connection.query(sql, function (error, results) {
-        if (error)
-            throw error;
-        if (results.length > 0) {
-            res.json(results);
-        }
-        else {
-            res.send('No hay resultados');
-        }
-    });
-});
-app.get('/tenis', function (req, res) {
-    var sql = 'SELECT * FROM producto WHERE idCategoria = 7';
-    dbconfig_1.connection.query(sql, function (error, results) {
-        if (error)
-            throw error;
-        if (results.length > 0) {
-            res.json(results);
-        }
-        else {
-            res.send('No hay resultados');
         }
     });
 });
@@ -150,7 +87,7 @@ app.get('/producto/:id', function (req, res) {
         }
     });
 });
-app.get('/categoria/:id', function (req, res) {
+app.get('/producto/categoria/:id', function (req, res) {
     var id = req.params.id;
     var sql = 'SELECT * FROM categoria WHERE idCategoria = ?';
     dbconfig_1.connection.query(sql, id, function (error, results) {

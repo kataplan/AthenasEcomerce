@@ -12,16 +12,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'search', component: SearchComponent },
+  { path: 'search/:busqueda', component: SearchComponent },
   { path: 'product/:producto', component: ProductComponent },
   { path: 'categoria', component: SearchComponent},
-  { path: 'categoria/football', component: SearchComponent},
-  { path: 'categoria/basketball', component: SearchComponent},
-  { path: 'categoria/rugby', component: SearchComponent},
-  { path: 'categoria/handball', component: SearchComponent},
-  { path: 'categoria/ciclismo', component: SearchComponent},
-  { path: 'categoria/boxeo', component: SearchComponent},
-  { path: 'categoria/tenis', component: SearchComponent},
+  { path: 'categoria/:categoria', component: SearchComponent},
   { path: 'carrito', component: CartComponent}
 ];
 

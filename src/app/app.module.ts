@@ -33,6 +33,7 @@ import { StarComponent } from './util/star/star.component';
 import { FilterComponent } from './util/filter/filter.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
+import { CategoriaComponent } from './pages/body/categoria/categoria.component';
 
 
 
@@ -50,6 +51,7 @@ import {MatSliderModule} from '@angular/material/slider';
     CartComponent,
     StarComponent,
     FilterComponent,
+    CategoriaComponent,
     
   ],
   imports: [

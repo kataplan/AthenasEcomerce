@@ -22,20 +22,46 @@ connection.connect( (error:any)=>{
     console.log('Base de datos conectada')
 })
 
+app.get('/search/:nombreProducto',(req:any, res:any)=>{
+    let prodBusqueda = req.nombreProducto;
+    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto = ? '
+    connection.query(sql,prodBusqueda,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
+})
+
+
 app.post('/registrar',(req:any,res:any)=>{
     if(req.body===''){
         res.status(500).json({ message: 'ERROR AL REGISTRAR' });
     }else{
         
         const newUser:Usuario= req.body
-        const sql = `INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion,contrasena) VALUES('${newUser.nombres}','${newUser.apellidos}','${newUser.rut}','${newUser.email}','${newUser.region}','${newUser.comuna}','${newUser.direccion}','${newUser.password}') `        
-        connection.query(sql,(error:any,results:any)=>{
+        const sql = "INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion,contrasena) VALUES(?,?,?,?,?,?,?,?) "       
+        connection.query(sql,newUser.nombres,newUser.apellidos,newUser.email,newUser.region,newUser.comuna,newUser.direccion,newUser.password,(error:any,results:any)=>{
             if (error) throw error;
             console.log("1 usuario registrado");
         })
         res.status(201).json({ message: 'USUARIO CREADO CON EXITO' });
     }
     
+})
+app.get('/categoria/:categoria',(req:any, res:any)=>{
+    let categoria=req.params.categoria;
+    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto INNER JOIN categoria ON categoria.nombreCategoria = ? WHERE producto.idCategoria = categoria.idCategoria'
+    connection.query(sql,categoria,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results)
+        }else{
+            res.send('No hay resultados')
+        }
+    })
 })
 
 app.get('/regiones',(req:any, res:any)=>{
@@ -50,85 +76,7 @@ app.get('/regiones',(req:any, res:any)=>{
     });
 })
 
-app.get('/football', (req: any, res: any) => {
-    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE idCategoria = 1'
-    connection.query(sql,(error:any,results:any)=>{
-        if (error) throw error;
-        if (results.length > 0){
-            res.json(results)
-        }else{
-            res.send('No hay resultados')
-        }
-    })
-});
-app.get('/basketball', (req: any, res: any) => {
-    const sql = 'SELECT * FROM producto WHERE idCategoria = 2'
-    connection.query(sql,(error:any,results:any)=>{
-        if (error) throw error;
-        if (results.length > 0){
-            res.json(results)
-        }else{
-            res.send('No hay resultados')
-        }
-    })
-});
-app.get('/rugby', (req: any, res: any) => {
-    const sql = 'SELECT * FROM producto WHERE idCategoria = 3'
-    connection.query(sql,(error:any,results:any)=>{
-        if (error) throw error;
-        if (results.length > 0){
-            res.json(results)
-        }else{
-            res.send('No hay resultados')
-        }
-    })
-});
-app.get('/handball', (req: any, res: any) => {
-    const sql = 'SELECT * FROM producto WHERE idCategoria = 4'
-    connection.query(sql,(error:any,results:any)=>{
-        if (error) throw error;
-        if (results.length > 0){
-            res.json(results)
-        }else{
-            res.send('No hay resultados')
-        }
-    })
-});
-app.get('/ciclismo', (req: any, res: any) => {
-    const sql = 'SELECT * FROM producto WHERE idCategoria = 5'
-    connection.query(sql,(error:any,results:any)=>{
-        if (error) throw error;
-        if (results.length > 0){
-            res.json(results)
-        }else{
-            res.send('No hay resultados')
-        }
-    })
-});
 
-app.get('/boxeo', (req: any, res: any) => {
-    const sql = 'SELECT * FROM producto WHERE idCategoria = 6'
-    connection.query(sql,(error:any,results:any)=>{
-        if (error) throw error;
-        if (results.length > 0){
-            res.json(results)
-        }else{
-            res.send('No hay resultados')
-        }
-    })
-});
-
-app.get('/tenis', (req: any, res: any) => {
-    const sql = 'SELECT * FROM producto WHERE idCategoria = 7'
-    connection.query(sql,(error:any,results:any)=>{
-        if (error) throw error;
-        if (results.length > 0){
-            res.json(results)
-        }else{
-            res.send('No hay resultados')
-        }
-    })
-});
 app.get('/producto/:id', (req: any, res: any) => {
     let id=req.params.id;
     const sql = 'SELECT * FROM producto WHERE idProducto = ?'
@@ -141,7 +89,7 @@ app.get('/producto/:id', (req: any, res: any) => {
         }
     })
 });
-app.get('/categoria/:id', (req: any, res: any) => {
+app.get('/producto/categoria/:id', (req: any, res: any) => {
     let id=req.params.id;
     const sql = 'SELECT * FROM categoria WHERE idCategoria = ?'
     connection.query(sql,id,(error:any,results:any)=>{
@@ -152,7 +100,6 @@ app.get('/categoria/:id', (req: any, res: any) => {
             res.send('No hay resultados')
         }
     })
-    
 });
 
 app.listen(port, hostname, () => {

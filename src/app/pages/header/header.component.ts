@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {ProductoService} from '../../services/producto.service' 
 import {Producto} from '../../interfaces/productos'
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -36,11 +37,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([`/register`])
   }
   search(){
-    this.router.navigate([`/search`,])
+    const searchInput = <HTMLInputElement> document.getElementById('inputSearch')
+    this.servicioProductos.obtenerProductoPorNombre(searchInput.value)
+    this.router.navigate([`/search/${searchInput.value}`])
   }
   goCategory(category:string){
     this.servicioProductos.catBusqueda=category;
-    this.servicioProductos.obtenerProductos(category)
+    this.servicioProductos.obtenerProductosPorNombreCategoria(category)
     this.router.navigate([`/categoria`,category])
   }
 
