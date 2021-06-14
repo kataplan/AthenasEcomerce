@@ -24,6 +24,7 @@ connection.connect( (error:any)=>{
 
 app.get('/search/:nombreProducto',(req:any, res:any)=>{
     let prodBusqueda = req.nombreProducto;
+    console.log(prodBusqueda)
     const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto = ? '
     connection.query(sql,prodBusqueda,(error:any,results:any)=>{
         if (error) throw error;
@@ -32,9 +33,9 @@ app.get('/search/:nombreProducto',(req:any, res:any)=>{
         }else{
             res.send('No hay resultados')
         }
+    
     })
 })
-
 
 app.post('/registrar',(req:any,res:any)=>{
     if(req.body===''){

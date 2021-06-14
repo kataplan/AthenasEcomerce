@@ -3,20 +3,18 @@ import { ProductoService } from '../../../services/producto.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Producto } from 'src/app/interfaces/productos';
 
-
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class CategoryComponent implements OnInit {
   constructor(public servicioProductos: ProductoService, private router: Router, private ActiveRoute:ActivatedRoute) {}
 
   ngOnInit(): void {
     this.ActiveRoute.paramMap.subscribe( (paramMap:any) =>{      
       const {params} = paramMap
-      console.log(params)
-      this.servicioProductos.obtenerProductoPorNombre(params.busqueda)
+      this.servicioProductos.obtenerProductosPorNombreCategoria(params.categoria)
       this.servicioProductos.catBusqueda=params.categoria;
     })
   }

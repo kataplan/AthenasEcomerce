@@ -21,6 +21,7 @@ dbconfig_1.connection.connect(function (error) {
 });
 app.get('/search/:nombreProducto', function (req, res) {
     var prodBusqueda = req.nombreProducto;
+    console.log(prodBusqueda);
     var sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto = ? ';
     dbconfig_1.connection.query(sql, prodBusqueda, function (error, results) {
         if (error)
@@ -104,3 +105,4 @@ app.get('/producto/categoria/:id', function (req, res) {
 app.listen(port, hostname, function () {
     console.log('SERVIDOR EJECUTÁNDOSE EN http://localhost:' + port);
 });
+
