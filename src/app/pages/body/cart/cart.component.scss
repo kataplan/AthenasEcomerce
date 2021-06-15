@@ -1,1 +1,52 @@
 @import "../../../app.component.scss";
+.content-wrapper{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+h1{
+  font-family: $strong-font;
+  color: $area;
+  font-size: 2.5rem;
+  
+}
+table {
+    width: 90%;
+  }
+.content-wrapper{
+  display: flex;
+}
+#carrito{
+  width: 80%;
+  max-width: 900px;
+}
+.column{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+}
+#resumen{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  padding: 5px;
+}
+#resumen .mat-card{
+  width: 90%;
+}
+@media screen and (max-width: 770px) {
+  .content-wrapper{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #resumen, #carrito{
+    width: 100%;
+    align-items: center;
+    
+  }
+  table{
+    width:80%
+  }
+}

@@ -6,3 +6,7 @@ export interface Producto {
     stock:number,
     valoracion:number,
 }
+export interface ProductoPedido{
+    producto:Producto,
+    cantidad:number,
+}

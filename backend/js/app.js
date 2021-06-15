@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var dbconfig_1 = require("./config/dbconfig");
+var bcrypt = require('bcryptjs');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -39,13 +40,15 @@ app.post('/registrar', function (req, res) {
     }
     else {
         var newUser = req.body;
-        var sql = "INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion,contrasena) VALUES(?,?,?,?,?,?,?,?) ";
-        dbconfig_1.connection.query(sql, newUser.nombres, newUser.apellidos, newUser.email, newUser.region, newUser.comuna, newUser.direccion, newUser.password, function (error, results) {
+        var hashedPassword = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync());
+        var sql = 'INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion, contrasena) VALUES(?,?,?,?,?,?,?,?)';
+        dbconfig_1.connection.query(sql, [newUser.nombres, newUser.apellidos, newUser.rut, newUser.email, newUser.region, newUser.comuna, newUser.direccion, hashedPassword], function (error, results) {
             if (error)
-                throw error;
+                if (error)
+                    throw error;
             console.log("1 usuario registrado");
+            res.status(201).json({ message: 'USUARIO CREADO CON EXITO' });
         });
-        res.status(201).json({ message: 'USUARIO CREADO CON EXITO' });
     }
 });
 app.get('/categoria/:categoria', function (req, res) {

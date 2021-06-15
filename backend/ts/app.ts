@@ -2,6 +2,7 @@ import { connection } from './config/dbconfig'
 import { Regiones } from './interfaces/regiones';
 import { Usuario } from './interfaces/usuario'
 
+const bcrypt = require('bcryptjs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -42,13 +43,15 @@ app.post('/registrar',(req:any,res:any)=>{
         res.status(500).json({ message: 'ERROR AL REGISTRAR' });
     }else{
         
-        const newUser:Usuario= req.body
-        const sql = "INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion,contrasena) VALUES(?,?,?,?,?,?,?,?) "       
-        connection.query(sql,newUser.nombres,newUser.apellidos,newUser.email,newUser.region,newUser.comuna,newUser.direccion,newUser.password,(error:any,results:any)=>{
-            if (error) throw error;
+        const newUser:Usuario= req.body;
+        const hashedPassword:string = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync());
+        const sql = 'INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion, contrasena) VALUES(?,?,?,?,?,?,?,?)'   
+        connection.query(sql,[newUser.nombres,newUser.apellidos,newUser.rut,newUser.email,newUser.region,newUser.comuna,newUser.direccion, hashedPassword],(error:any,results:any)=>{
+            if (error) if (error) throw error;
+            
             console.log("1 usuario registrado");
+            res.status(201).json({ message: 'USUARIO CREADO CON EXITO' }); 
         })
-        res.status(201).json({ message: 'USUARIO CREADO CON EXITO' });
     }
     
 })

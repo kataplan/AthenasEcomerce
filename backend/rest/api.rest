@@ -15,3 +15,18 @@ GET http://localhost:3000/regiones
 GET  http://localhost:3000/categoria/1
 ###
 GET http://localhost:3000/categoria/football
+
+###
+POST http://localhost:3000/registrar
+content-type: application/json
+
+{
+  "nombres": "asdasd",
+  "apellidos": "asdasdasd",
+  "rut": "19941645-6",
+  "email": "aasd@gmaul.com",
+  "region": "Region de Atacama",
+  "comuna": "Vallenar",
+  "direccion": "asda 123",
+  "password": "asd"
+}

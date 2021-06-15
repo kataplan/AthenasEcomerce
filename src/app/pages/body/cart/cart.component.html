@@ -1,8 +1,46 @@
 <div class="content-wrapper">
-    <h1>
-        MI CARRITO
-    </h1>
-    <div>
-        
-    </div>
+  <div id="carrito" class="columnn">
+    <h1>MI CARRITO</h1>
+    
+      <table mat-table>
+        <ng-container matColumnDef="Producto">
+          <th mat-header-cell *matHeaderCellDef>Producto</th>
+          <td mat-cell>Hola</td>
+        </ng-container>
+        <ng-container matColumnDef="Precio">
+          <th mat-header-cell *matHeaderCellDef>Precio</th>
+          <td mat-cell>Hola</td>
+        </ng-container>
+        <ng-container matColumnDef="cantidad">
+          <th mat-header-cell *matHeaderCellDef>cantidad</th>
+          <td mat-cell>Hola</td>
+        </ng-container>
+        <ng-container matColumnDef="subtotal">
+          <th mat-header-cell *matHeaderCellDef>subtotal</th>
+          <td mat-cell>Hola</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+  </div>
+  <div id="resumen" class="columnn">
+    <mat-card>
+      <mat-card-title>
+        <h3>RESUMEN</h3>
+      </mat-card-title>
+      <mat-card-content>
+        <span> subtotal:</span>
+        <span>$ precio</span>
+      </mat-card-content>
+      <mat-card-content>
+        <span> Total:</span>
+        <span>$ precio</span>
+      </mat-card-content>
+      <button mat-raised-button color="primary" class="btn-standar">
+        IR A PAGAR
+      </button>
+    </mat-card>
+  </div>
 </div>

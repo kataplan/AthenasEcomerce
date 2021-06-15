@@ -93,15 +93,18 @@
             <mat-icon>{{ hide2 ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
         </mat-form-field>
+        <ngx-recaptcha2 #captchaElem
+          [siteKey]="siteKey"
+          formControlName="recaptcha"> 
+        </ngx-recaptcha2>
       </div>
       <button  
           mat-flat-button 
           type="submit"
           color="accent"
-          class="g-recaptcha" 
-          data-sitekey="6LcKnjUbAAAAAJyeamokDgbukWhaPiC-3GNuMj58" 
-          data-callback='onSubmit' 
-          data-action='submit'>CREAR CUENTA
+          class="btn-standar"
+          (click)="onSubmit()"
+        >CREAR CUENTA
       </button>
     </form>
   </div>

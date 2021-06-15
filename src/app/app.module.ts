@@ -34,9 +34,8 @@ import { FilterComponent } from './util/filter/filter.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
 import { CategoryComponent } from './pages/body/category/category.component';
-
-
-
+import {MatBadgeModule} from '@angular/material/badge';
+import { NgxCaptchaModule } from 'ngx-captcha'
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +50,7 @@ import { CategoryComponent } from './pages/body/category/category.component';
     CartComponent,
     StarComponent,
     FilterComponent,
-    CategoryComponent, 
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +75,8 @@ import { CategoryComponent } from './pages/body/category/category.component';
     MatTableModule,
     MatExpansionModule,
     MatSliderModule,
+    MatBadgeModule,
+    NgxCaptchaModule
   ],
   providers: [ProductoService],
   bootstrap: [AppComponent],

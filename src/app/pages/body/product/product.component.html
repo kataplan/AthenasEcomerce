@@ -41,7 +41,7 @@
         <button mat-raised-button disabled class="btn-standar" *ngIf="stock(this.servicioProductos.productoVisto.stock)" >
           AGREGAR AL CARRITO
         </button>
-        <button mat-raised-button color="accent" class="btn-standar" *ngIf="this.servicioProductos.productoVisto.stock" >
+        <button mat-raised-button color="accent" class="btn-standar" *ngIf="this.servicioProductos.productoVisto.stock" (click)="addToCart()" >
           AGREGAR AL CARRITO
         </button>
       </div>

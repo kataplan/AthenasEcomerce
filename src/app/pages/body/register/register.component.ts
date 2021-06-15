@@ -10,6 +10,7 @@ import {RegistroUsuarioService} from '../../../services/registro-usuario.service
 import {RegionesService} from '../../../services/regiones.service'
 import {Usuario} from '../../../interfaces/usuario'
 import { Region} from '../../../interfaces/region'
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,7 +21,9 @@ export class RegisterComponent implements OnInit {
   hide2 = true;
   comunas:Array<String> =[];
   formulario: FormGroup;
-  constructor( public fb: FormBuilder, public servicioRegistro:RegistroUsuarioService,public servicioRegiones:RegionesService ) {
+  siteKey:string="6Ld1STYbAAAAANTXcdx94Ki2xxTLd6vn8JYi5om_"
+
+  constructor(public fb: FormBuilder, public servicioRegistro:RegistroUsuarioService,public servicioRegiones:RegionesService) {
     this.formulario = fb.group({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -31,6 +34,7 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', [Validators.required,Validators.email]),
     password: new FormControl('', [Validators.required]),
     repeatPassword: new FormControl('', [Validators.required]),
+    recaptcha: new FormControl('',[Validators.required])
   });
 } 
 
@@ -39,28 +43,35 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-    const nuevoUsuario:Usuario={
-      nombres:this.formulario.controls['firstName'].value,
-      apellidos:this.formulario.controls['lastName'].value,
-      rut:this.formulario.controls['rut'].value,
-      email:this.formulario.controls['email'].value,
-      region:this.formulario.controls['region'].value,
-      comuna:this.formulario.controls['comuna'].value,
-      direccion:this.formulario.controls['address'].value,
-      password:this.formulario.controls['password'].value  
+    if(this.formulario.valid){
+
+      const password=this.formulario.controls['password'].value;
+      const repPassword=this.formulario.controls['repeatPassword'].value;
       
-    }
+      if(password === repPassword){
+        
+        const nuevoUsuario:Usuario={
+          nombres:this.formulario.controls['firstName'].value,
+          apellidos:this.formulario.controls['lastName'].value,
+          rut:this.formulario.controls['rut'].value,
+          email:this.formulario.controls['email'].value,
+          region:this.formulario.controls['region'].value,
+          comuna:this.formulario.controls['comuna'].value,
+          direccion:this.formulario.controls['address'].value ,
+          password:password
+        }
+        
+        this.servicioRegistro.registrarUsuario(nuevoUsuario);
+        alert('Registrado con éxito!!')
+      }else{
+        alert('Las contraseñas no coinciden')
+      }
 
-    const password=this.formulario.controls['password'].value;
-    const repPassword=this.formulario.controls['repeatPassword'].value;
-    if(password === repPassword){
-      nuevoUsuario.password=password;
     }else{
-      alert('Las contraseñas no coinciden')
+      alert('Complete correctamente el formulario')
     }
-
-    this.servicioRegistro.registrarUsuario(nuevoUsuario);
-    alert('Registrado con éxito!!')
+    
+    
   }
   seleccionarRegion(region:Region){
     this.comunas = region.comunas;
