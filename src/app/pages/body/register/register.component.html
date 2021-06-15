@@ -94,8 +94,14 @@
           </button>
         </mat-form-field>
       </div>
-      <button mat-flat-button color="accent" type="submit" (click)="onSubmit()" class="btn-standar">
-        CREAR UNA CUENTA
+      <button  
+          mat-flat-button 
+          type="submit"
+          color="accent"
+          class="g-recaptcha" 
+          data-sitekey="6LcKnjUbAAAAAJyeamokDgbukWhaPiC-3GNuMj58" 
+          data-callback='onSubmit' 
+          data-action='submit'>CREAR CUENTA
       </button>
     </form>
   </div>

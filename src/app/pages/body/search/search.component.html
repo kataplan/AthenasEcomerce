@@ -1,37 +1,36 @@
 <div class="content-wrapper">
-  <div>
+ 
     <h1 id="busqueda">Resultados de la busqueda: <span>"{{this.busqueda}}"</span></h1>
-  </div>
-  <div id="content">
-    <div id="filter" class="column">
-     <app-filter></app-filter>
-    </div>
-    <div class="column" id="products-wrapper">
-      
-      <div id="products">
-        <div id="no-results" *ngIf="servicioProductos.listaProductos.length === 0">  
-          <h3>No hay resultados para la busqueda de: {{this.busqueda}}</h3>
-        </div>
-        <div *ngFor="let item of servicioProductos.listaProductos">
-          
-          <mat-card class="card" (click)="verProducto(item)">
-            <button class="btn-producto">
-              <img
-                mat-card-image
-                src="../../../assets/img/productos/{{item.idProducto}}.jpg"
-                alt="foto productos"
-              />
-              <mat-card-content class="title">
-                <b>{{item.nombreProducto}}</b>
-              </mat-card-content>
-            </button>
-
-            <mat-card-content class="price"> $ {{moneyFormating(item.precio)}}</mat-card-content>   
+    <div id="content">
+      <div id="filter" class="column">
+       <app-filter></app-filter>
+      </div>
+      <div class="column" id="products-wrapper">
+        
+        <div id="products">
+          <div id="no-results" *ngIf="servicioProductos.listaProductos.length === 0">  
+            <h3>No hay resultados para la busqueda de: {{this.busqueda}}</h3>
+          </div>
+          <div *ngFor="let item of servicioProductos.listaProductos">
             
-            <app-star>{{rate(item.valoracion)}}</app-star>
-          </mat-card>
+            <mat-card class="card" (click)="verProducto(item)">
+              <button class="btn-producto">
+                <img
+                  mat-card-image
+                  src="../../../assets/img/productos/{{item.idProducto}}.jpg"
+                  alt="foto productos"
+                />
+                <mat-card-content class="title">
+                  <b>{{item.nombreProducto}}</b>
+                </mat-card-content>
+              </button>
+  
+              <mat-card-content class="price"> $ {{moneyFormating(item.precio)}}</mat-card-content>   
+              
+              <app-star>{{rate(item.valoracion)}}</app-star>
+            </mat-card>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
