@@ -218,6 +218,9 @@ input {
   .mat-icon-button .mat-icon {
     line-height: normal;
   }
+  #btn-logo {
+    max-width: 120px;
+  }
   .btn-icon {
     font-size: 1.8rem;
     margin: 0px;

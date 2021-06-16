@@ -9,4 +9,5 @@ export interface Producto {
 export interface ProductoPedido{
     producto:Producto,
     cantidad:number,
+    subTotal:number,
 }

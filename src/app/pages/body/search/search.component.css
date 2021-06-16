@@ -1,7 +1,7 @@
 .content-wrapper {
   background-color: #f7f7f7;
   width: 100%;
-  min-height: 68%;
+  min-height: 72%;
 }
 
 #btn-logo {
@@ -135,7 +135,7 @@
 
 .title {
   color: black;
-  height: 70px;
+  height: 5rem;
   line-height: 1rem;
 }
 

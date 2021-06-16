@@ -1,7 +1,7 @@
 .content-wrapper {
   background-color: #f7f7f7;
   width: 100%;
-  min-height: 68%;
+  min-height: 72%;
 }
 
 #btn-logo {
@@ -47,5 +47,139 @@
 .card:hover {
   -webkit-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
           box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px;
+}
+
+.mat-column-Producto {
+  width: 60%;
+  max-width: 500px;
+  padding: 0;
+}
+
+.mat-column-Cantidad {
+  border-right: 0.7px solid #f7f7f7;
+  padding: 0 5px 0 5px;
+}
+
+.mat-column-Subtotal {
+  padding-left: 5px;
+}
+
+.mat-column-Precio div {
+  color: #ff4081;
+}
+
+.mat-column-Subtotal, .mat-column-Precio, .mat-column-Cantidad {
+  text-align: center;
+}
+
+img {
+  max-width: 200px;
+  min-width: 100px;
+  width: 100%;
+}
+
+.product-img-name {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+h1 {
+  font-family: "Anton", Arial, sans-serif;
+  color: #212833;
+  font-size: 2.5rem;
+}
+
+h4 {
+  font-family: "Poppins";
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#carrito {
+  width: 80%;
+  max-width: 1100px;
+}
+
+.column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#resumen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30%;
+  padding: 5px;
+}
+
+#resumen .mat-card {
+  width: 90%;
+}
+
+@media screen and (max-width: 770px) {
+  .content-wrapper, .product-img-name {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-align: center;
+  }
+  #resumen, #carrito {
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  table {
+    width: 80%;
+  }
 }
 /*# sourceMappingURL=cart.component.css.map */
