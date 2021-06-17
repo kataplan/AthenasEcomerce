@@ -35,7 +35,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
 import { CategoryComponent } from './pages/body/category/category.component';
 import {MatBadgeModule} from '@angular/material/badge';
-import { NgxCaptchaModule } from 'ngx-captcha'
+import { NgxCaptchaModule } from 'ngx-captcha';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +80,9 @@ import { NgxCaptchaModule } from 'ngx-captcha'
     MatExpansionModule,
     MatSliderModule,
     MatBadgeModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    MatTooltipModule,
+    MatSnackBarModule,
   ],
   providers: [ProductoService],
   bootstrap: [AppComponent],

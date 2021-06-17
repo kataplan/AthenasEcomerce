@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from '../../../../services/producto.service';
+import { LoginUsuarioService } from '../../../../services/login-usuario.service';
 
 
 @Component({
@@ -10,13 +11,13 @@ import { ProductoService } from '../../../../services/producto.service';
 })
 export class ComentComponent implements OnInit {
 
-  constructor(public servicioProductos: ProductoService) 
+  constructor(public servicioProductos: ProductoService, public servicioLogin:LoginUsuarioService) 
   {this.formulario =this.createFormGroup();}
   createFormGroup(){
     return new FormGroup({
       rate:new FormControl('',[Validators.required]),
       coment:new FormControl('',[Validators.required, Validators.minLength(5)]),
-     
+
     });
   }
   formulario:FormGroup;

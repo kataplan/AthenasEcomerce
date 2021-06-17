@@ -9,7 +9,7 @@ $light-font: "Poppins";
 .content-wrapper {
   background-color: $light-area;
   width: 100%;
-  min-height: 72%;
+  min-height: 90%;
 }
 #btn-logo {
   width: 180px;
@@ -21,7 +21,8 @@ $light-font: "Poppins";
   padding: 20px 20px;
   margin: 5px 0;
 }
-.btn-standar, .g-recaptcha {
+.btn-standar,
+.g-recaptcha {
   border-radius: 30px;
   height: 3rem;
   width: 50%;
@@ -29,14 +30,13 @@ $light-font: "Poppins";
 }
 .input-container {
   width: 100%;
-
 }
 .price {
   color: $accent;
 }
-.btn-standar{
-  margin:10px 0px;
-  justify-self:right ;
+.btn-standar {
+  margin: 10px 0px;
+  justify-self: right;
 }
 .card {
   transition: box-shadow 0.1s ease-in;

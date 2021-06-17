@@ -2,16 +2,6 @@ CREATE DATABASE athenas_ecommerce_db;
 
 USE athenas_ecommerce_db;
 
-CREATE TABLE comuna(
-    idComuna INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nombreComuna VARCHAR(50)
-);
-
-CREATE TABLE region(
-    idRegion INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nombreRegion VARCHAR(50)
-);
-
 CREATE TABLE categoria(
     idCategoria INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombreCategoria VARCHAR(50)
@@ -23,12 +13,10 @@ CREATE TABLE usuario(
     apellidos VARCHAR(120),
     rut VARCHAR(10),
     direccion VARCHAR(200),
-    idRegion INT(11),
-    idComuna INT(11),
+    region VARCHAR(50),
+    comuna VARCHAR(50),
     email VARCHAR(30),
-    contrasena VARCHAR(100),
-    FOREIGN KEY (idRegion) REFERENCES region(idRegion),
-    FOREIGN KEY (idComuna) REFERENCES comuna(idComuna)
+    contrasena VARCHAR(100)
 );
 
 CREATE TABLE producto(
@@ -69,4 +57,17 @@ CREATE TABLE comentario(
     FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario)
 )
 
+CREATE TABLE carrito( 
+    idCarrito INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    idUsuario INT(11), FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario) 
+)
+
+CREATE TABLE productoCarrito(
+    idProductoCarrito INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idCarrito INT(11),
+    idProducto INT(11),
+    cantidad INT(11),
+    FOREIGN KEY (idCarrito) REFERENCES carrito(idCarrito),
+    FOREIGN KEY (idProducto) REFERENCES producto(idProducto)
+)
 

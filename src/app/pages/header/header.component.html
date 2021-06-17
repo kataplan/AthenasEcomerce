@@ -53,7 +53,7 @@
         class="btn-header"
       >
         <div class="btn-icon-text">
-          <mat-icon class="btn-icon">person_outline</mat-icon>
+          <mat-icon class="btn-icon">person</mat-icon>
           <div id="profile-menu">
             <div class="btn-text">MI PERFIL</div>
             <mat-icon id="arrow-down">keyboard_arrow_down</mat-icon>
@@ -61,8 +61,15 @@
         </div>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="goLogin()">Iniciar Sesión</button>
-        <button mat-menu-item (click)="goRegister()">Crear Cuenta</button>
+        <div *ngIf="this.servicioLogin.loggedUser; else elseBlock">
+          <button mat-menu-item (click)="goProfile()">Mi Perfil</button>
+          <button mat-menu-item (click)="closeSession()">Cerrar Sesión</button>
+        </div>
+        <ng-template #elseBlock>
+          <button mat-menu-item (click)="goLogin()">Iniciar Sesión</button>
+          <button mat-menu-item (click)="goRegister()">Crear Cuenta</button>
+        </ng-template>
+        
       </mat-menu>
     </div>
   </mat-toolbar-row>

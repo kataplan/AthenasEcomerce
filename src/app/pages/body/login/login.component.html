@@ -31,12 +31,17 @@
           </mat-form-field>
         </div>
         <div>
+          <!-- 
+          <ngx-recaptcha2 #captchaElem
+          [siteKey]="siteKey"
+          formControlName="recaptcha"> 
+          </ngx-recaptcha2> 
+          -->
           <button  mat-flat-button 
           color="accent"
-          class="g-recaptcha" 
-          data-sitekey="6LcKnjUbAAAAAJyeamokDgbukWhaPiC-3GNuMj58" 
-          data-callback='onSubmit' 
-          data-action='submit'>INICIAR SESION</button>
+          class="btn-standar" 
+          (click)="onSubmit()"
+          >INICIAR SESION</button>
         </div>
       </form>
     </div>

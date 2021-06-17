@@ -27,7 +27,12 @@ export class ProductoService {
 
   obtenerProductoPorNombre(str:string){
     return this.servicio.get(`${this.server}search/${str}`).subscribe((dato:any)=>{
-      this.listaProductos=dato
+      if(dato== []){
+        this.listaProductos= [];
+      }else{
+        this.listaProductos=dato;
+      }
+      
     })
   }
 

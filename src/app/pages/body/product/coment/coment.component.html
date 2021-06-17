@@ -1,7 +1,8 @@
 <div class="review">
-  <h2>¿Le gustó el producto?</h2>
-  <h4>¡Háganos saber!</h4>
-  <form action="" [formGroup]="formulario">
+  
+  <form action="" [formGroup]="formulario" *ngIf="this.servicioLogin.loggedUser; else elseBlock">
+    <h2>¿Le gustó el producto?</h2>
+    <h4>¡Háganos saber!</h4>
     <div class="star-wrapper">
       <div class="star-widget">
         <input
@@ -71,6 +72,7 @@
       Enviar Comentario
     </button>
   </form>
+  <ng-template #elseBlock>Inicie sesión para añadir un comentario</ng-template>
   <mat-divider></mat-divider>
 
   <h3>Comentarios de otros Clientes:</h3>

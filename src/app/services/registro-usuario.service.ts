@@ -13,7 +13,6 @@ export class RegistroUsuarioService {
   constructor(private servicio: HttpClient) { }
 
   registrarUsuario(nuevoUsuario:Usuario){
-    console.log(nuevoUsuario);
     
     this.servicio.post(`${this.server}registrar`,nuevoUsuario).subscribe(
       (response) => console.log(response),

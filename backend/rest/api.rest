@@ -30,3 +30,14 @@ content-type: application/json
   "direccion": "asda 123",
   "password": "asd"
 }
+
+###
+POST http://localhost:3000/admin
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "email": "ignavaldecace98@gmail.com",
+  "password": "hola123",
+  
+}
