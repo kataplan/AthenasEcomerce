@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http'
 export class CarritoService {
   server = 'http://localhost:3000/';
   listaCarrito: Array<ProductoPedido> = [];
-
+  hiddenBadge=true;
   constructor(private servicio: HttpClient) { }
 
   addProduct(product:Producto, cant:number){
@@ -32,7 +32,7 @@ export class CarritoService {
     }
     this.listaCarrito.push(productoPedido)
     this.saveInLocalStorage(this.listaCarrito)
-   
+    this.hiddenBadge = false;
     /* GUARDAR CARRITO EN LA BD*/
     // if (usuario === loggedIn){
     //  this.servicio.post(`${this.server}carrito`,this.listaCarrito).subscribe(
@@ -41,9 +41,20 @@ export class CarritoService {
     //  );
     // }
   }
+  moneyFormating(num: number) {
+    return Intl.NumberFormat('de-DE').format(num);
+  }
+  precioTotal() {
+    let sum = 0;
+    this.listaCarrito.forEach(function (value) {
+      sum = sum + value.subTotal;
+    });
+    return this.moneyFormating(sum);
+    
+  }
 
   saveInLocalStorage(listaCarritoLocal:Array<ProductoPedido>){
-    localStorage.setItem('listaCarritoLocal',JSON.stringify(listaCarritoLocal))
+  localStorage.setItem('listaCarritoLocal',JSON.stringify(listaCarritoLocal))
   }
 
   loadLocalStorage(){

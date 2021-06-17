@@ -50,6 +50,10 @@
           box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
+li {
+  list-style: none;
+}
+
 .example-container .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
@@ -67,18 +71,13 @@ input.example-right-align {
   -moz-appearance: textfield;
 }
 
-.column {
+form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  width: 40%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .box {
@@ -89,60 +88,113 @@ input.example-right-align {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
   min-width: 300px;
 }
 
 .content-wrapper {
-  padding: 40px 10px;
+  padding: 40px 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #f7f7f7;
 }
 
-.mat-form-field {
-  width: 90%;
+.content-wrapper > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .text {
   margin-bottom: 20px;
 }
 
-h2 {
+h1 {
   padding-left: 10px;
-  font-size: 2.5rem;
   font-family: "Anton", Arial, sans-serif;
+  font-size: 2.5rem;
   color: #212833;
   line-height: 2.6rem;
 }
 
-@media screen and (max-width: 714px) {
-  .content-wrapper, form, .box, .box div {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+.mat-form-field {
+  width: 100%;
+}
+
+#resumen {
+  margin-top: 57px;
+}
+
+.mat-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#datos {
+  width: 100%;
+  margin-right: 10px;
+  max-width: 900px;
+}
+
+@media screen and (max-width: 640px) {
+  .container,
+  .box {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-  }
-  .content-wrapper {
-    padding: 40px 5px;
-  }
-  .column {
-    width: 80%;
-    margin-bottom: 40px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 100%;
   }
   form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .input-container {
+    width: 100%;
+  }
+  h1 {
+    text-align: center;
+  }
+  .content-wrapper > div {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #resumen {
+    margin-top: 10px;
     width: 100%;
   }
 }
-/*# sourceMappingURL=login.component.css.map */
+/*# sourceMappingURL=checkout.component.css.map */

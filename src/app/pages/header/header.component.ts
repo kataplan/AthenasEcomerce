@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
-import { Producto } from '../../interfaces/productos';
 import { LoginUsuarioService } from '../../services/login-usuario.service';
+import {CarritoService} from '../../services/carrito.service'
 
 @Component({
   selector: 'app-header',
@@ -13,10 +13,17 @@ export class HeaderComponent implements OnInit {
   constructor(
     public servicioProductos: ProductoService,
     private router: Router,
-    public servicioLogin: LoginUsuarioService
+    public servicioLogin: LoginUsuarioService,
+    public servicioCarrito: CarritoService
   ) {}
+  
+  ngOnInit(): void {
+    this.servicioCarrito.loadLocalStorage();
+    if(this.servicioCarrito.listaCarrito.length>0){
+      this.servicioCarrito.hiddenBadge=false;
+    }
 
-  ngOnInit(): void {}
+  }
   display: boolean = true;
   name() {
     if (this.display) {

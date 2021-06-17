@@ -38,6 +38,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {CheckoutComponent} from './pages/body/checkout/checkout.component';
+import { AdminComponent } from './pages/body/admin/admin.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     CartComponent,
     StarComponent,
     FilterComponent,
-    CategoryComponent
+    CategoryComponent,
+    CheckoutComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

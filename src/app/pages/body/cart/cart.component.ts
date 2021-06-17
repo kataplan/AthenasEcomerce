@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { createEmitAndSemanticDiagnosticsBuilderProgram } from 'typescript';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CarritoService } from '../../../services/carrito.service';
-import { Producto, ProductoPedido } from '../../../interfaces/productos';
+import {  ProductoPedido } from '../../../interfaces/productos';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import {MatTable} from '@angular/material/table';
 
 
 @Component({
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  
+  
   displayedColumns: string[] = [
     'Producto',
     'Precio',
@@ -24,7 +26,9 @@ export class CartComponent implements OnInit {
     public servicioCarrito: CarritoService,
     private _snackBar: MatSnackBar,
     private router:Router,
+   
   ) {}
+  @ViewChild(MatTable) table!: MatTable<ProductoPedido>;
 
   plus(pr: ProductoPedido) {
     let inputArray = document.getElementsByClassName('quantity-number')!;
@@ -36,7 +40,8 @@ export class CartComponent implements OnInit {
     input.innerHTML = num + '';
     pr.cantidad = num;
     pr.subTotal = pr.cantidad * pr.producto.precio;
-    this.precioTotal();
+    this.servicioCarrito.precioTotal();
+    this.servicioCarrito.saveInLocalStorage(this.servicioCarrito.listaCarrito);
   }
   minus(pr: ProductoPedido) {
     let inputArray = document.getElementsByClassName('quantity-number')!;
@@ -49,7 +54,8 @@ export class CartComponent implements OnInit {
     input.innerHTML = num + '';
     pr.cantidad = num;
     pr.subTotal = pr.cantidad * pr.producto.precio;
-    this.precioTotal();
+    this.servicioCarrito.precioTotal();
+    this.servicioCarrito.saveInLocalStorage(this.servicioCarrito.listaCarrito);
   }
 
   ngOnInit(): void {
@@ -61,13 +67,6 @@ export class CartComponent implements OnInit {
     return Intl.NumberFormat('de-DE').format(num);
   }
 
-  precioTotal() {
-    let sum = 0;
-    this.dataSource.forEach(function (value) {
-      sum = sum + value.subTotal;
-    });
-    return this.moneyFormating(sum);
-  }
   openSnackBar(producto:ProductoPedido) {
     let snackBarRef = this._snackBar.open("¿Seguro que desea eliminar su producto del carrito?","Si estoy seguro.", {
       duration: 3000
@@ -78,7 +77,14 @@ export class CartComponent implements OnInit {
       this.servicioCarrito.listaCarrito.splice( index ,1);
       this.servicioCarrito.saveInLocalStorage(this.servicioCarrito.listaCarrito);
       this.dataSource = this.servicioCarrito.listaCarrito;
-      window.location.reload()
+      this.table.renderRows();
+      if(this.servicioCarrito.listaCarrito.length==0){
+        this.servicioCarrito.hiddenBadge=true;
+      }
+
     });
+  }
+  checkOut(){
+    this.router.navigate(['checkout'])
   }
 }

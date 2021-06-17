@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { RegistroUsuarioService } from '../../../services/registro-usuario.service';
 import { RegionesService } from '../../../services/regiones.service';
+import { LoginUsuarioService  } from '../../../services/login-usuario.service';
 import { Usuario } from '../../../interfaces/usuario';
 import { Region } from '../../../interfaces/region';
 import { Router } from '@angular/router';
@@ -28,6 +29,7 @@ export class RegisterComponent implements OnInit {
     public fb: FormBuilder,
     public servicioRegistro: RegistroUsuarioService,
     public servicioRegiones: RegionesService,
+    public servicioLogin:LoginUsuarioService,
     private router:Router,
   ) {
     this.formulario = fb.group({
@@ -46,6 +48,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicioRegiones.getRegiones();
+    if(this.servicioLogin.loggedUser){
+      this.router.navigate(['home'])
+    }
   }
 
   onSubmit() {

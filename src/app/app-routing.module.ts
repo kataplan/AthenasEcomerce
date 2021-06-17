@@ -7,6 +7,9 @@ import { LoginComponent } from './pages/body/login/login.component';
 import { ProductComponent } from './pages/body/product/product.component';
 import { RegisterComponent } from './pages/body/register/register.component';
 import { SearchComponent } from './pages/body/search/search.component';
+import { CheckoutComponent } from './pages/body/checkout/checkout.component';
+import { AdminComponent } from './pages/body/admin/admin.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,8 +19,11 @@ const routes: Routes = [
   { path: 'search/:busqueda', component: SearchComponent },
   { path: 'producto/:producto', component: ProductComponent },
   { path: 'categoria/:categoria', component: CategoryComponent},
-  { path: 'carrito', component: CartComponent}
-];
+  { path: 'carrito', component: CartComponent},
+  { path: 'checkout', component: CheckoutComponent},
+  { path: 'admin', component: AdminComponent},];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

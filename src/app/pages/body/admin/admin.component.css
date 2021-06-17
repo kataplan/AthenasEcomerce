@@ -1,0 +1,56 @@
+.content-wrapper {
+  background-color: #f7f7f7;
+  width: 100%;
+  min-height: 90%;
+}
+
+#btn-logo {
+  width: 180px;
+}
+
+.box {
+  background-color: #ffff;
+  border: solid 0.8px #adadad;
+  border-radius: 10px;
+  padding: 20px 20px;
+  margin: 5px 0;
+}
+
+.btn-standar,
+.g-recaptcha {
+  border-radius: 30px;
+  height: 3rem;
+  width: 50%;
+  min-width: 200px;
+}
+
+.input-container {
+  width: 100%;
+}
+
+.price {
+  color: #ff4081;
+}
+
+.btn-standar {
+  margin: 10px 0px;
+  -ms-grid-column-align: right;
+      justify-self: right;
+}
+
+.card {
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in;
+  transition: -webkit-box-shadow 0.1s ease-in;
+  transition: box-shadow 0.1s ease-in;
+  transition: box-shadow 0.1s ease-in, -webkit-box-shadow 0.1s ease-in;
+}
+
+.card:hover {
+  -webkit-box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  width: 100%;
+}
+/*# sourceMappingURL=admin.component.css.map */
