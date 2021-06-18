@@ -1,89 +1,91 @@
 <div class="content-wrapper">
-    
-    
-    <form [formGroup]="formulario" method="POST" >
-        
-        <div id="datos">
-            <h1>CHECKOUT</h1>
-            <div class="box">
-                <h3>Ingrese sus datos para la entrega</h3>
-                <div class="input-container">
-                <mat-form-field appearance="outline">
-                    <mat-label>Nombre</mat-label>
-                    <input matInput formControlName="firstName" />
-                </mat-form-field>
-                </div>
-                <div class="input-container">
-                <mat-form-field appearance="outline">
-                    <mat-label>Apellidos</mat-label>
-                    <input matInput formControlName="lastName" />
-                </mat-form-field>
-                </div>
-                <div class="input-container">
-                <mat-form-field appearance="outline">
-                    <mat-label>Rut</mat-label>
-                    <input matInput formControlName="rut" />
-                </mat-form-field>
-                </div>
-                <div class="input-container">
-                <mat-form-field appearance="outline">
-                    <mat-label>correo electrónico</mat-label>
-                    <input matInput formControlName="email" type="email" />
-                </mat-form-field>
-                </div>
-                <div class="input-container">
-                <mat-form-field appearance="outline">
-                    <mat-label>Region</mat-label>
-                    <mat-select formControlName="region">
-                    <mat-option *ngFor="let region of this.servicioRegiones.listaRegiones" [value]="region.region" (click)="seleccionarRegion(region)">
-                        {{region.region}}
-                    </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                </div>
-                <div class="input-container">
-                <mat-form-field appearance="outline">
-                    <mat-label>Comuna</mat-label>
-                    <mat-select formControlName="comuna">
-                    <mat-option *ngFor="let comuna of comunas" [value]="comuna">
-                        {{comuna}}
-                    </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                </div>
-                <div class="input-container">
-                <mat-form-field appearance="outline">
-                    <mat-label>Direccion</mat-label>
-                    <input matInput formControlName="address" />
-                </mat-form-field>
-                </div>  
-            </div>
-            <ngx-recaptcha2 #captchaElem
-            [siteKey]="siteKey"
-            formControlName="recaptcha"> 
-            </ngx-recaptcha2>
+  <form [formGroup]="formulario" method="POST">
+    <div id="datos">
+      <h1>CHECKOUT</h1>
+      <div class="box">
+        <h3>Ingrese sus datos para la entrega</h3>
+        <div class="input-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="firstName" />
+          </mat-form-field>
         </div>
-       
-        <div id="resumen" class="columnn">
-            <mat-card>
-              <mat-card-title>
-                <h3>RESUMEN</h3>
-              </mat-card-title>
-              <mat-card-content>
-                <span> Total:</span>
-                <span>${{this.servicioCarrito.precioTotal()}}</span>
-              </mat-card-content>
-              <button  
-                    mat-flat-button 
-                    type="submit"
-                    color="accent"
-                    class="btn-standar"
-                    (click)="onSubmit()"
-                >Realizar Pago
-                </button>
-            </mat-card>
-          </div> 
-    </form>
+        <div class="input-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input matInput formControlName="lastName" />
+          </mat-form-field>
+        </div>
+        <div class="input-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Rut</mat-label>
+            <input matInput formControlName="rut" />
+          </mat-form-field>
+        </div>
+        <div class="input-container">
+          <mat-form-field appearance="outline">
+            <mat-label>correo electrónico</mat-label>
+            <input matInput formControlName="email" type="email" />
+          </mat-form-field>
+        </div>
+        <div class="input-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Region</mat-label>
+            <mat-select formControlName="region">
+              <mat-option
+                *ngFor="let region of this.servicioRegiones.listaRegiones"
+                [value]="region.region"
+                (click)="seleccionarRegion(region)"
+              >
+                {{ region.region }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="input-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Comuna</mat-label>
+            <mat-select formControlName="comuna">
+              <mat-option *ngFor="let comuna of comunas" [value]="comuna">
+                {{ comuna }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="input-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Direccion</mat-label>
+            <input matInput formControlName="address" />
+          </mat-form-field>
+        </div>
+      </div>
+      <ngx-recaptcha2
+        #captchaElem
+        [siteKey]="siteKey"
+        formControlName="recaptcha"
+      >
+      </ngx-recaptcha2>
+    </div>
 
+    <div id="resumen" class="columnn">
+      <mat-card>
+        <mat-card-title>
+          <h3>RESUMEN</h3>
+        </mat-card-title>
+        <mat-card-content>
+          <span> Total:</span>
+          <span>${{ this.servicioCarrito.precioTotal() }}</span>
+        </mat-card-content>
+        <button
+          mat-flat-button
+          type="submit"
+          color="accent"
+          class="btn-standar"
+          (click)="onSubmit()"
+        >
+          Realizar Pago
+        </button>
+      </mat-card>
+    </div>
+  </form>
 </div>
-  

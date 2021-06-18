@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductoService } from '../../services/producto.service';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
   autoTicks = false;
@@ -11,10 +12,14 @@ export class FilterComponent implements OnInit {
   max = 100000;
   min = 0;
   showTicks = false;
-  step = 500;
+  step = 100;
   minValue = 0;
   maxValue = 100000;
-    tickInterval = 1;
+  tickInterval = 1;
+  constructor(
+    public servicioProductos: ProductoService,
+  ) {}
+
   getSliderTickInterval(): number | 'auto' {
     if (this.showTicks) {
       return this.autoTicks ? 'auto' : this.tickInterval;
@@ -29,12 +34,10 @@ export class FilterComponent implements OnInit {
 
     return value;
   }
-  moneyFormating(num:number){
+  moneyFormating(num: number) {
     return Intl.NumberFormat('de-DE').format(num);
- }
-  constructor() { }
+  }
 
   ngOnInit(): void {
   }
-
 }

@@ -40,7 +40,7 @@ export class ProductoService {
     
     return this.servicio.get(`${this.server}producto/${str}`).subscribe((dato:any)=>{
       this.productoVisto=dato[0]
-      this.obtenerCategoriaPorID(dato[0].idCategoria),
+      this.obtenerCategoriaPorID(dato[0].idCategoria)
       
       
     });

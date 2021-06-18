@@ -16,6 +16,7 @@ export class CategoryComponent implements OnInit {
       const {params} = paramMap
       this.servicioProductos.obtenerProductosPorNombreCategoria(params.categoria)
       this.servicioProductos.catBusqueda=params.categoria;
+
     })
   }
   verProducto(item:Producto){

@@ -12,6 +12,7 @@ import { LoginUsuarioService } from '../../../services/login-usuario.service'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+
 export class LoginComponent implements OnInit {
   hide = true;
   formulario: FormGroup;
@@ -53,6 +54,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  goPasswordReset(){
+    this.router.navigate(['passwordReset'])
+  }
   goRegister() {
     this.router.navigate([`/register`]);
   }

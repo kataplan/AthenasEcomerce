@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
       repeatPassword: new FormControl('', [Validators.required]),
-      recaptcha: new FormControl('', [Validators.required]),
+      recaptcha: new FormControl('', [Validators.required])
     });
   }
 

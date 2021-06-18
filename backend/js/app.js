@@ -46,12 +46,14 @@ var cors = require('cors');
 var hostname = 'localhost';
 var port = '3000';
 var jwt = require('jsonwebtoken');
+/* NODEMAILER SERVICE*/
+var nodemailer = require('nodemailer');
+/* EXORESS SESSIONS*/
 var session = require('express-session');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(express.urlencoded());
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -63,11 +65,52 @@ dbconfig_1.connection.connect(function (error) {
         throw error;
     console.log('Base de datos conectada');
 });
-app.get('/admin', verificarToken, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.post('/passRecovery', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        console.log(req.body);
+        return [2 /*return*/];
+    });
+}); });
+app.post('/passReset/:email', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var sql;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                sql = 'SELECT email FROM usuario WHERE email LIKE ?';
+                if (!(req.params.email == '')) return [3 /*break*/, 1];
+                res.send({
+                    "code": 204,
+                    "error": "Email inválido"
+                });
+                return [3 /*break*/, 3];
+            case 1: return [4 /*yield*/, dbconfig_1.connection.query(sql, req.params.email, function (error, results) {
+                    if (error)
+                        throw error;
+                    if (results.length > 0) {
+                        mailer(req.params.email);
+                        res.status(201).json({ message: 'Email enviado con exito' });
+                    }
+                    else {
+                        res.send({
+                            "code": 404,
+                            "error": "Email inválido"
+                        });
+                    }
+                })];
+            case 2:
+                _a.sent();
+                _a.label = 3;
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+app.post('/api/:sessionToken', verificarToken, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         res.send({
             "code": 200,
             "success": "login successful",
+            "loginStatus": "true",
+            "token": req.params.sessionToken
         });
         return [2 /*return*/];
     });
@@ -128,12 +171,14 @@ app.get('/search/:nombreProducto', function (req, res) { return __awaiter(void 0
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                console.log(req.body);
                 prodBusqueda = "%" + req.params.nombreProducto + "%";
                 sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto LIKE ? ";
                 return [4 /*yield*/, dbconfig_1.connection.query(sql, prodBusqueda, function (error, results) {
                         if (error)
                             throw error;
                         if (results.length > 0) {
+                            console.log(results);
                             res.json(results);
                         }
                         else {
@@ -265,15 +310,46 @@ app.listen(port, hostname, function () {
     console.log('SERVIDOR EJECUTÁNDOSE EN http://localhost:' + port);
 });
 function verificarToken(req, res, next) {
-    if (!req.headers.authorization) {
+    if (!req.params.sessionToken) {
         return res.status(401).send('USTED NO TIENE AUTORIZACION PARA ESTAR AQUI');
     }
-    var token = req.headers.authorization;
-    console.log(token);
+    var token = req.params.sessionToken;
     if (token === 'null') {
         return res.status(401).send('USTED NO TIENE AUTORIZACION PARA ESTAR AQUI');
     }
     var payload = jwt.verify(token, 'secretKey');
     req.userEmail = payload.email;
     next();
+}
+function mailer(email) {
+    return __awaiter(this, void 0, void 0, function () {
+        var recovery_token, mailOptions, transporter;
+        return __generator(this, function (_a) {
+            console.log(email);
+            recovery_token = jwt.sign({ _id: email }, 'secretKey');
+            mailOptions = {
+                from: 'athenasecommerce@gmail.com',
+                to: "" + email,
+                subject: 'Recuperar tu contraseña',
+                html: '<h2>Click en el siguiente link para recuperar tu contraseña:</h2><button style="background-color: #008CBA;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer; " type="button"><a style="color: #ffffff; text-decoration: none;" href="http://localhost:4200/passwordRecovery/' + recovery_token + '">REINICIAR CONTRASEÑA</a></button>'
+            };
+            transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'athenasecommerce@gmail.com',
+                    pass: '4th3n4s3c0mm3rc3*'
+                }
+            });
+            transporter.sendMail(mailOptions, function (err, info) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    console.log('Email enviado: ' + info.response);
+                }
+                ;
+            });
+            return [2 /*return*/];
+        });
+    });
 }

@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
     
     this.ActiveRoute.paramMap.subscribe( (paramMap:any) =>{      
       const {params} = paramMap
-      this.busqueda=params.busqueda
+      this.busqueda=params.busqueda     
       this.servicioProductos.listaProductos=[]
       this.servicioProductos.obtenerProductoPorNombre(params.busqueda)
       this.servicioProductos.catBusqueda=params.categoria;

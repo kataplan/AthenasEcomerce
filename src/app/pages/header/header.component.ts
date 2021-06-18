@@ -35,35 +35,46 @@ export class HeaderComponent implements OnInit {
     }
   }
   goProfile(){
-    console.log('TAMO REDY 1')
+    this.router.navigate([`/perfil`]);
   }
 
   closeSession(){
-    console.log('TAMO REDY 2')
+    this.servicioLogin.logOut();
+    this.router.navigate([`/home`]);
+    window.location.reload()
   }
 
   goCart() {
     this.router.navigate([`/carrito`]);
   }
+
   goHome() {
     this.router.navigate([`/home`]);
   }
+
   goLogin() {
     this.router.navigate([`/login`]);
   }
+
   goRegister() {
     this.router.navigate([`/register`]);
   }
+
   search() {
+    
     const searchInput = <HTMLInputElement>(
       document.getElementById('inputSearch')
     );
+    console.log(searchInput);
+    
     this.servicioProductos.obtenerProductoPorNombre(searchInput.value);
     this.router.navigate([`/search/${searchInput.value}`]);
   }
+
   goCategory(category: string) {
     this.servicioProductos.catBusqueda = category;
     this.servicioProductos.obtenerProductosPorNombreCategoria(category);
     this.router.navigate([`/categoria`, category]);
   }
+
 }

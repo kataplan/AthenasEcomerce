@@ -19,5 +19,4 @@ export class RegistroUsuarioService {
       (error) => console.log(error)
     );
   }
-
 }

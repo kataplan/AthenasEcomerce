@@ -10,14 +10,14 @@
 
     <mat-form-field appearance="outline" class="filter-selector">
       <mat-label>Categoria:</mat-label>
-      <mat-select>
-        <mat-option value="option">Football</mat-option>
-        <mat-option value="option">Basketball</mat-option>
-        <mat-option value="option">Rugby</mat-option>
-        <mat-option value="option">Handball</mat-option>
-        <mat-option value="option">Ciclismo</mat-option>
-        <mat-option value="option">Boxeo</mat-option>
-        <mat-option value="option">Tenis</mat-option>
+      <mat-select [(value)]=" this.servicioProductos.catBusqueda">
+        <mat-option value="football">Football</mat-option>
+        <mat-option value="basketball">Basketball</mat-option>
+        <mat-option value="rugby">Rugby</mat-option>
+        <mat-option value="handball">Handball</mat-option>
+        <mat-option value="ciclismo">Ciclismo</mat-option>
+        <mat-option value="boxeo">Boxeo</mat-option>
+        <mat-option value="tenis">Tenis</mat-option>
       </mat-select>
     </mat-form-field>
     

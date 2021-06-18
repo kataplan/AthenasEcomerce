@@ -40,6 +40,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {CheckoutComponent} from './pages/body/checkout/checkout.component';
 import { AdminComponent } from './pages/body/admin/admin.component';
+import { ProfileComponent } from './pages/body/profile/profile.component';
+import { ResetpasswordComponent } from './pages/body/resetpassword/resetpassword.component';
+import { PasswordRecoveryComponent } from './pages/body/password-recovery/password-recovery.component';
 
 
 @NgModule({
@@ -58,7 +61,10 @@ import { AdminComponent } from './pages/body/admin/admin.component';
     FilterComponent,
     CategoryComponent,
     CheckoutComponent,
-    AdminComponent
+    AdminComponent,
+    ProfileComponent,
+    ResetpasswordComponent,
+    PasswordRecoveryComponent
   ],
   imports: [
     BrowserModule,

@@ -5,13 +5,15 @@
         <mat-icon class="btn-icon">menu</mat-icon>
       </button>
       <mat-menu #Category="matMenu">
-        <button (click)='goCategory("football")' mat-menu-item>Football</button>
-        <button (click)='goCategory("basketball")' mat-menu-item>Basketball</button>
-        <button (click)='goCategory("rugby")'mat-menu-item>Rugby</button>
-        <button (click)='goCategory("handball")' mat-menu-item>Handball</button>
-        <button (click)='goCategory("ciclismo")' mat-menu-item>Ciclismo</button>
-        <button (click)='goCategory("boxeo")' mat-menu-item>Boxeo</button>
-        <button (click)='goCategory("tenis")' mat-menu-item>Tenis</button>
+        <button (click)="goCategory('football')" mat-menu-item>Football</button>
+        <button (click)="goCategory('basketball')" mat-menu-item>
+          Basketball
+        </button>
+        <button (click)="goCategory('rugby')" mat-menu-item>Rugby</button>
+        <button (click)="goCategory('handball')" mat-menu-item>Handball</button>
+        <button (click)="goCategory('ciclismo')" mat-menu-item>Ciclismo</button>
+        <button (click)="goCategory('boxeo')" mat-menu-item>Boxeo</button>
+        <button (click)="goCategory('tenis')" mat-menu-item>Tenis</button>
       </mat-menu>
     </div>
 
@@ -22,24 +24,38 @@
     </div>
 
     <div class="header-content" id="header-search">
-      <button mat-icon-button class="btn-header" id="btn-search" (click)=name()>
+      <button
+        mat-icon-button
+        class="btn-header"
+        id="btn-search"
+        (click)="name()"
+      >
         <mat-icon class="btn-icon">search</mat-icon>
       </button>
 
       <div id="busqueda" class="search-content">
-        
-        <input placeholder="Busca en nuestra tienda..." name="inputSearch" id="inputSearch"/>
-        <button mat-icon-button (click)=search()>
+        <input
+          placeholder="Busca en nuestra tienda..."
+          name="inputSearch"
+          id="inputSearch"
+        />
+        <button mat-icon-button (click)="search()">
           <mat-icon matSuffix>search</mat-icon>
         </button>
-        
       </div>
     </div>
 
     <div class="header-content">
-      <button mat-icon-button class="btn-header" (click)=goCart() >
+      <button mat-icon-button class="btn-header" (click)="goCart()">
         <div class="btn-icon-text">
-          <mat-icon class="btn-icon" [matBadgeHidden]="this.servicioCarrito.hiddenBadge" matBadge="{{this.servicioCarrito.listaCarrito.length}}" matBadgeColor="accent">shopping_cart</mat-icon>
+          <mat-icon
+            class="btn-icon"
+            [matBadgeHidden]="this.servicioCarrito.hiddenBadge"
+            matBadge="{{ this.servicioCarrito.listaCarrito.length }}"
+            matBadgeColor="accent"
+            matBadgeSize="small"
+            >shopping_cart</mat-icon
+          >
           <div class="btn-text">CARRITO</div>
         </div>
       </button>
@@ -69,28 +85,39 @@
           <button mat-menu-item (click)="goLogin()">Iniciar Sesión</button>
           <button mat-menu-item (click)="goRegister()">Crear Cuenta</button>
         </ng-template>
-        
       </mat-menu>
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row id="second-row">
-    
     <div id="sub-busqueda" class="search-content">
       <input placeholder="Busca en nuestra tienda..." />
-      <button mat-icon-button (click)=search()>
+      <button mat-icon-button (click)="search()">
         <mat-icon matSuffix>search</mat-icon>
       </button>
-      
     </div>
 
     <div id="categorys">
-      <button mat-button (click)='goCategory("football")' class="tab-content">FOOTBALL</button>
-      <button mat-button (click)='goCategory("basketball")' class="tab-content">BASKETBALL</button>
-      <button mat-button (click)='goCategory("rugby")' class="tab-content">RUGBY</button>
-      <button mat-button (click)='goCategory("handball")' class="tab-content">HANDBALL</button>
-      <button mat-button (click)='goCategory("ciclismo")' class="tab-content">CICLISMO</button>
-      <button mat-button (click)='goCategory("boxeo")' class="tab-content">BOXEO</button>
-      <button mat-button (click)='goCategory("tenis")' class="tab-content">TENIS</button>
+      <button mat-button (click)="goCategory('football')" class="tab-content">
+        FOOTBALL
+      </button>
+      <button mat-button (click)="goCategory('basketball')" class="tab-content">
+        BASKETBALL
+      </button>
+      <button mat-button (click)="goCategory('rugby')" class="tab-content">
+        RUGBY
+      </button>
+      <button mat-button (click)="goCategory('handball')" class="tab-content">
+        HANDBALL
+      </button>
+      <button mat-button (click)="goCategory('ciclismo')" class="tab-content">
+        CICLISMO
+      </button>
+      <button mat-button (click)="goCategory('boxeo')" class="tab-content">
+        BOXEO
+      </button>
+      <button mat-button (click)="goCategory('tenis')" class="tab-content">
+        TENIS
+      </button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -26,11 +26,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./admin.component.scss']
 })
 
-
-
-
 export class AdminComponent implements OnInit {
-  displayedColumns: string[] = ['idPedido', 'numeroOrden', 'fecha', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
 
   constructor() { }

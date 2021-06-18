@@ -1,6 +1,9 @@
 <div class="review">
-  
-  <form action="" [formGroup]="formulario" *ngIf="this.servicioLogin.loggedUser; else elseBlock">
+  <form
+    action=""
+    [formGroup]="formulario"
+    *ngIf="this.servicioLogin.loggedUser; else elseBlock"
+  >
     <h2>¿Le gustó el producto?</h2>
     <h4>¡Háganos saber!</h4>
     <div class="star-wrapper">
@@ -60,7 +63,13 @@
     <div id="coment">
       <mat-form-field>
         <mat-label>Deje un comentario</mat-label>
-        <textarea formControlName="coment" matInput></textarea>
+        <textarea
+          formControlName="coment"
+          matInput
+          #message
+          maxlength="256"
+        ></textarea>
+        <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
       </mat-form-field>
     </div>
     <button
@@ -81,7 +90,7 @@
       <div class="nombreCliente">Fulanito</div>
     </mat-card-title>
     <mat-card-subtitle>
-      {{rate(3)}}
+      {{ rate(3) }}
       <app-star></app-star>
     </mat-card-subtitle>
     <mat-card-content>
@@ -97,7 +106,7 @@
       <div class="nombreCliente">Fulanito</div>
     </mat-card-title>
     <mat-card-subtitle>
-      {{rate(4)}}
+      {{ rate(4) }}
       <app-star></app-star>
     </mat-card-subtitle>
     <mat-card-content>

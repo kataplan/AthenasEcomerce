@@ -9,7 +9,9 @@ import { RegisterComponent } from './pages/body/register/register.component';
 import { SearchComponent } from './pages/body/search/search.component';
 import { CheckoutComponent } from './pages/body/checkout/checkout.component';
 import { AdminComponent } from './pages/body/admin/admin.component';
-
+import { ProfileComponent } from './pages/body/profile/profile.component';
+import { ResetpasswordComponent } from './pages/body/resetpassword/resetpassword.component'
+import { PasswordRecoveryComponent } from './pages/body/password-recovery/password-recovery.component'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,10 +23,11 @@ const routes: Routes = [
   { path: 'categoria/:categoria', component: CategoryComponent},
   { path: 'carrito', component: CartComponent},
   { path: 'checkout', component: CheckoutComponent},
-  { path: 'admin', component: AdminComponent},];
-
-
-
+  { path: 'perfil', component: ProfileComponent },
+  { path: 'admin', component: AdminComponent},
+  { path: 'passwordReset',component:ResetpasswordComponent},
+  { path: 'passwordRecovery/:token',component:PasswordRecoveryComponent}
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

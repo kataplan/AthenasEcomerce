@@ -1,7 +1,7 @@
 .content-wrapper {
   background-color: #f7f7f7;
   width: 100%;
-  min-height: 72%;
+  min-height: 90%;
 }
 
 #btn-logo {
@@ -16,7 +16,8 @@
   margin: 5px 0;
 }
 
-.btn-standar, .g-recaptcha {
+.btn-standar,
+.g-recaptcha {
   border-radius: 30px;
   height: 3rem;
   width: 50%;
@@ -57,13 +58,23 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 20px;
+  padding: 40px;
 }
 
-.content-wrapper div {
+.quantity-wrapper {
+  width: 100%;
+}
+
+.ifblock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .mat-column-Producto {
@@ -75,18 +86,41 @@
 .mat-column-Cantidad {
   border-right: 0.7px solid #f7f7f7;
   padding: 0 5px 0 5px;
+  width: 100px !important;
+}
+
+.mat-column-Cantidad div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .mat-column-Subtotal {
-  padding-left: 5px;
+  width: 10%;
+  min-width: 100px;
 }
 
-.mat-column-Precio div {
+.precio {
   color: #ff4081;
 }
 
-.mat-column-Subtotal, .mat-column-Precio, .mat-column-Cantidad {
+.mat-column-Precio p {
+  color: #ff4081;
   text-align: center;
+}
+
+.mat-column-Subtotal,
+.mat-column-Precio,
+.mat-column-Cantidad,
+.mat-column-Eliminar {
+  text-align: center;
+}
+
+.mat-column-Eliminar {
+  width: 30px;
 }
 
 img {
@@ -96,13 +130,17 @@ img {
 }
 
 .product-img-name {
-  width: 100%;
+  width: 80%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.quantity-number {
+  width: 10px;
 }
 
 h1 {
@@ -114,18 +152,20 @@ h1 {
 h4 {
   font-family: "Poppins";
   font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+h4 a {
+  color: #212833;
+  overflow-wrap: break-word;
+  min-width: 50px;
 }
 
 table {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-}
-
-.content-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  overflow-x: auto;
 }
 
 #carrito {
@@ -134,6 +174,7 @@ table {
 }
 
 .column {
+  margin-top: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -144,6 +185,41 @@ table {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.quantity {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.quantity-manager {
+  border: solid 0.1px #e0dfdf;
+  border-radius: 30px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.quantity-wrapper {
+  width: 100%;
+  margin: auto;
 }
 
 #resumen {
@@ -157,16 +233,22 @@ table {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 30%;
-  padding: 5px;
+  width: 300px;
+}
+
+.btn-standar {
+  width: 90%;
 }
 
 #resumen .mat-card {
   width: 90%;
+  min-width: 200px;
 }
 
 @media screen and (max-width: 770px) {
-  .content-wrapper, .product-img-name, .content-wrapper div {
+  .content-wrapper,
+  .product-img-name,
+  .content-wrapper div {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -176,7 +258,9 @@ table {
             align-items: center;
     text-align: center;
   }
-  #resumen, #carrito, .content-wrapper div {
+  #resumen,
+  #carrito,
+  .content-wrapper div {
     width: 100%;
     -webkit-box-align: center;
         -ms-flex-align: center;
@@ -184,6 +268,26 @@ table {
   }
   table {
     width: 80%;
+  }
+  .content-wrapper {
+    padding: 20px 1% 20px 1%;
+  }
+  img {
+    max-width: 100px;
+    min-width: 50px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 770px) and (max-width: 500px) {
+  .product-img-name, h4, h4 > a {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 770px) and (max-width: 500px) and (max-width: 420px) {
+  .product-img-name, h4, h4 > a {
+    width: 80px;
   }
 }
 /*# sourceMappingURL=cart.component.css.map */

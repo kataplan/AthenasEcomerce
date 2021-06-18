@@ -11,6 +11,12 @@ const cors = require('cors');
 const hostname = 'localhost';
 const port = '3000';
 const jwt = require('jsonwebtoken')
+
+/* NODEMAILER SERVICE*/
+const nodemailer = require('nodemailer')
+
+
+/* EXORESS SESSIONS*/
 var session = require('express-session');
 
 app.use(cors());
@@ -19,7 +25,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.json());
-app.use(express.urlencoded());
+
+
 
 app.use(session({
 	secret: 'secret',
@@ -33,20 +40,55 @@ connection.connect( (error:any)=>{
     console.log('Base de datos conectada')
 })
 
+app.post('/passRecovery',async(req:any,res:any)=>{
+    console.log(req.body);
+    
+    //console.log(token,password);
+    
+})
 
-app.get('/admin', verificarToken, async(req:any,res:any)=>{
+app.post('/passReset/:email',async(req:any,res:any)=>{
+
+    const sql = 'SELECT email FROM usuario WHERE email LIKE ?'
+    
+    if(req.params.email ==''){
+        res.send({                 
+            "code":204,                 
+            "error":"Email inválido"            
+        })      
+    }else{
+        await connection.query(sql,req.params.email,(error:any,results:any)=>{
+            if (error) throw error;
+            if (results.length > 0){
+                mailer(req.params.email)
+                res.status(201).json({ message: 'Email enviado con exito' });
+            }else{
+                res.send({                 
+                    "code":404,                 
+                    "error":"Email inválido"            
+                })
+            }
+        
+        })
+    }
+})
+
+app.post('/api/:sessionToken', verificarToken, async(req:any,res:any)=>{
+    
     res.send({                
         "code":200,                
-        "success":"login successful",                                    
+        "success":"login successful", 
+        "loginStatus":"true",
+        "token": req.params.sessionToken                                  
     })
 })
 
 
 app.post('/login', async(req:any,res:any)=>{
 
-    const email= req.body._email
-    const sqlEmail= "%"+req.body._email+"%"
-    const password= req.body._password
+    const email = req.body._email
+    const sqlEmail = "%"+req.body._email+"%"
+    const password = req.body._password
 
     const sql = 'SELECT email, contrasena FROM usuario WHERE email LIKE ?'    
 
@@ -95,14 +137,17 @@ app.post('/login', async(req:any,res:any)=>{
 })
 
 app.get('/search/:nombreProducto', async(req:any, res:any)=>{
-
+    console.log(req.body);
+    
     let prodBusqueda = "%"+req.params.nombreProducto+"%";
     const sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto LIKE ? "
     
     await connection.query(sql,prodBusqueda,(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
+            console.log(results)
             res.json(results)
+            
         }else{
             res.send('No hay resultados')
         }
@@ -188,13 +233,12 @@ app.listen(port, hostname, () => {
 });
 
 function verificarToken(req:any,res:any,next:any){
-        
-    if(!req.headers.authorization){
+    
+    if(!req.params.sessionToken){
         return res.status(401).send('USTED NO TIENE AUTORIZACION PARA ESTAR AQUI');
     }
 
-    const token = req.headers.authorization
-    console.log(token);
+    const token = req.params.sessionToken
     
     if(token === 'null'){
         return res.status(401).send('USTED NO TIENE AUTORIZACION PARA ESTAR AQUI');
@@ -203,4 +247,33 @@ function verificarToken(req:any,res:any,next:any){
     const payload = jwt.verify(token,'secretKey')
     req.userEmail = payload.email
     next()
+}
+
+async function mailer(email:string){
+    console.log(email);
+    const recovery_token = jwt.sign({_id: email},'secretKey')
+
+    const mailOptions ={
+        from:'athenasecommerce@gmail.com',
+        to:`${email}`,
+        subject:'Recuperar tu contraseña',
+        html: '<h2>Click en el siguiente link para recuperar tu contraseña:</h2><button style="background-color: #008CBA;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer; " type="button"><a style="color: #ffffff; text-decoration: none;" href="http://localhost:4200/passwordRecovery/' + recovery_token + '">REINICIAR CONTRASEÑA</a></button>'
+    };
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth:{
+            user: 'athenasecommerce@gmail.com',
+            pass: '4th3n4s3c0mm3rc3*'
+        }
+    })
+
+    transporter.sendMail(mailOptions,(err:any,info:any)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log('Email enviado: ' + info.response);
+        };
+    });
+    
 }
