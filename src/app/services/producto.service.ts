@@ -17,15 +17,15 @@ export class ProductoService {
   constructor(private servicio: HttpClient) { }
 
  
-  obtenerProductosPorNombreCategoria(str:string) {
+  obtenerProductosPorNombreCategoria(str:string) {    
     this.listaProductos = [];
     return this.servicio.get(`${this.server}categoria/${str}`).subscribe((dato:any)=>{
-      
       this.listaProductos=dato
     });
   }
 
   obtenerProductoPorNombre(str:string){
+    console.log(str);
     return this.servicio.get(`${this.server}search/${str}`).subscribe((dato:any)=>{
       if(dato== []){
         this.listaProductos= [];
@@ -37,14 +37,16 @@ export class ProductoService {
   }
 
   obtenerProductoPorID(str:string){
+    
     return this.servicio.get(`${this.server}producto/${str}`).subscribe((dato:any)=>{
       this.productoVisto=dato[0]
-      this.obtenerCategoriaPorID(dato[0].idCategoria)
+      this.obtenerCategoriaPorID(dato[0].idCategoria),
       
       
     });
   }
   obtenerCategoriaPorID(str:string){
+    console.log(str);
     return this.servicio.get(`${this.server}producto/categoria/${str}`).subscribe((dato:any)=>{
       this.catBusqueda = dato[0].nombreCategoria.toLowerCase()
     });
