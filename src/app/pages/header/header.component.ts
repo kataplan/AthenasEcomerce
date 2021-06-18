@@ -65,7 +65,6 @@ export class HeaderComponent implements OnInit {
     const searchInput = <HTMLInputElement>(
       document.getElementById('inputSearch')
     );
-    console.log(searchInput);
     
     this.servicioProductos.obtenerProductoPorNombre(searchInput.value);
     this.router.navigate([`/search/${searchInput.value}`]);

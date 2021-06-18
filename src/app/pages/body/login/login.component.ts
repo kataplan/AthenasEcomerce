@@ -39,18 +39,14 @@ export class LoginComponent implements OnInit {
 
       const email = this.formulario.controls['email'].value
       const password = this.formulario.controls['password'].value
-      
       const userLoginData={
         authorization: 'micabezera',
         _email: email,
         _password: password
       }
-
       const token = this.servicioLogin.logUser(userLoginData)      
       this.router.navigate(['home'])
-
     }else{
-      
     }
   }
 
