@@ -20,16 +20,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, public fb: FormBuilder, public servicioLogin:LoginUsuarioService) {
     this.formulario = fb.group({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required,Validators.email]),
       password: new FormControl('', [Validators.required]),
       //recaptcha: new FormControl('',[Validators.required])
     });
   }
 
-  ngOnInit(): void {
-    if(this.servicioLogin.loggedUser){
-      this.router.navigate(['home'])
-    }
+  ngOnInit(): void {   
 
   }
 
@@ -44,9 +41,11 @@ export class LoginComponent implements OnInit {
         _email: email,
         _password: password
       }
-      const token = this.servicioLogin.logUser(userLoginData)      
-      this.router.navigate(['home'])
+      this.servicioLogin.logUser(userLoginData);
+      this.servicioLogin.verifylogin();
+
     }else{
+      alert('Email y/o contraseña inválidos')
     }
   }
 
