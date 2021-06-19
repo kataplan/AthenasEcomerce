@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { LoginUsuarioService } from '../../services/login-usuario.service';
-import {CarritoService} from '../../services/carrito.service'
+import {CarritoService} from '../../services/carrito.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-header',
@@ -14,14 +16,17 @@ export class HeaderComponent implements OnInit {
     public servicioProductos: ProductoService,
     private router: Router,
     public servicioLogin: LoginUsuarioService,
-    public servicioCarrito: CarritoService
+    public servicioCarrito: CarritoService,
+    private _snackBar: MatSnackBar
   ) {}
   
   ngOnInit(): void {
     this.servicioCarrito.loadLocalStorage();
+    this.servicioLogin.loadSession();
     if(this.servicioCarrito.listaCarrito.length>0){
       this.servicioCarrito.hiddenBadge=false;
     }
+
 
   }
   display: boolean = true;
@@ -40,8 +45,6 @@ export class HeaderComponent implements OnInit {
 
   closeSession(){
     this.servicioLogin.logOut();
-    this.router.navigate([`/home`]);
-    window.location.reload()
   }
 
   goCart() {
@@ -65,10 +68,17 @@ export class HeaderComponent implements OnInit {
     const searchInput = <HTMLInputElement>(
       document.getElementById('inputSearch')
     );
+    if(searchInput.value==""){
+      this._snackBar.open("Ingrese correctamente la búsqueda", "ok",{
+        duration: 3000
+      })
+        }else{
+          this.servicioProductos.obtenerProductoPorNombre(searchInput.value);
+          this.router.navigate([`/search/${searchInput.value}`]);
+        }
+        }
     
-    this.servicioProductos.obtenerProductoPorNombre(searchInput.value);
-    this.router.navigate([`/search/${searchInput.value}`]);
-  }
+  
 
   goCategory(category: string) {
     this.servicioProductos.catBusqueda = category;

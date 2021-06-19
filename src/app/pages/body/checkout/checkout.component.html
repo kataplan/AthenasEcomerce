@@ -72,9 +72,29 @@
         <mat-card-title>
           <h3>RESUMEN</h3>
         </mat-card-title>
+     
+        <mat-card-subtitle >
+         <div  class="resumen">
+          <div class="nombreResumen"> <b>Nombre</b></div>
+          <div class="CantidadResumen"><b>Cantidad</b></div>
+          <div class="subtotalResumen"><b>Subtotal</b></div>
+         </div> 
+
+          <div *ngFor="let item of this.servicioCarrito.listaCarrito"  class="resumen">
+            <div class="nombreResumen">
+              {{item.producto.nombreProducto}}
+            </div> 
+            <div class="CantidadResumen">
+              <b>{{item.cantidad}}</b>
+            </div>
+            <div class="subtotalResumen">
+            ${{moneyFormating(item.subTotal)}}</div>
+          </div>
+         
+        </mat-card-subtitle>
         <mat-card-content>
           <span> Total:</span>
-          <span>${{ this.servicioCarrito.precioTotal() }}</span>
+          <span><h2>${{ this.servicioCarrito.precioTotal() }}</h2></span>
         </mat-card-content>
         <button
           mat-flat-button

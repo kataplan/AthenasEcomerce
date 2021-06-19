@@ -26,8 +26,6 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 
-
-
 app.use(session({
 	secret: 'secret',
 	resave: true,
@@ -40,16 +38,85 @@ connection.connect( (error:any)=>{
     console.log('Base de datos conectada')
 })
 
-app.post('/passRecovery',async(req:any,res:any)=>{
+app.post('/loadComments/', async(req:any,res:any)=>{
+    
+    const idProducto = req.body.id
+    const sql = 'SELECT comentario,valoracion,nombres FROM comentario INNER JOIN usuario ON comentario.idUsuario = usuario.idUsuario WHERE comentario.idProducto = ?'
+    
+    connection.query(sql,idProducto,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.json(results);
+        }else{
+
+            res.send({                 
+                "code":204,                 
+                "error":"No hay resultados"            
+            })
+        } 
+    });
+});
+
+app.post('/saveComment',async(req:any,res:any)=>{
+    const { token , comment, valoration} = req.body;
+    const productId= req.body.idProducto
+   
+    const sqlEmail = 'SELECT idUsuario FROM usuario WHERE email = ?';
+    const email = jwt.verify(token,'secretKey')
+    
+    const sqlComment = 'INSERT INTO comentario (comentario, valoracion, idProducto, idUsuario) VALUES(?,?,?,?)'
+    let userId;
+
+    connection.query(sqlEmail,email._id,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+           userId = results[0].idUsuario
+           
+            connection.query(sqlComment,[comment,valoration,productId,userId],(error:any,results:any)=>{
+                if (error) throw error;
+                res.send({                 
+                    "code":201,                 
+                    "error":"Comentario Guardado"            
+                })   
+            })
+        }else{
+            res.send({                 
+                "code":204,                 
+                "error":"falla en  validar email"            
+            })
+        }    
+    })
+})
+
+app.post('/passRecovery', async(req:any,res:any)=>{
     console.log(req.body);
     
-    //console.log(token,password);
-    
+    const token = req.body.recoveryToken
+    const password = req.body.recoveryPassword
+ 
+    const sql = ' UPDATE usuario SET contrasena= ? WHERE email = ? '
+    const hashedPassword:string = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    const email = jwt.verify(token,'secretKey')
+
+    if(token ==''){
+        res.send({                 
+            "code":204,                 
+            "error":"token error"            
+        })      
+    }else{
+        await connection.query(sql,[hashedPassword,email._id],(error:any,results:any)=>{
+            if (error) throw error;  
+            res.send({                 
+                "code":201,                 
+                "error":"Contraseña modificada con exito"            
+            }) 
+        })
+    } 
 })
 
 app.post('/passReset/:email',async(req:any,res:any)=>{
 
-    const sql = 'SELECT email FROM usuario WHERE email LIKE ?'
+    const sql = 'SELECT email FROM usuario WHERE email = ?'
     
     if(req.params.email ==''){
         res.send({                 
@@ -68,7 +135,6 @@ app.post('/passReset/:email',async(req:any,res:any)=>{
                     "error":"Email inválido"            
                 })
             }
-        
         })
     }
 })
@@ -84,45 +150,48 @@ app.post('/api/:sessionToken', verificarToken, async(req:any,res:any)=>{
 })
 
 
-app.post('/login', async(req:any,res:any)=>{
+app.post('/login', async (req:any,res:any)=>{
 
     const email = req.body._email
-    const sqlEmail = "%"+req.body._email+"%"
     const password = req.body._password
-
-    const sql = 'SELECT email, contrasena FROM usuario WHERE email LIKE ?'    
+    
+    const sql = 'SELECT email, contrasena FROM usuario WHERE email = ?'    
 
     if (email && password) {
 
-        await connection.query(sql,sqlEmail, function(error:any, results:any, fields:any) {            
+        await connection.query(sql,email, function(error:any, results:any, fields:any) {            
 			
             if (results.length > 0) {
-                const comparison = bcrypt.compare(password,results[0].contrasena)
-                if(comparison){
-                    
-                    req.session.loggedin = true;
-				    req.session.username = email;
-                    
-                    const token = jwt.sign({_id: email},'secretKey')
-                    
-                    res.send({                
-                        "code":200,                
-                        "success":"login successful",                             
-                        "userName": results[0].email,              
-                        "token": token           
-                    })
-                    
-                }else{
-                    res.send({                 
-                        "code":204,                 
-                        "error":"Email and password does not match"            
-                    })
-                }
                 
+                const comparison =  bcrypt.compare(password,results[0].contrasena,(err:any,match:any)=>{
+                    
+                    if(match){
+                    
+                        req.session.loggedin = true;
+                        req.session.username = email;
+                        
+                        const token = jwt.sign({_id: email},'secretKey')
+                        
+                        res.send({                
+                            "code":200,                
+                            "success":"login successful",                             
+                            "userName": results[0].email,              
+                            "token": token           
+                        })
+                        
+                    }else{
+                        res.send({                 
+                            "code":204,                 
+                            "error":"Contraseña erronea"            
+                        })
+                    }  
+
+                })
+
 			} else {
 				res.send({                 
                     "code":204,                 
-                    "error":"Email and password does not match"            
+                    "error":"Email no encontrado"            
                 })
 			}
 			
@@ -137,7 +206,7 @@ app.post('/login', async(req:any,res:any)=>{
 })
 
 app.get('/search/:nombreProducto', async(req:any, res:any)=>{
-    console.log(req.body);
+    
     
     let prodBusqueda = "%"+req.params.nombreProducto+"%";
     const sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto LIKE ? "
@@ -145,7 +214,6 @@ app.get('/search/:nombreProducto', async(req:any, res:any)=>{
     await connection.query(sql,prodBusqueda,(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
-            console.log(results)
             res.json(results)
             
         }else{

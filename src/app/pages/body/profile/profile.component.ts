@@ -15,14 +15,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     
     if (!sessionStorage.getItem('whoami')){
-      this.router.navigate(['login'])
+      this.router.navigate(['home'])
     }else{
       const token = <string> sessionStorage.getItem('whoami')
       
       if(this.servicioLogin.verifyLoggedUser(token)){
         
       }else{
-        this.router.navigate(['login'])  
+        this.router.navigate(['home'])  
       }
     } 
   }

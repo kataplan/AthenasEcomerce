@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Recovery } from '../../../interfaces/recovery'
 import {LoginUsuarioService } from '../../../services/login-usuario.service'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-password-recovery',
   templateUrl: './password-recovery.component.html',
@@ -19,7 +20,7 @@ export class PasswordRecoveryComponent implements OnInit {
   hide2 = true;
   formulario:FormGroup;
   token:string = '';
-  constructor(private route: ActivatedRoute,public fb: FormBuilder,public servicioLogin:LoginUsuarioService) { 
+  constructor(private route: ActivatedRoute,public fb: FormBuilder,public servicioLogin:LoginUsuarioService,private router: Router) { 
     this.formulario = fb.group({
       password: new FormControl('',[Validators.required]),
       repeatPassword:new FormControl('',[Validators.required]),
@@ -36,13 +37,7 @@ export class PasswordRecoveryComponent implements OnInit {
   }
 
   onSubmit(){
-
-      const recovery:Recovery ={
-        recoveryToken: this.token,
-        newPassword: this.formulario.controls['password'].value
-      }
-
-      this.servicioLogin.passRecover(recovery);
+      this.servicioLogin.passRecover(this.token,this.formulario.controls['password'].value);
   }
 
 

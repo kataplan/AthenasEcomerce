@@ -1,50 +1,72 @@
 <div class="content-wrapper">
-  <div class="product-wrapper">
+  <div class="product-wrapper" *ngIf="this.servicioProductos.productoVisto">
     <div class="column">
-        
-          <img
-            mat-card-image
-            src="../../../assets/img/productos/{{this.servicioProductos.productoVisto.idProducto}}.jpg"
-            alt="foto productos"
-            id="img-product"
-          />
-       
-      </div>
-      <div class="column">
-        <h2 class="product-name"><b>{{this.servicioProductos.productoVisto.nombreProducto}}</b></h2>
-        <p class="price">$ {{moneyFormating(this.servicioProductos.productoVisto.precio)}}</p>
-        {{rate(this.servicioProductos.productoVisto.valoracion)}}
-        <app-star></app-star>
-      
-        <div class="box" >
-          <div id="description">
-            {{this.servicioProductos.productoVisto.descripcion}}
-          </div>
-          <div class="box-gray">
-            <div class="quantity">
-              <div class="quantity-wrapper">
-                <div>Cantidad&nbsp;</div>
-                <div class="quantity-manager">
-                  <button mat-icon-button (click)="minus()" id="btn-minus">-</button>
-                  <div id="quantity-number">1</div>
-                  <button mat-icon-button (click)="plus()" id="btn-plus">+</button>
-                </div>
+      <img
+        mat-card-image
+        src="../../../assets/img/productos/{{
+          this.servicioProductos.productoVisto.idProducto
+        }}.jpg"
+        alt="foto productos"
+        id="img-product"
+      />
+    </div>
+    <div class="column">
+      <h2 class="product-name">
+        <b>{{ this.servicioProductos.productoVisto.nombreProducto }}</b>
+      </h2>
+      <p class="price">
+        $ {{ moneyFormating(this.servicioProductos.productoVisto.precio) }}
+      </p>
+      {{ rate(this.servicioProductos.productoVisto.valoracion) }}
+      <app-star></app-star>
+
+      <div class="box">
+        <div id="description">
+          {{ this.servicioProductos.productoVisto.descripcion }}
+        </div>
+        <div class="box-gray">
+          <div class="quantity">
+            <div class="quantity-wrapper">
+              <div>Cantidad&nbsp;</div>
+              <div class="quantity-manager">
+                <button mat-icon-button (click)="minus()" id="btn-minus">
+                  -
+                </button>
+                <div id="quantity-number">1</div>
+                <button mat-icon-button (click)="plus()" id="btn-plus">
+                  +
+                </button>
               </div>
-              <div class="available-stock">
-                <div class="available">Disponibles: </div>
-                <div class="stock">Solo quedan:&nbsp; <div>{{this.servicioProductos.productoVisto.stock}}</div></div>
+            </div>
+            <div class="available-stock">
+              <div class="available">Disponibles:</div>
+              <div class="stock">
+                Solo quedan:&nbsp;
+                <div>{{ this.servicioProductos.productoVisto.stock }}</div>
               </div>
             </div>
           </div>
         </div>
-      
-        <button mat-raised-button disabled class="btn-standar" *ngIf="stock(this.servicioProductos.productoVisto.stock)" >
-          AGREGAR AL CARRITO
-        </button>
-        <button mat-raised-button color="accent" class="btn-standar" *ngIf="this.servicioProductos.productoVisto.stock" (click)="addToCart()" >
-          AGREGAR AL CARRITO
-        </button>
       </div>
+
+      <button
+        mat-raised-button
+        disabled
+        class="btn-standar"
+        *ngIf="stock(this.servicioProductos.productoVisto.stock)"
+      >
+        AGREGAR AL CARRITO
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        class="btn-standar"
+        *ngIf="this.servicioProductos.productoVisto.stock"
+        (click)="addToCart()"
+      >
+        AGREGAR AL CARRITO
+      </button>
     </div>
+  </div>
   <app-coment></app-coment>
 </div>

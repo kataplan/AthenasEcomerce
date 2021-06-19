@@ -40,3 +40,15 @@ Authorization: Bearer token
   "email": "ignavaldecace98@gmail.com",
   "password": "hola123"
 }
+
+###
+POST http://localhost:3000/loadComments
+
+{
+  "idProducto": "22"
+}
+
+###
+POST http://localhost:3000/passRecovery
+Content-Type: application/json
+

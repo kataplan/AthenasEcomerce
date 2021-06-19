@@ -3,6 +3,7 @@
     <h2>CLIENTES REGISTRADOS</h2>
     <div class="box">
       <h2></h2>
+      
       <div class="text">
         Si tiene una cuenta, inicie sesión con su dirección de correo
         electrónico.
@@ -29,6 +30,7 @@
             </button>
           </mat-form-field>
         </div>
+        <p style="color: red" *ngIf=" this.servicioLogin.error != '' ">Error en el mail y/o contraseña</p>
         <div>
           <!-- 
           <ngx-recaptcha2 #captchaElem

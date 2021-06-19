@@ -43,7 +43,7 @@ import { AdminComponent } from './pages/body/admin/admin.component';
 import { ProfileComponent } from './pages/body/profile/profile.component';
 import { ResetpasswordComponent } from './pages/body/resetpassword/resetpassword.component';
 import { PasswordRecoveryComponent } from './pages/body/password-recovery/password-recovery.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -93,6 +93,7 @@ import { PasswordRecoveryComponent } from './pages/body/password-recovery/passwo
     NgxCaptchaModule,
     MatTooltipModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
   providers: [ProductoService],
   bootstrap: [AppComponent],

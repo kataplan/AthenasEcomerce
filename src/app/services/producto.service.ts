@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Producto } from '../interfaces/productos'
-
+import { Comentario} from '../interfaces/comentario'
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +12,7 @@ export class ProductoService {
   catBusqueda = '';
   productoVisto:Producto = this.listaProductos[0];
   valorRating:number=0;
-
+  listaComentarios: Array<Comentario> = [];
   constructor(private servicio: HttpClient) { }
 
  
@@ -45,9 +44,42 @@ export class ProductoService {
     });
   }
   obtenerCategoriaPorID(str:string){
-    console.log(str);
     return this.servicio.get(`${this.server}producto/categoria/${str}`).subscribe((dato:any)=>{
       this.catBusqueda = dato[0].nombreCategoria.toLowerCase()
     });
+  }
+
+  saveComment(str:string, num:number,id:number){
+    const comentario = {
+      token:sessionStorage.getItem('whoami'),
+      comment:str,
+      valoration:num,
+      idProducto:id
+    }
+    
+    this.servicio.post(`${this.server}saveComment`,comentario).subscribe(
+      (response:any)=>{
+        console.log(response);
+        if(response.code==201){
+          this.loadComments(id)
+        }
+      }
+    )
+    
+  }
+
+  loadComments(idProducto:number){
+    const producto = {
+      id:idProducto
+    }
+
+    this.listaComentarios = [];
+    this.servicio.post(`${this.server}loadComments`,producto).subscribe(
+      (response:any)=>{
+        if(response.code != 204){
+          this.listaComentarios = response
+        }       
+      }
+    ) 
   }
 }

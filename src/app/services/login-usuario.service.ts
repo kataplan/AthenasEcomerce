@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { textChangeRangeIsUnchanged } from 'typescript';
 import {Recovery} from '../interfaces/recovery'
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,20 +10,36 @@ export class LoginUsuarioService {
   server = 'http://localhost:3000/';
   loggedUser = false;
   token = '';
-
-  constructor(private servicio: HttpClient) { }
+  error = '';
+  
+  constructor(private servicio: HttpClient, private router: Router) { }
  
   logUser(user:any){
     return this.servicio.post(`${this.server}login`,user).subscribe(
-      (dato:any) =>{
-        this.token = dato.token;
-        sessionStorage.setItem('whoami',this.token)
-        console.log(this.token);
-        this.loggedUser=true;
+      (response:any) =>{
+        if(response.code == 204){
+          this.error = "Email y/o contraseña erroneos."
+        }else{
+          this.token = response.token;
+          sessionStorage.setItem('whoami',this.token)
+          this.loggedUser=true;
+          this.verifylogin()
+        }
+        
       },
       (error) => console.log(error)
-    );
-    
+    );    
+  }
+  getUserData(){
+
+  }
+
+  verifylogin(){
+    if(this.loggedUser){
+      this.router.navigate(['home'])
+    }else{
+      console.log('false');
+    }
   }
 
   verifyLoggedUser(sessionToken:string){
@@ -52,17 +69,32 @@ export class LoginUsuarioService {
     )
   }
 
-  passRecover(recovery:Recovery){
+  passRecover(token:string,password:string){
+    const recovery={
+      recoveryToken:token,
+      recoveryPassword:password
+    }
+
     this.servicio.post(`${this.server}passrecovery`,recovery).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
+      (response:any) => {
+        if(response.code == 201){
+          alert("¡Contraseña modificada con éxito!")
+          this.router.navigate(['login'])
+        }
+      }
     )
   }
 
   logOut(){
-    sessionStorage.removeItem('whoami')
+    sessionStorage.removeItem('whoami');
+    this.router.navigate(['home']);
+    window.location.reload();
   }
 
+  loadSession(){
+    if(sessionStorage.getItem('whoami')){
+      this.loggedUser = true;
+    }
+  }
   
-
 }

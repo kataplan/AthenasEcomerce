@@ -52,7 +52,13 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.servicioCarrito.loadLocalStorage();
     this.servicioRegiones.getRegiones();
+    if(this.servicioCarrito.listaCarrito.length==0){
+      this.router.navigate(['home'])
+    }
   }
+  moneyFormating(num:number){
+    return Intl.NumberFormat('de-DE').format(num);
+ }
   CrearPedido(){
 
   }

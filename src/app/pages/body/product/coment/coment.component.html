@@ -69,7 +69,7 @@
           #message
           maxlength="250"
         ></textarea>
-        <mat-hint align="end">{{message.value.length}} / 250</mat-hint>
+        <mat-hint align="end">{{ message.value.length }} / 250</mat-hint>
       </mat-form-field>
     </div>
     <button
@@ -83,38 +83,28 @@
   </form>
   <ng-template #elseBlock>Inicie sesión para añadir un comentario</ng-template>
   <mat-divider></mat-divider>
-
-  <h3>Comentarios de otros Clientes:</h3>
-  <mat-card>
-    <mat-card-title>
-      <div class="nombreCliente">Fulanito</div>
-    </mat-card-title>
-    <mat-card-subtitle>
-      {{ rate(3) }}
-      <app-star></app-star>
-    </mat-card-subtitle>
-    <mat-card-content>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit natus
-        consequatur amet ipsam porro iste harum id error labore ex rem sunt
-        delectus nobis, minus quo quisquam architecto rerum non?
-      </p>
-    </mat-card-content>
-  </mat-card>
-  <mat-card>
-    <mat-card-title>
-      <div class="nombreCliente">Fulanito</div>
-    </mat-card-title>
-    <mat-card-subtitle>
-      {{ rate(4) }}
-      <app-star></app-star>
-    </mat-card-subtitle>
-    <mat-card-content>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit natus
-        consequatur amet ipsam porro iste harum id error labore ex rem sunt
-        delectus nobis, minus quo quisquam architecto rerum non?
-      </p>
-    </mat-card-content>
-  </mat-card>
+  <div
+    *ngIf="this.servicioProductos.listaComentarios.length > 0;else elseBlock2"
+  >
+    <h3>Comentarios de otros Clientes:</h3>
+    <div *ngFor="let item of this.servicioProductos.listaComentarios">
+      <mat-card>
+        <mat-card-title>
+          <div class="nombreCliente">{{ item.nombres }}</div>
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ rate(item.valoracion) }}
+          <app-star></app-star>
+        </mat-card-subtitle>
+        <mat-card-content>
+          <p>
+            {{ item.comentario }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <ng-template #elseBlock2>
+    <h3>Aún no hay comentarios.</h3>
+  </ng-template>
 </div>

@@ -65,10 +65,89 @@ dbconfig_1.connection.connect(function (error) {
         throw error;
     console.log('Base de datos conectada');
 });
-app.post('/passRecovery', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.post('/loadComments/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var idProducto, sql;
     return __generator(this, function (_a) {
-        console.log(req.body);
+        idProducto = req.body.id;
+        sql = 'SELECT comentario,valoracion,nombres FROM comentario INNER JOIN usuario ON comentario.idUsuario = usuario.idUsuario WHERE comentario.idProducto = ?';
+        dbconfig_1.connection.query(sql, idProducto, function (error, results) {
+            if (error)
+                throw error;
+            if (results.length > 0) {
+                res.json(results);
+            }
+            else {
+                res.send({
+                    "code": 204,
+                    "error": "No hay resultados"
+                });
+            }
+        });
         return [2 /*return*/];
+    });
+}); });
+app.post('/saveComment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, token, comment, valoration, productId, sqlEmail, email, sqlComment, userId;
+    return __generator(this, function (_b) {
+        _a = req.body, token = _a.token, comment = _a.comment, valoration = _a.valoration;
+        productId = req.body.idProducto;
+        sqlEmail = 'SELECT idUsuario FROM usuario WHERE email = ?';
+        email = jwt.verify(token, 'secretKey');
+        sqlComment = 'INSERT INTO comentario (comentario, valoracion, idProducto, idUsuario) VALUES(?,?,?,?)';
+        dbconfig_1.connection.query(sqlEmail, email._id, function (error, results) {
+            if (error)
+                throw error;
+            if (results.length > 0) {
+                userId = results[0].idUsuario;
+                dbconfig_1.connection.query(sqlComment, [comment, valoration, productId, userId], function (error, results) {
+                    if (error)
+                        throw error;
+                    res.send({
+                        "code": 201,
+                        "error": "Comentario Guardado"
+                    });
+                });
+            }
+            else {
+                res.send({
+                    "code": 204,
+                    "error": "falla en  validar email"
+                });
+            }
+        });
+        return [2 /*return*/];
+    });
+}); });
+app.post('/passRecovery', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, password, sql, hashedPassword, email;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                console.log(req.body);
+                token = req.body.recoveryToken;
+                password = req.body.recoveryPassword;
+                sql = ' UPDATE usuario SET contrasena= ? WHERE email = ? ';
+                hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+                email = jwt.verify(token, 'secretKey');
+                if (!(token == '')) return [3 /*break*/, 1];
+                res.send({
+                    "code": 204,
+                    "error": "token error"
+                });
+                return [3 /*break*/, 3];
+            case 1: return [4 /*yield*/, dbconfig_1.connection.query(sql, [hashedPassword, email._id], function (error, results) {
+                    if (error)
+                        throw error;
+                    res.send({
+                        "code": 201,
+                        "error": "Contraseña modificada con exito"
+                    });
+                })];
+            case 2:
+                _a.sent();
+                _a.label = 3;
+            case 3: return [2 /*return*/];
+        }
     });
 }); });
 app.post('/passReset/:email', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -76,7 +155,7 @@ app.post('/passReset/:email', function (req, res) { return __awaiter(void 0, voi
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                sql = 'SELECT email FROM usuario WHERE email LIKE ?';
+                sql = 'SELECT email FROM usuario WHERE email = ?';
                 if (!(req.params.email == '')) return [3 /*break*/, 1];
                 res.send({
                     "code": 204,
@@ -116,40 +195,40 @@ app.post('/api/:sessionToken', verificarToken, function (req, res) { return __aw
     });
 }); });
 app.post('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var email, sqlEmail, password, sql;
+    var email, password, sql;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 email = req.body._email;
-                sqlEmail = "%" + req.body._email + "%";
                 password = req.body._password;
-                sql = 'SELECT email, contrasena FROM usuario WHERE email LIKE ?';
+                sql = 'SELECT email, contrasena FROM usuario WHERE email = ?';
                 if (!(email && password)) return [3 /*break*/, 2];
-                return [4 /*yield*/, dbconfig_1.connection.query(sql, sqlEmail, function (error, results, fields) {
+                return [4 /*yield*/, dbconfig_1.connection.query(sql, email, function (error, results, fields) {
                         if (results.length > 0) {
-                            var comparison = bcrypt.compare(password, results[0].contrasena);
-                            if (comparison) {
-                                req.session.loggedin = true;
-                                req.session.username = email;
-                                var token = jwt.sign({ _id: email }, 'secretKey');
-                                res.send({
-                                    "code": 200,
-                                    "success": "login successful",
-                                    "userName": results[0].email,
-                                    "token": token
-                                });
-                            }
-                            else {
-                                res.send({
-                                    "code": 204,
-                                    "error": "Email and password does not match"
-                                });
-                            }
+                            var comparison = bcrypt.compare(password, results[0].contrasena, function (err, match) {
+                                if (match) {
+                                    req.session.loggedin = true;
+                                    req.session.username = email;
+                                    var token = jwt.sign({ _id: email }, 'secretKey');
+                                    res.send({
+                                        "code": 200,
+                                        "success": "login successful",
+                                        "userName": results[0].email,
+                                        "token": token
+                                    });
+                                }
+                                else {
+                                    res.send({
+                                        "code": 204,
+                                        "error": "Contraseña erronea"
+                                    });
+                                }
+                            });
                         }
                         else {
                             res.send({
                                 "code": 204,
-                                "error": "Email and password does not match"
+                                "error": "Email no encontrado"
                             });
                         }
                     })];
@@ -171,14 +250,12 @@ app.get('/search/:nombreProducto', function (req, res) { return __awaiter(void 0
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                console.log(req.body);
                 prodBusqueda = "%" + req.params.nombreProducto + "%";
                 sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto LIKE ? ";
                 return [4 /*yield*/, dbconfig_1.connection.query(sql, prodBusqueda, function (error, results) {
                         if (error)
                             throw error;
                         if (results.length > 0) {
-                            console.log(results);
                             res.json(results);
                         }
                         else {

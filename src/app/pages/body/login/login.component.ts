@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {   
-
+    this.servicioLogin.error='';
   }
 
   onSubmit(){
@@ -37,13 +37,10 @@ export class LoginComponent implements OnInit {
       const email = this.formulario.controls['email'].value
       const password = this.formulario.controls['password'].value
       const userLoginData={
-        authorization: 'micabezera',
         _email: email,
         _password: password
       }
       this.servicioLogin.logUser(userLoginData);
-      this.servicioLogin.verifylogin();
-
     }else{
       alert('Email y/o contraseña inválidos')
     }
@@ -55,4 +52,5 @@ export class LoginComponent implements OnInit {
   goRegister() {
     this.router.navigate([`/register`]);
   }
+  
 }
