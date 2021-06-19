@@ -1,5 +1,6 @@
 <mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel>
+
+  <mat-expansion-panel>  
     <mat-expansion-panel-header>
       <mat-panel-title> Filtros </mat-panel-title>
       <mat-panel-description>
@@ -10,7 +11,7 @@
 
     <mat-form-field appearance="outline" class="filter-selector">
       <mat-label>Categoria:</mat-label>
-      <mat-select [(value)]=" this.servicioProductos.catBusqueda">
+      <mat-select [(value)]=" categoria">
         <mat-option value="football">Football</mat-option>
         <mat-option value="basketball">Basketball</mat-option>
         <mat-option value="rugby">Rugby</mat-option>
@@ -23,13 +24,13 @@
     
     <mat-form-field appearance="outline" class="filter-selector">
       <mat-label>Ordenar por</mat-label>
-      <mat-select>
-        <mat-option value="option">Precio menor a mayor</mat-option>
-        <mat-option value="option">Precio mayor a menor</mat-option>
-        <mat-option value="option">Valoracion menor a mayor</mat-option>
-        <mat-option value="option">Valoracion mayor a menor</mat-option>
-        <mat-option value="option">Alfabético A->Z</mat-option>
-        <mat-option value="option">Alfabético Z->A</mat-option>
+      <mat-select [(value)]=" order">
+        <mat-option value="PrecioMenorMayor">Precio menor a mayor</mat-option>
+        <mat-option value="PrecioMayorMenor">Precio mayor a menor</mat-option>
+        <mat-option value="ValoracionMenorMayor">Valoracion menor a mayor</mat-option>
+        <mat-option value="ValoracionMayormenor">Valoracion mayor a menor</mat-option>
+        <mat-option value="A-Z">Alfabético A->Z</mat-option>
+        <mat-option value="Z-A">Alfabético Z->A</mat-option>
       
       </mat-select>
     </mat-form-field>
@@ -67,8 +68,10 @@
         [displayWith]="formatLabel"
         aria-labelledby="example-name-label">
     </mat-slider>
-    <button mat-flat-button  class="btn-standar" color="accent">
+    <button mat-flat-button  class="btn-standar" color="accent" (click)=filtrar()>
       FILTRAR BUSQUEDA
     </button>
+    
   </mat-expansion-panel>
+
 </mat-accordion>

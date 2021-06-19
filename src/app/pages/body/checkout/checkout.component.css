@@ -152,6 +152,25 @@ h1 {
   max-width: 900px;
 }
 
+.resumen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nombreResumen {
+  width: 50%;
+}
+
+.CantidadResumen, .subtotalResumen {
+  width: 25%;
+  text-align: center;
+}
+
+.mat-card-content {
+  text-align: center;
+}
+
 @media screen and (max-width: 640px) {
   .container,
   .box {

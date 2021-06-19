@@ -14,12 +14,14 @@ export class ProductoService {
   valorRating:number=0;
   listaComentarios: Array<Comentario> = [];
   constructor(private servicio: HttpClient) { }
+  listaSinFiltrar:Array<Producto> = [];
 
  
   obtenerProductosPorNombreCategoria(str:string) {    
     this.listaProductos = [];
     return this.servicio.get(`${this.server}categoria/${str}`).subscribe((dato:any)=>{
       this.listaProductos=dato
+      this.listaSinFiltrar=dato;
     });
   }
 
@@ -29,6 +31,7 @@ export class ProductoService {
         this.listaProductos= [];
       }else{
         this.listaProductos=dato;
+        this.listaSinFiltrar=dato;
       }
       
     })
