@@ -33,7 +33,6 @@ export class ProductoService {
         this.listaProductos=dato;
         this.listaSinFiltrar=dato;
       }
-      
     })
   }
 
@@ -41,9 +40,7 @@ export class ProductoService {
     
     return this.servicio.get(`${this.server}producto/${str}`).subscribe((dato:any)=>{
       this.productoVisto=dato[0]
-      this.obtenerCategoriaPorID(dato[0].idCategoria)
-      
-      
+      this.obtenerCategoriaPorID(dato[0].idCategoria) 
     });
   }
   obtenerCategoriaPorID(str:string){
@@ -67,11 +64,11 @@ export class ProductoService {
           this.loadComments(id)
         }
       }
-    )
-    
+    ) 
   }
 
   loadComments(idProducto:number){
+    
     const producto = {
       id:idProducto
     }

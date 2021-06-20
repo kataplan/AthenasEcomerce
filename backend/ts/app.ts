@@ -1,6 +1,6 @@
 import { connection } from './config/dbconfig'
 import { Regiones } from './interfaces/regiones';
-import { Usuario } from './interfaces/usuario'
+import { Profile, Usuario } from './interfaces/usuario'
 
 const bcrypt = require('bcryptjs');
 const express = require('express');
@@ -38,7 +38,27 @@ connection.connect( (error:any)=>{
     console.log('Base de datos conectada')
 })
 
-app.post('/loadComments/', async(req:any,res:any)=>{
+app.post('/getUserData' , async(req:any,res:any)=>{   
+    const token = req.body.token
+    const sqlEmail = 'SELECT nombres,apellidos,rut,direccion,region,comuna FROM usuario WHERE email = ?';
+    const email = jwt.verify(token,'secretKey')
+    let userData:Profile;
+    await connection.query(sqlEmail,email._id,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            userData=results[0];          
+            res.send(userData)
+        }else{
+            res.send({                 
+                "code":204,                 
+                "error":"No hay resultados"            
+            })
+           
+        }    
+    })  
+})
+
+app.post('/loadComments', async(req:any,res:any)=>{
     
     const idProducto = req.body.id
     const sql = 'SELECT comentario,valoracion,nombres FROM comentario INNER JOIN usuario ON comentario.idUsuario = usuario.idUsuario WHERE comentario.idProducto = ?'
@@ -140,7 +160,6 @@ app.post('/passReset/:email',async(req:any,res:any)=>{
 })
 
 app.post('/api/:sessionToken', verificarToken, async(req:any,res:any)=>{
-    
     res.send({                
         "code":200,                
         "success":"login successful", 

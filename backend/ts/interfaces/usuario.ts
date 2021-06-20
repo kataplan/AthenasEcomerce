@@ -8,3 +8,12 @@ export interface Usuario {
     email:string,
     password:string
 }
+
+export interface Profile{
+    nombres:string,
+    apellidos:string,
+    rut:string,
+    direccion:string,
+    region:string,
+    comuna:string,
+}

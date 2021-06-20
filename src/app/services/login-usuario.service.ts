@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { textChangeRangeIsUnchanged } from 'typescript';
 import {Recovery} from '../interfaces/recovery'
 import { Router } from '@angular/router';
+import { Profile } from '../interfaces/usuario';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,14 @@ export class LoginUsuarioService {
   loggedUser = false;
   token = '';
   error = '';
-  
+  profile:Profile = {
+    nombres:'',
+    apellidos:'',
+    rut:'',
+    direccion:'',
+    region:'',
+    comuna:''
+  }
   constructor(private servicio: HttpClient, private router: Router) { }
  
   logUser(user:any){
@@ -30,8 +38,13 @@ export class LoginUsuarioService {
       (error) => console.log(error)
     );    
   }
-  getUserData(){
-
+  
+  getUserData(sessionToken:string){
+    const tokenString={
+      token:sessionToken
+    }
+    return this.servicio.post(`${this.server}getUserData`,tokenString)
+    
   }
 
   verifylogin(){
@@ -43,7 +56,7 @@ export class LoginUsuarioService {
   }
 
   verifyLoggedUser(sessionToken:string){
-    
+   
     this.servicio.post(`${this.server}api/${sessionStorage.getItem('whoami')}`,sessionToken).subscribe(
       (dato:any)=>{
         this.loggedUser = dato.loginStatus

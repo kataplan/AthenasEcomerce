@@ -10,6 +10,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
+  
+  success:string=''
+
   constructor(
     public servicioCarrito: CarritoService,
     public servicioProductos: ProductoService,
@@ -17,7 +20,7 @@ export class ProductComponent implements OnInit {
   ) {}
   public id: any;
   ngOnInit(): void {
-    
+    this.success=''
     document.documentElement.scrollTop;
     this.route.paramMap.subscribe((paramMap: any) => {
       const { params } = paramMap;
@@ -65,7 +68,9 @@ export class ProductComponent implements OnInit {
     if(num>this.servicioProductos.productoVisto.stock){
       return null;
     }
+
     this.servicioCarrito.addProduct(this.servicioProductos.productoVisto,num);
+    this.success = 'Producto Agregado Exitosamente!'
     return
   }
 

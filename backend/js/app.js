@@ -65,7 +65,35 @@ dbconfig_1.connection.connect(function (error) {
         throw error;
     console.log('Base de datos conectada');
 });
-app.post('/loadComments/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+app.post('/getUserData', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, sqlEmail, email, userData;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                token = req.body.token;
+                sqlEmail = 'SELECT nombres,apellidos,rut,direccion,region,comuna FROM usuario WHERE email = ?';
+                email = jwt.verify(token, 'secretKey');
+                return [4 /*yield*/, dbconfig_1.connection.query(sqlEmail, email._id, function (error, results) {
+                        if (error)
+                            throw error;
+                        if (results.length > 0) {
+                            userData = results[0];
+                            res.send(userData);
+                        }
+                        else {
+                            res.send({
+                                "code": 204,
+                                "error": "No hay resultados"
+                            });
+                        }
+                    })];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); });
+app.post('/loadComments', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var idProducto, sql;
     return __generator(this, function (_a) {
         idProducto = req.body.id;

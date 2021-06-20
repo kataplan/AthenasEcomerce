@@ -1,4 +1,27 @@
 @import "../../../app.component.scss";
-.content-wrapper{
+
+.content-wrapper {
+    background-color: $lighter-area;
     padding:40px 20px;
 }
+
+.profile-wrapper{
+    display: flex;
+}
+
+.column {
+    flex-flow: row;
+    margin: 0 10px;
+    width: 40%;
+}
+
+.user-data {
+    display:flex;
+    
+}
+
+.user-data .div{
+    margin: 1rem;
+}
+
+

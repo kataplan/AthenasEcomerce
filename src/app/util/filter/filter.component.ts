@@ -17,7 +17,6 @@ export class FilterComponent implements OnInit {
   minValue:number = 0;
   maxValue:number = 200000;
   tickInterval = 1;
-  categoria =this.servicioProductos.catBusqueda;
   order = ""
   constructor(
     public servicioProductos: ProductoService,

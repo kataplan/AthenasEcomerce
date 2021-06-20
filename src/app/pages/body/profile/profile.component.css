@@ -51,6 +51,32 @@
 }
 
 .content-wrapper {
+  background-color: #ffff;
   padding: 40px 20px;
+}
+
+.profile-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.column {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  margin: 0 10px;
+  width: 40%;
+}
+
+.user-data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.user-data .div {
+  margin: 1rem;
 }
 /*# sourceMappingURL=profile.component.css.map */
