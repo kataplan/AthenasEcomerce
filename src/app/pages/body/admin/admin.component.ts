@@ -19,7 +19,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 ];
-
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -29,9 +28,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class AdminComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
-
   constructor() { }
-
+  
   ngOnInit(): void {
   }
 
