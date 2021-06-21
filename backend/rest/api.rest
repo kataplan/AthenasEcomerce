@@ -52,3 +52,5 @@ POST http://localhost:3000/loadComments
 POST http://localhost:3000/passRecovery
 Content-Type: application/json
 
+###
+POST http://localhost:3000/obtenerPedidos

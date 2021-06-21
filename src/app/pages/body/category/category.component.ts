@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../../services/producto.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Producto } from 'src/app/interfaces/productos';
-
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -16,7 +15,6 @@ export class CategoryComponent implements OnInit {
       const {params} = paramMap
       this.servicioProductos.obtenerProductosPorNombreCategoria(params.categoria)
       this.servicioProductos.catBusqueda=params.categoria;
-
     })
   }
   verProducto(item:Producto){

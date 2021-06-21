@@ -48,7 +48,7 @@ var port = '3000';
 var jwt = require('jsonwebtoken');
 /* NODEMAILER SERVICE*/
 var nodemailer = require('nodemailer');
-/* EXORESS SESSIONS*/
+/* EXPRESS SESSIONS*/
 var session = require('express-session');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -65,6 +65,142 @@ dbconfig_1.connection.connect(function (error) {
         throw error;
     console.log('Base de datos conectada');
 });
+app.get('/obtenerPedidos', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var sql;
+    return __generator(this, function (_a) {
+        sql = 'SELECT * FROM pedido INNER JOIN productopedido ON pedido.idPedido = productopedido.idPedido';
+        dbconfig_1.connection.query(sql, function (error, results) {
+            if (error)
+                throw error;
+            if (results.length > 0) {
+                res.send(results);
+            }
+            else {
+                res.send({
+                    "code": 204,
+                    "error": "No hay resultados"
+                });
+            }
+        });
+        return [2 /*return*/];
+    });
+}); });
+app.post('/guardarPedido', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var dataToSave, email, sqlEmail, sqlPedido, sqlUltimoPedido, sqlProductoPedido, idUsuario, idPedido;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                dataToSave = req.body;
+                email = jwt.verify(dataToSave.token, 'secretKey');
+                sqlEmail = 'SELECT idUsuario FROM usuario WHERE email = ?';
+                sqlPedido = 'INSERT INTO pedido (nombre,apellido,rut,direccion,region,comuna,idUsuario) VALUES (?,?,?,?,?,?,?)';
+                sqlUltimoPedido = 'SELECT MAX(idPedido) as id FROM pedido';
+                sqlProductoPedido = 'INSERT INTO productopedido (idProducto,idPedido,cantidadProductos) VALUES(?,?,?)';
+                idUsuario = '';
+                idPedido = '';
+                return [4 /*yield*/, dbconfig_1.connection.query(sqlEmail, email._id, function (error, results) { return __awaiter(void 0, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    if (error)
+                                        throw error;
+                                    if (!(results.length > 0)) return [3 /*break*/, 2];
+                                    idUsuario = results[0].idUsuario;
+                                    return [4 /*yield*/, dbconfig_1.connection.query(sqlPedido, [dataToSave.nombreEntrega, dataToSave.apellidoEntrega, dataToSave.rutEntrega, dataToSave.direccionEntrega, dataToSave.regionEntrega, dataToSave.comunaEntrega, idUsuario], function (error, results) { return __awaiter(void 0, void 0, void 0, function () {
+                                            return __generator(this, function (_a) {
+                                                switch (_a.label) {
+                                                    case 0:
+                                                        if (error)
+                                                            throw error;
+                                                        return [4 /*yield*/, dbconfig_1.connection.query(sqlUltimoPedido, function (error, results) { return __awaiter(void 0, void 0, void 0, function () {
+                                                                return __generator(this, function (_a) {
+                                                                    if (error)
+                                                                        throw error;
+                                                                    if (results.length > 0 || !null) {
+                                                                        idPedido = results[0].id;
+                                                                        dataToSave.listaProductos.forEach(function (item) { return __awaiter(void 0, void 0, void 0, function () {
+                                                                            return __generator(this, function (_a) {
+                                                                                switch (_a.label) {
+                                                                                    case 0: return [4 /*yield*/, dbconfig_1.connection.query(sqlProductoPedido, [item.producto.idProducto, idPedido, item.cantidad], function (error, results) {
+                                                                                            if (error)
+                                                                                                throw error;
+                                                                                        })];
+                                                                                    case 1:
+                                                                                        _a.sent();
+                                                                                        return [2 /*return*/];
+                                                                                }
+                                                                            });
+                                                                        }); });
+                                                                        res.send({
+                                                                            "code": 200,
+                                                                            "result": 'Datos insertados correctamente'
+                                                                        });
+                                                                    }
+                                                                    else {
+                                                                        res.send({
+                                                                            "code": 204,
+                                                                            "error": "No hay resultados"
+                                                                        });
+                                                                    }
+                                                                    return [2 /*return*/];
+                                                                });
+                                                            }); })];
+                                                    case 1:
+                                                        _a.sent();
+                                                        return [2 /*return*/];
+                                                }
+                                            });
+                                        }); })];
+                                case 1:
+                                    _a.sent();
+                                    return [3 /*break*/, 3];
+                                case 2:
+                                    res.send({
+                                        "code": 204,
+                                        "error": "No hay resultados"
+                                    });
+                                    _a.label = 3;
+                                case 3: return [2 /*return*/];
+                            }
+                        });
+                    }); })];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); });
+app.post('/getUserId', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, sql, email;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                token = req.body.token;
+                sql = 'SELECT idUsuario FROM usuario WHERE email = ?';
+                email = jwt.verify(token, 'secretKey');
+                return [4 /*yield*/, dbconfig_1.connection.query(sql, email._id, function (error, results) {
+                        if (error)
+                            throw error;
+                        if (results.length > 0) {
+                            var id = results[0].idUsuario;
+                            res.send({
+                                "code": 200,
+                                "result": id
+                            });
+                        }
+                        else {
+                            res.send({
+                                "code": 204,
+                                "error": "No hay resultados"
+                            });
+                        }
+                    })];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); });
 app.post('/getUserData', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var token, sqlEmail, email, userData;
     return __generator(this, function (_a) {

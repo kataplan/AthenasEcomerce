@@ -45,6 +45,7 @@ import { ResetpasswordComponent } from './pages/body/resetpassword/resetpassword
 import { PasswordRecoveryComponent } from './pages/body/password-recovery/password-recovery.component';
 import {MatDialogModule} from '@angular/material/dialog';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     AdminComponent,
     ProfileComponent,
     ResetpasswordComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
   ],
   imports: [
     BrowserModule,

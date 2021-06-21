@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'perfil', component: ProfileComponent },
   { path: 'admin', component: AdminComponent},
   { path: 'passwordReset',component:ResetpasswordComponent},
-  { path: 'passwordRecovery/:token',component:PasswordRecoveryComponent}
+  { path: 'passwordRecovery/:token',component:PasswordRecoveryComponent},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

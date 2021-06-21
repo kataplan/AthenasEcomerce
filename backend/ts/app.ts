@@ -1,6 +1,9 @@
 import { connection } from './config/dbconfig'
 import { Regiones } from './interfaces/regiones';
 import { Profile, Usuario } from './interfaces/usuario'
+import { Producto,ProductoPedido} from './interfaces/producto'
+import { Pedido} from './interfaces/pedido'
+import { nextTick } from 'process';
 
 const bcrypt = require('bcryptjs');
 const express = require('express');
@@ -14,9 +17,7 @@ const jwt = require('jsonwebtoken')
 
 /* NODEMAILER SERVICE*/
 const nodemailer = require('nodemailer')
-
-
-/* EXORESS SESSIONS*/
+/* EXPRESS SESSIONS*/
 var session = require('express-session');
 
 app.use(cors());
@@ -36,6 +37,91 @@ app.use(session({
 connection.connect( (error:any)=>{
     if (error) throw error;
     console.log('Base de datos conectada')
+})
+
+app.get('/obtenerPedidos',async(req:any,res:any)=>{
+    const sql = 'SELECT * FROM pedido INNER JOIN productopedido ON pedido.idPedido = productopedido.idPedido'
+    connection.query(sql,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            
+            res.send(results)
+        }else{
+            res.send({
+                "code":204,                 
+                "error":"No hay resultados"  
+            })
+        }
+    })
+})
+
+app.post('/guardarPedido',async(req:any,res:any)=>{
+    let dataToSave:Pedido = req.body;
+    const email = jwt.verify(dataToSave.token,'secretKey');
+    const sqlEmail = 'SELECT idUsuario FROM usuario WHERE email = ?';
+    const sqlPedido = 'INSERT INTO pedido (nombre,apellido,rut,direccion,region,comuna,idUsuario) VALUES (?,?,?,?,?,?,?)';
+    const sqlUltimoPedido= 'SELECT MAX(idPedido) as id FROM pedido'
+    const sqlProductoPedido = 'INSERT INTO productopedido (idProducto,idPedido,cantidadProductos) VALUES(?,?,?)';
+    let idUsuario ='';
+    let idPedido = '';
+
+    await connection.query(sqlEmail,email._id, async(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            idUsuario=results[0].idUsuario
+            await connection.query(sqlPedido,[dataToSave.nombreEntrega,dataToSave.apellidoEntrega,dataToSave.rutEntrega,dataToSave.direccionEntrega,dataToSave.regionEntrega,dataToSave.comunaEntrega,idUsuario],async(error:any,results:any)=>{
+                if (error) throw error;
+                await connection.query(sqlUltimoPedido,async(error:any,results:any)=>{
+                    if (error) throw error;
+                    if (results.length>0 || !null){
+                        idPedido=results[0].id                            
+                        dataToSave.listaProductos.forEach(async(item)=>{
+                            await connection.query(sqlProductoPedido,[item.producto.idProducto,idPedido,item.cantidad],(error:any,results:any)=>{
+                                if(error) throw error;    
+                            })
+                        })
+                        res.send({
+                            "code":200,
+                            "result":'Datos insertados correctamente'
+                        });
+                    }else{
+                        res.send({
+                            "code":204,                 
+                            "error":"No hay resultados"  
+                        })
+                    }  
+                })          
+            })
+        }else{
+            res.send({
+                "code":204,                 
+                "error":"No hay resultados"  
+            })
+        }
+    })
+})
+
+app.post('/getUserId',async(req:any,res:any)=>{
+    const token = req.body.token
+    const sql = 'SELECT idUsuario FROM usuario WHERE email = ?'
+    const email = jwt.verify(token,'secretKey')
+    
+    await connection.query(sql,email._id,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            const id = results[0].idUsuario
+            res.send({
+                "code":200,
+                "result":id
+            });
+
+        }else{
+            res.send({
+                "code":204,                 
+                "error":"No hay resultados"  
+            })
+        }
+    })
 })
 
 app.post('/getUserData' , async(req:any,res:any)=>{   
