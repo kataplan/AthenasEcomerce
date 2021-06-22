@@ -1,37 +1,37 @@
 @import "../../app.component.scss";
-.area{
-    background-color: $area;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 20%;
+.area {
+  background-color: $area;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 20%;
 }
-#text{
-    color:$lighter-area ;
+#text {
+  color: $lighter-area;
 }
-.svg-rrss{
-    width: 25px;
-    height:25px;
-    color:$area;
-    
+.svg-rrss {
+  width: 25px;
+  height: 25px;
+  color: $area;
 }
-.btn-rrss{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.btn-rrss {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.content{
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 5px;
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 2px;
 }
-.btn-rrss{
-    margin: 0 5px;
+.btn-rrss {
+  margin: 0 2px;
 }
 @media screen and (max-width: 650px) {
-.area{
+  .area {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-}
+  }
+ 
 }

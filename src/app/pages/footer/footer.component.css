@@ -93,11 +93,11 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 20px 5px;
+  padding: 20px 2px;
 }
 
 .btn-rrss {
-  margin: 0 5px;
+  margin: 0 2px;
 }
 
 @media screen and (max-width: 650px) {
