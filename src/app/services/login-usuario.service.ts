@@ -10,7 +10,14 @@ export class LoginUsuarioService {
   loggedUser = false;
   token = '';
   error = '';
-  
+  profile: Profile = {
+    nombres: '',
+    apellidos: '',
+    rut: '',
+    direccion: '',
+    region: '',
+    comuna: '',
+  };
   constructor(private servicio: HttpClient, private router: Router) {}
 
   /*getUserId(){
@@ -26,7 +33,7 @@ export class LoginUsuarioService {
       }
     )
   }*/
-  
+
   logUser(user: any) {
     return this.servicio.post(`${this.server}login`, user).subscribe(
       (response: any) => {
@@ -37,6 +44,12 @@ export class LoginUsuarioService {
           sessionStorage.setItem('whoami', this.token);
           this.loggedUser = true;
           this.verifylogin();
+         
+          if (this.verifyLoggedUser(this.token)) {
+            this.getUserData(this.token).subscribe((response) => {
+              this.profile = <Profile>response;
+            });
+          }
         }
       },
       (error) => console.log(error)
@@ -112,6 +125,7 @@ export class LoginUsuarioService {
   loadSession() {
     if (sessionStorage.getItem('whoami')) {
       this.loggedUser = true;
+     
     }
   }
 }

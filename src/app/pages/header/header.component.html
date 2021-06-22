@@ -1,8 +1,8 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <div class="header-content" id="hambuger-menu">
-      <button mat-button class="btn-header" [matMenuTriggerFor]="Category">
-        <mat-icon class="btn-icon">menu</mat-icon>
+      <button mat-icon-button class="btn-header" [matMenuTriggerFor]="Category">
+        <mat-icon  class="btn-icon">menu</mat-icon>
       </button>
       <mat-menu #Category="matMenu">
         <button (click)="goCategory('football')" mat-menu-item>Football</button>
@@ -78,7 +78,12 @@
       </button>
       <mat-menu #menu="matMenu">
         <div *ngIf="this.servicioLogin.loggedUser; else elseBlock">
-          <button mat-menu-item (click)="goProfile()">Mi Perfil</button>
+          <div class="user-data">
+            <h2>{{ this.servicioLogin.profile.nombres }} {{ this.servicioLogin.profile.apellidos }}</h2>
+            <h3>{{ this.servicioLogin.profile.direccion }}</h3>
+            <h3>{{ this.servicioLogin.profile.comuna }}, {{ this.servicioLogin.profile.region }}</h3>
+          </div>
+          <button mat-menu-item (click)="goProfile">Mi Perfil</button>
           <button mat-menu-item (click)="closeSession()">Cerrar Sesión</button>
         </div>
         <ng-template #elseBlock>
