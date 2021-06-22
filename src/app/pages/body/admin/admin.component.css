@@ -50,7 +50,19 @@
           box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
+.content-wrapper {
+  padding: 20px;
+  overflow-x: auto;
+  width: 100%;
+}
+
 table {
   width: 100%;
+  min-width: 1500px;
+  text-align: center;
+}
+
+table th {
+  text-align: center;
 }
 /*# sourceMappingURL=admin.component.css.map */

@@ -4,7 +4,7 @@ import { ProductoService } from '../../services/producto.service';
 import { LoginUsuarioService } from '../../services/login-usuario.service';
 import {CarritoService} from '../../services/carrito.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { PedidosService } from '../../services/pedidos.service';
 
 @Component({
   selector: 'app-header',
@@ -17,10 +17,12 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     public servicioLogin: LoginUsuarioService,
     public servicioCarrito: CarritoService,
+    public servicioPedidos: PedidosService ,
     private _snackBar: MatSnackBar
   ) {}
   
   ngOnInit(): void {
+    this.servicioPedidos.obtenerPedidos();
     this.servicioCarrito.loadLocalStorage();
     this.servicioLogin.loadSession();
     if(this.servicioCarrito.listaCarrito.length>0){

@@ -45,7 +45,6 @@ export class ProductComponent implements OnInit {
     input.innerText = num + '';
   }
  
-
   moneyFormating(num: number) {
     return Intl.NumberFormat('de-DE').format(num);
   }

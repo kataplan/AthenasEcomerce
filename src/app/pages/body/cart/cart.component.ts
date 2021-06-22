@@ -13,7 +13,6 @@ import {MatTable} from '@angular/material/table';
 })
 export class CartComponent implements OnInit {
   
-  
   displayedColumns: string[] = [
     'Producto',
     'Precio',

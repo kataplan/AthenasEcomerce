@@ -100,7 +100,7 @@
   margin: 0 5px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .area {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;

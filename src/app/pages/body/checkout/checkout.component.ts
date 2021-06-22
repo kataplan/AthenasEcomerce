@@ -85,7 +85,6 @@ export class CheckoutComponent implements OnInit {
     if (!this.servicioLogin.loggedUser) {
       this.router.navigate(['login']);
     }
-    this.servicioPedidos.obtenerPedidos();
   }
 
   moneyFormating(num: number) {

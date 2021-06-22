@@ -44,6 +44,7 @@ import { ProfileComponent } from './pages/body/profile/profile.component';
 import { ResetpasswordComponent } from './pages/body/resetpassword/resetpassword.component';
 import { PasswordRecoveryComponent } from './pages/body/password-recovery/password-recovery.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -95,6 +96,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTooltipModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatPaginatorModule,
   ],
   providers: [ProductoService],
   bootstrap: [AppComponent],
