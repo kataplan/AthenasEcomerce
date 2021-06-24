@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Profile } from '../interfaces/usuario';
 @Injectable({
@@ -18,8 +18,9 @@ export class LoginUsuarioService {
     region: '',
     comuna: '',
   };
-  constructor(private servicio: HttpClient, private router: Router) {}
 
+
+  constructor(private servicio: HttpClient, private router: Router) {}
   /*getUserId(){
     let idUsuario;
     const tokenString={
@@ -72,15 +73,16 @@ export class LoginUsuarioService {
   }
 
   verifyLoggedUser(sessionToken: string) {
-    this.servicio
-      .post(
-        `${this.server}api/${sessionStorage.getItem('whoami')}`,
-        sessionToken
-      )
-      .subscribe((dato: any) => {
+    if(sessionToken ===''){
+      return this.loggedUser;
+    }else{
+    
+      this.servicio.post(`${this.server}api/${sessionStorage.getItem('whoami')}`,sessionToken).subscribe((dato: any) => {
         this.loggedUser = dato.loginStatus;
       });
-    return this.loggedUser;
+      return this.loggedUser;
+    }
+    
   }
 
   /*getAdmin(user:any){
@@ -125,7 +127,7 @@ export class LoginUsuarioService {
   loadSession() {
     if (sessionStorage.getItem('whoami')) {
       this.loggedUser = true;
-     
     }
   }
+
 }
