@@ -1,16 +1,49 @@
 @import "../../../app.component.scss";
+
 .content-wrapper{
   padding: 20px;
   overflow-x:auto;
   width: 100%;
 }
+.admin-title h1{
+  font-size: 2.5rem;
+  font-family: $strong-font;
+}
+
+.center{
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  
+}
+
 table {
     width: 100%;
     min-width: 1500px;
     text-align: center;
-    
-  }
+}
 table th{
   text-align: center;
-  
+}
+.box{
+  width:100%;
+  max-width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input-container{
+  width: 100%;
+  display:flex;
+  justify-content: center;
+
+}
+.mat-form-field{
+  width: 80%;
+}
+@media screen and (max-width: 600px) {
+  .column{
+    width: 100%;
+  }
 }

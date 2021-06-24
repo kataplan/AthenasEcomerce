@@ -71,3 +71,9 @@ CREATE TABLE productoCarrito(
     FOREIGN KEY (idProducto) REFERENCES producto(idProducto)
 )
 
+CREATE TABLE administrador(
+    idAdmin INT (11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(45) NOT NULL,
+    contrasena VARCHAR(45) NOT NULL,
+)
+

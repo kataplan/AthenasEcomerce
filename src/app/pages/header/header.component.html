@@ -6,9 +6,7 @@
       </button>
       <mat-menu #Category="matMenu">
         <button (click)="goCategory('football')" mat-menu-item>Football</button>
-        <button (click)="goCategory('basketball')" mat-menu-item>
-          Basketball
-        </button>
+        <button (click)="goCategory('basketball')" mat-menu-item>Basketball</button>
         <button (click)="goCategory('rugby')" mat-menu-item>Rugby</button>
         <button (click)="goCategory('handball')" mat-menu-item>Handball</button>
         <button (click)="goCategory('ciclismo')" mat-menu-item>Ciclismo</button>
@@ -19,7 +17,7 @@
 
     <div class="header-content">
       <button mat-button id="btn-logo" (click)="goHome()">
-        <img src="../../../assets/img/logo_01.svg" alt="" />
+        <img src="../../../assets/img/logo_01.svg" alt=""/>
       </button>
     </div>
 
@@ -61,7 +59,7 @@
       </button>
     </div>
 
-    <div class="header-content">
+    <div class="header-content" *ngIf="!this.servicioAdmin.loggedAdmin; else elseAdmin">
       <button
         mat-icon-button
         [matMenuTriggerFor]="menu"
@@ -77,21 +75,46 @@
         </div>
       </button>
       <mat-menu #menu="matMenu">
-        <div *ngIf="this.servicioLogin.loggedUser; else elseBlock">
+        <div *ngIf="this.servicioLogin.loggedUser; else elseBlock" >
+          
           <div class="user-data">
             <h2>{{ this.servicioLogin.profile.nombres }} {{ this.servicioLogin.profile.apellidos }}</h2>
             <h3>{{ this.servicioLogin.profile.direccion }}</h3>
             <h3>{{ this.servicioLogin.profile.comuna }}, {{ this.servicioLogin.profile.region }}</h3>
           </div>
-          <button mat-menu-item (click)="goProfile">Mi Perfil</button>
+          <button mat-menu-item (click)="goProfile()">Mi Perfil</button>
           <button mat-menu-item (click)="closeSession()">Cerrar Sesión</button>
         </div>
         <ng-template #elseBlock>
           <button mat-menu-item (click)="goLogin()">Iniciar Sesión</button>
-          <button mat-menu-item (click)="goRegister()">Crear Cuenta</button>
+          <button mat-menu-item (click)="goRegister()">Registrarse</button>
         </ng-template>
       </mat-menu>
+      
     </div>
+
+    <ng-template class="header-content"  #elseAdmin>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu2"
+        id="btn-profile"
+        class="btn-header"
+      >
+      
+        <div class="btn-icon-text">
+          <mat-icon class="btn-icon">person</mat-icon>
+          <div id="profile-menu">
+            <div class="btn-text">MI PERFIL</div>
+            <mat-icon id="arrow-down">keyboard_arrow_down</mat-icon>
+          </div>
+        </div>
+     
+      </button>
+      
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item (click)="this.servicioAdmin.closeSession()">Cerrar Sesión Admin</button>
+      </mat-menu>
+    </ng-template>
   </mat-toolbar-row>
   <mat-toolbar-row id="second-row">
     <div id="sub-busqueda" class="search-content">

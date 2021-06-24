@@ -65,6 +65,59 @@ dbconfig_1.connection.connect(function (error) {
         throw error;
     console.log('Base de datos conectada');
 });
+app.post('/admin', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var email, password, sql;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                console.log(req.body);
+                email = req.body._email;
+                password = req.body._password;
+                console.log(email, password);
+                sql = 'SELECT email, contrasena FROM administrador WHERE email = ?';
+                if (!(email && password)) return [3 /*break*/, 2];
+                return [4 /*yield*/, dbconfig_1.connection.query(sql, email, function (error, results, fields) {
+                        if (results.length > 0) {
+                            bcrypt.compare(password, results[0].contrasena, function (err, match) {
+                                if (match) {
+                                    req.session.loggedin = true;
+                                    req.session.username = email;
+                                    var token = jwt.sign({ _id: email }, 'secretKey');
+                                    res.send({
+                                        "code": 200,
+                                        "success": "login successful",
+                                        "userName": results[0].email,
+                                        "token": token
+                                    });
+                                }
+                                else {
+                                    res.send({
+                                        "code": 204,
+                                        "error": "Contraseña erronea"
+                                    });
+                                }
+                            });
+                        }
+                        else {
+                            res.send({
+                                "code": 204,
+                                "error": "Email no encontrado"
+                            });
+                        }
+                    })];
+            case 1:
+                _a.sent();
+                return [3 /*break*/, 3];
+            case 2:
+                res.send({
+                    "code": 204,
+                    "error": "Email and password does not match"
+                });
+                _a.label = 3;
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
 app.get('/obtenerPedidos', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var sql;
     return __generator(this, function (_a) {
@@ -187,6 +240,32 @@ app.post('/getUserId', function (req, res) { return __awaiter(void 0, void 0, vo
                                 "code": 200,
                                 "result": id
                             });
+                        }
+                        else {
+                            res.send({
+                                "code": 204,
+                                "error": "No hay resultados"
+                            });
+                        }
+                    })];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); });
+app.get('/getUsers', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var adminToken, sql, userData;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                adminToken = req.body.token;
+                sql = 'SELECT nombres,apellidos,rut,email,direccion,region, comuna FROM usuario';
+                return [4 /*yield*/, dbconfig_1.connection.query(sql, function (error, results) {
+                        if (error)
+                            throw error;
+                        if (results.length > 0) {
+                            res.send(results);
                         }
                         else {
                             res.send({

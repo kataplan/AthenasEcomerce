@@ -39,12 +39,66 @@ connection.connect( (error:any)=>{
     console.log('Base de datos conectada')
 })
 
+app.post('/admin',async(req:any,res:any)=>{
+    
+    console.log(req.body);
+    
+    const email = req.body._email
+    const password = req.body._password
+    console.log(email,password);
+    const sql = 'SELECT email, contrasena FROM administrador WHERE email = ?'    
+
+    if (email && password) {
+
+        await connection.query(sql,email, function(error:any, results:any, fields:any) {            
+			
+            if (results.length > 0) {
+                
+                bcrypt.compare(password,results[0].contrasena,(err:any,match:any)=>{
+                    
+                    if(match){
+                    
+                        req.session.loggedin = true;
+                        req.session.username = email;
+                        
+                        const token = jwt.sign({_id: email},'secretKey')
+                        
+                        res.send({                
+                            "code":200,                
+                            "success":"login successful",                             
+                            "userName": results[0].email,              
+                            "token": token           
+                        })
+                        
+                    }else{
+
+                        res.send({                 
+                            "code":204,                 
+                            "error":"Contraseña erronea"            
+                        })
+
+                    }
+                })
+			} else {
+				res.send({                 
+                    "code":204,                 
+                    "error":"Email no encontrado"            
+                })
+			}
+		});
+	} else {
+		res.send({                 
+            "code":204,                 
+            "error":"Email and password does not match"            
+        })
+	}
+})
+
 app.get('/obtenerPedidos',async(req:any,res:any)=>{
     const sql = 'SELECT * FROM pedido INNER JOIN productopedido ON pedido.idPedido = productopedido.idPedido'
     connection.query(sql,(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
-            
             res.send(results)
         }else{
             res.send({
@@ -124,6 +178,24 @@ app.post('/getUserId',async(req:any,res:any)=>{
     })
 })
 
+app.get ('/getUsers',async(req:any,res:any)=>{
+    const adminToken = req.body.token
+    const sql = 'SELECT nombres,apellidos,rut,email,direccion,region, comuna FROM usuario'
+   
+    let userData:Profile;
+    await connection.query(sql,(error:any,results:any)=>{
+        if (error) throw error;
+        if (results.length > 0){
+            res.send(results)
+        }else{
+            res.send({
+                "code":204,
+                "error":"No hay resultados"
+            })
+        }
+    })
+})
+
 app.post('/getUserData' , async(req:any,res:any)=>{   
     const token = req.body.token
     const sqlEmail = 'SELECT nombres,apellidos,rut,direccion,region,comuna FROM usuario WHERE email = ?';
@@ -139,7 +211,6 @@ app.post('/getUserData' , async(req:any,res:any)=>{
                 "code":204,                 
                 "error":"No hay resultados"            
             })
-           
         }    
     })  
 })

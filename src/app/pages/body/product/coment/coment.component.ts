@@ -4,7 +4,6 @@ import { ProductoService } from '../../../../services/producto.service';
 import { LoginUsuarioService } from '../../../../services/login-usuario.service';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-coment',
   templateUrl: './coment.component.html',
@@ -30,8 +29,6 @@ export class ComentComponent implements OnInit {
       ]),
     });
   }
-  
- 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: any) => {
       const { params } = paramMap;
