@@ -46,6 +46,7 @@ import { PasswordRecoveryComponent } from './pages/body/password-recovery/passwo
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTabsModule} from '@angular/material/tabs';
+import { DialogComponent } from './util/dialog/dialog.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     ProfileComponent,
     ResetpasswordComponent,
     PasswordRecoveryComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,

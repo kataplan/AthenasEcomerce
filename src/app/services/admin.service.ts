@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Profile } from '../interfaces/usuario';
+import { ProfileAdmin } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +10,24 @@ export class AdminService {
   server = 'http://localhost:3000/';
   loggedAdmin = false;
   error = '';
-  token = ''
-  listaUsuarios: Array<Profile> = [];
+  token = '';
+  listaUsuarios: Array<ProfileAdmin> = [];
+  textoEliminar='';
   constructor(private servicio: HttpClient, private router: Router) { }
   
 
   obtenerUsuarios() {
-    console.log('hola?');
     return this.servicio.get(`${this.server}getUsers`).subscribe((response:any)=>{
       this.listaUsuarios=response
-      console.log(response);
     });
+  }
+  eliminarUsuario(idUsuario:string){
+    const objUsuario={
+      id:idUsuario
+    }
+    return this.servicio.post(`${this.server}eliminarUsuario`, objUsuario).subscribe((response:any)=>{
+      console.log(response);
+    })
   }
 
   logAdmin(user: any) {

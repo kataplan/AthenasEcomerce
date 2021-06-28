@@ -10,10 +10,12 @@ export interface Usuario {
 }
 
 export interface Profile{
+    idUsuario:string,
     nombres:string,
     apellidos:string,
     rut:string,
     direccion:string,
     region:string,
     comuna:string,
+    email:string,
 }

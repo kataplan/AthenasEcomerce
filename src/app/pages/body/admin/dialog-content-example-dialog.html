@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Eliminar {{this.servicioAdmin.textoEliminar}}</h2>
+<div mat-dialog-content>
+    <p>¿Está seguro de querer eliminar este {{this.servicioAdmin.textoEliminar}}?</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Eliminar</button>
+</div>
+
+
+    

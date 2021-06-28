@@ -24,4 +24,14 @@ export class PedidosService {
       (error) => console.log(error)
     );
   }
+
+  eliminarProductoPedido(idProductoPedido:number){
+    const objProductoPedido={
+      id:idProductoPedido
+    }
+    this.servicio.post(`${this.server}eliminarProductoPedido`,objProductoPedido).subscribe((response:any)=>{
+      console.log(response);
+      
+    })
+  }
 }

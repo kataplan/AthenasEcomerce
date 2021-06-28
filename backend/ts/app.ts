@@ -39,10 +39,7 @@ connection.connect( (error:any)=>{
     console.log('Base de datos conectada')
 })
 
-app.post('/admin',async(req:any,res:any)=>{
-    
-    console.log(req.body);
-    
+app.post('/admin',async(req:any,res:any)=>{    
     const email = req.body._email
     const password = req.body._password
     console.log(email,password);
@@ -94,11 +91,40 @@ app.post('/admin',async(req:any,res:any)=>{
 	}
 })
 
+app.post('/eliminarUsuario',async(req:any,res:any)=>{   
+    const idUsuario= req.body.id
+    const sql = 'DELETE FROM usuario WHERE idUsuario = ?'
+
+    await connection.query(sql,idUsuario,(error:any,results:any)=>{
+        if (error) throw error;
+        res.send({
+            "code":201,                 
+            "message":"Usuario  eliminado correctamente"  
+        })
+    })
+
+})
+
+app.post('/eliminarProductoPedido',async(req:any,res:any)=>{
+    const idProductoPedido = req.body.id
+    
+    const sql = 'DELETE FROM productopedido WHERE idProductoPedido = ?'
+
+    await connection.query(sql,idProductoPedido,(error:any,results:any)=>{
+        if (error) throw error;
+        res.send({
+            "code":201,                 
+            "message":"Producto en pedido eliminado exitosamente"  
+        })
+    })
+
+})
+
 app.get('/obtenerPedidos',async(req:any,res:any)=>{
     const sql = 'SELECT * FROM pedido INNER JOIN productopedido ON pedido.idPedido = productopedido.idPedido'
     connection.query(sql,(error:any,results:any)=>{
         if (error) throw error;
-        if (results.length > 0){
+        if (results.length > 0){          
             res.send(results)
         }else{
             res.send({
@@ -116,10 +142,12 @@ app.post('/guardarPedido',async(req:any,res:any)=>{
     const sqlPedido = 'INSERT INTO pedido (nombre,apellido,rut,direccion,region,comuna,idUsuario) VALUES (?,?,?,?,?,?,?)';
     const sqlUltimoPedido= 'SELECT MAX(idPedido) as id FROM pedido'
     const sqlProductoPedido = 'INSERT INTO productopedido (idProducto,idPedido,cantidadProductos) VALUES(?,?,?)';
+    const sqlUpdateStock = 'UPDATE producto SET stock = (SELECT stock from producto WHERE idProducto = ?)-? WHERE idProducto = ? AND idProducto > 0'
     let idUsuario ='';
     let idPedido = '';
-
-    await connection.query(sqlEmail,email._id, async(error:any,results:any)=>{
+    
+    
+    connection.query(sqlEmail,email._id, async(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
             idUsuario=results[0].idUsuario
@@ -130,9 +158,20 @@ app.post('/guardarPedido',async(req:any,res:any)=>{
                     if (results.length>0 || !null){
                         idPedido=results[0].id                            
                         dataToSave.listaProductos.forEach(async(item)=>{
-                            await connection.query(sqlProductoPedido,[item.producto.idProducto,idPedido,item.cantidad],(error:any,results:any)=>{
-                                if(error) throw error;    
+                            connection.query(sqlUpdateStock,[item.producto.idProducto,item.cantidad,item.producto.idProducto],async(error:any,results:any)=>{
+                                if(error){
+                                    res.send({
+                                        "code":204,                 
+                                        "error":"No hay resultados"  
+                                    })
+                                }else{
+                                    await connection.query(sqlProductoPedido,[item.producto.idProducto,idPedido,item.cantidad],(error:any,results:any)=>{
+                                        if(error) throw error;
+                                    })
+                                }
+                               
                             })
+                            
                         })
                         res.send({
                             "code":200,
@@ -180,8 +219,8 @@ app.post('/getUserId',async(req:any,res:any)=>{
 
 app.get ('/getUsers',async(req:any,res:any)=>{
     const adminToken = req.body.token
-    const sql = 'SELECT nombres,apellidos,rut,email,direccion,region, comuna FROM usuario'
-   
+    const sql = 'SELECT idUsuario,nombres,apellidos,rut,email,direccion,region,comuna FROM usuario'
+    
     let userData:Profile;
     await connection.query(sql,(error:any,results:any)=>{
         if (error) throw error;
@@ -216,13 +255,14 @@ app.post('/getUserData' , async(req:any,res:any)=>{
 })
 
 app.post('/loadComments', async(req:any,res:any)=>{
+    console.log(req.body);
     
     const idProducto = req.body.id
     const sql = 'SELECT comentario,valoracion,nombres FROM comentario INNER JOIN usuario ON comentario.idUsuario = usuario.idUsuario WHERE comentario.idProducto = ?'
     
     connection.query(sql,idProducto,(error:any,results:any)=>{
         if (error) throw error;
-        if (results.length > 0){
+        if (results.length > 0){           
             res.json(results);
         }else{
 
@@ -235,6 +275,8 @@ app.post('/loadComments', async(req:any,res:any)=>{
 });
 
 app.post('/saveComment',async(req:any,res:any)=>{
+    console.log(req.body);
+    
     const { token , comment, valoration} = req.body;
     const productId= req.body.idProducto
    
@@ -253,13 +295,13 @@ app.post('/saveComment',async(req:any,res:any)=>{
                 if (error) throw error;
                 res.send({                 
                     "code":201,                 
-                    "error":"Comentario Guardado"            
+                    "response":"Comentario Guardado"            
                 })   
             })
         }else{
             res.send({                 
                 "code":204,                 
-                "error":"falla en  validar email"            
+                "error":"fallo en  validar email"            
             })
         }    
     })
@@ -422,7 +464,7 @@ app.post('/registrar', async(req:any,res:any)=>{
 
 app.get('/categoria/:categoria', async(req:any, res:any)=>{
     let categoria=req.params.categoria;
-    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto INNER JOIN categoria ON categoria.nombreCategoria = ? WHERE producto.idCategoria = categoria.idCategoria'
+    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock FROM producto INNER JOIN categoria ON categoria.nombreCategoria = ? WHERE producto.idCategoria = categoria.idCategoria'
     
     await connection.query(sql,categoria,(error:any,results:any)=>{
         if (error) throw error;

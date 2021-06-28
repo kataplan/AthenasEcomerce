@@ -16,7 +16,7 @@ export class ProductoService {
   constructor(private servicio: HttpClient) { }
   listaSinFiltrar:Array<Producto> = [];
 
- 
+  
   obtenerProductosPorNombreCategoria(str:string) {    
     this.listaProductos = [];
     return this.servicio.get(`${this.server}categoria/${str}`).subscribe((dato:any)=>{
@@ -43,6 +43,7 @@ export class ProductoService {
       this.obtenerCategoriaPorID(dato[0].idCategoria) 
     });
   }
+  
   obtenerCategoriaPorID(str:string){
     return this.servicio.get(`${this.server}producto/categoria/${str}`).subscribe((dato:any)=>{
       this.catBusqueda = dato[0].nombreCategoria.toLowerCase()
@@ -77,7 +78,7 @@ export class ProductoService {
     this.servicio.post(`${this.server}loadComments`,producto).subscribe(
       (response:any)=>{
         if(response.code != 204){
-          this.listaComentarios = response
+          this.listaComentarios = response          
         }       
       }
     ) 

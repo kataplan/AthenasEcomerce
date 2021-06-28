@@ -15,5 +15,15 @@ export interface Profile{
     rut:string,
     direccion:string,
     region:string,
-    comuna:string
+    comuna:string,
+}
+export interface ProfileAdmin{
+    idUsuario:string,
+    nombres:string,
+    apellidos:string,
+    rut:string,
+    direccion:string,
+    region:string,
+    comuna:string,
+    email:string,
 }
