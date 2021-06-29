@@ -179,6 +179,29 @@ app.get('/obtenerPedidos', function (req, res) { return __awaiter(void 0, void 0
         return [2 /*return*/];
     });
 }); });
+app.post('/verificarComentario', function (req, res) {
+    var token = req.body.tokenValue;
+    var email = jwt.verify(token, 'secretKey');
+    var sql = 'SELECT COUNT(idComentario) as contador FROM comentario WHERE idUsuario = (SELECT idUsuario FROM usuario WHERE email = ?) AND idProducto = ?';
+    dbconfig_1.connection.query(sql, [email._id, req.body.idProducto], function (error, results) {
+        if (error)
+            throw error;
+        if (results.length > 0) {
+            if (results[0].contador != 0) {
+                res.send({
+                    "code": 200,
+                    "hasComment": "true"
+                });
+            }
+            else {
+                res.send({
+                    "code": 200,
+                    "hasComment": "false"
+                });
+            }
+        }
+    });
+});
 app.post('/guardarPedido', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var dataToSave, email, sqlEmail, sqlPedido, sqlUltimoPedido, sqlProductoPedido, sqlUpdateStock, idUsuario, idPedido;
     return __generator(this, function (_a) {
@@ -336,7 +359,7 @@ app.post('/getUserData', function (req, res) { return __awaiter(void 0, void 0, 
         switch (_a.label) {
             case 0:
                 token = req.body.token;
-                sqlEmail = 'SELECT nombres,apellidos,rut,direccion,region,comuna FROM usuario WHERE email = ?';
+                sqlEmail = 'SELECT nombres,apellidos,rut,direccion,region,comuna,email FROM usuario WHERE email = ?';
                 email = jwt.verify(token, 'secretKey');
                 return [4 /*yield*/, dbconfig_1.connection.query(sqlEmail, email._id, function (error, results) {
                         if (error)
@@ -381,36 +404,83 @@ app.post('/loadComments', function (req, res) { return __awaiter(void 0, void 0,
     });
 }); });
 app.post('/saveComment', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, token, comment, valoration, productId, sqlEmail, email, sqlComment, userId;
+    var _a, token, comment, valoration, productId, sqlEmail, email, sqlComment, userId, sqlSelVal, sqlUpdateVal, suma, promedio;
     return __generator(this, function (_b) {
-        console.log(req.body);
-        _a = req.body, token = _a.token, comment = _a.comment, valoration = _a.valoration;
-        productId = req.body.idProducto;
-        sqlEmail = 'SELECT idUsuario FROM usuario WHERE email = ?';
-        email = jwt.verify(token, 'secretKey');
-        sqlComment = 'INSERT INTO comentario (comentario, valoracion, idProducto, idUsuario) VALUES(?,?,?,?)';
-        dbconfig_1.connection.query(sqlEmail, email._id, function (error, results) {
-            if (error)
-                throw error;
-            if (results.length > 0) {
-                userId = results[0].idUsuario;
-                dbconfig_1.connection.query(sqlComment, [comment, valoration, productId, userId], function (error, results) {
-                    if (error)
-                        throw error;
-                    res.send({
-                        "code": 201,
-                        "response": "Comentario Guardado"
-                    });
-                });
-            }
-            else {
-                res.send({
-                    "code": 204,
-                    "error": "fallo en  validar email"
-                });
-            }
-        });
-        return [2 /*return*/];
+        switch (_b.label) {
+            case 0:
+                _a = req.body, token = _a.token, comment = _a.comment, valoration = _a.valoration;
+                productId = req.body.idProducto;
+                sqlEmail = 'SELECT idUsuario FROM usuario WHERE email = ?';
+                email = jwt.verify(token, 'secretKey');
+                sqlComment = 'INSERT INTO comentario (comentario, valoracion, idProducto, idUsuario) VALUES(?,?,?,?)';
+                sqlSelVal = 'SELECT valoracion FROM comentario WHERE idProducto = ?';
+                sqlUpdateVal = 'UPDATE producto SET valoracion = ? WHERE producto.idProducto = ?';
+                suma = 0;
+                promedio = 0;
+                return [4 /*yield*/, dbconfig_1.connection.query(sqlEmail, email._id, function (error, results) { return __awaiter(void 0, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    if (error)
+                                        throw error;
+                                    if (!(results.length > 0)) return [3 /*break*/, 2];
+                                    userId = results[0].idUsuario;
+                                    return [4 /*yield*/, dbconfig_1.connection.query(sqlComment, [comment, valoration, productId, userId], function (error, results) { return __awaiter(void 0, void 0, void 0, function () {
+                                            return __generator(this, function (_a) {
+                                                switch (_a.label) {
+                                                    case 0:
+                                                        if (error)
+                                                            throw error;
+                                                        return [4 /*yield*/, dbconfig_1.connection.query(sqlSelVal, productId, function (error, results) { return __awaiter(void 0, void 0, void 0, function () {
+                                                                var i;
+                                                                return __generator(this, function (_a) {
+                                                                    switch (_a.label) {
+                                                                        case 0:
+                                                                            i = 0;
+                                                                            for (i = 0; i < results.length; i++) {
+                                                                                suma = suma + results[i].valoracion;
+                                                                            }
+                                                                            promedio = suma / results.length;
+                                                                            return [4 /*yield*/, dbconfig_1.connection.query(sqlUpdateVal, [promedio, productId], function (error, results) { return __awaiter(void 0, void 0, void 0, function () {
+                                                                                    return __generator(this, function (_a) {
+                                                                                        if (error)
+                                                                                            throw error;
+                                                                                        res.send({
+                                                                                            "code": 201,
+                                                                                            "response": "Comentario Guardado"
+                                                                                        });
+                                                                                        return [2 /*return*/];
+                                                                                    });
+                                                                                }); })];
+                                                                        case 1:
+                                                                            _a.sent();
+                                                                            return [2 /*return*/];
+                                                                    }
+                                                                });
+                                                            }); })];
+                                                    case 1:
+                                                        _a.sent();
+                                                        return [2 /*return*/];
+                                                }
+                                            });
+                                        }); })];
+                                case 1:
+                                    _a.sent();
+                                    return [3 /*break*/, 3];
+                                case 2:
+                                    res.send({
+                                        "code": 204,
+                                        "error": "fallo en  validar email"
+                                    });
+                                    _a.label = 3;
+                                case 3: return [2 /*return*/];
+                            }
+                        });
+                    }); })];
+            case 1:
+                _b.sent();
+                return [2 /*return*/];
+        }
     });
 }); });
 app.post('/passRecovery', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -546,7 +616,7 @@ app.get('/search/:nombreProducto', function (req, res) { return __awaiter(void 0
         switch (_a.label) {
             case 0:
                 prodBusqueda = "%" + req.params.nombreProducto + "%";
-                sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto LIKE ? ";
+                sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock,valoracion FROM producto WHERE nombreProducto LIKE ? ";
                 return [4 /*yield*/, dbconfig_1.connection.query(sql, prodBusqueda, function (error, results) {
                         if (error)
                             throw error;
@@ -564,31 +634,74 @@ app.get('/search/:nombreProducto', function (req, res) { return __awaiter(void 0
     });
 }); });
 app.post('/registrar', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var newUser, hashedPassword, sql, token;
+    var sql, newUser_1;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                if (!(req.body === '')) return [3 /*break*/, 1];
-                res.status(500).json({ message: 'ERROR AL REGISTRAR' });
-                return [3 /*break*/, 3];
-            case 1:
-                newUser = req.body;
-                hashedPassword = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
-                sql = 'INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion, contrasena) VALUES(?,?,?,?,?,?,?,?)';
-                return [4 /*yield*/, dbconfig_1.connection.query(sql, [newUser.nombres, newUser.apellidos, newUser.rut, newUser.email, newUser.region, newUser.comuna, newUser.direccion, hashedPassword], function (error, results) {
-                        if (error)
-                            if (error)
-                                throw error;
-                        console.log("1 usuario registrado");
-                    })];
-            case 2:
-                _a.sent();
-                token = jwt.sign({ _id: newUser.password }, 'secretKey');
-                res.status(201).json({ message: token });
-                console.log(token);
-                _a.label = 3;
-            case 3: return [2 /*return*/];
+        sql = 'SELECT COUNT(idUsuario) as contador FROM usuario WHERE email = ?';
+        if (req.body === '') {
+            res.status(500).json({ message: 'ERROR AL REGISTRAR' });
         }
+        else {
+            newUser_1 = req.body;
+            if (validarDatos(newUser_1)) {
+                if (verificarRut(newUser_1.rut)) {
+                    if (verificarContrasena(newUser_1.password)) {
+                        dbconfig_1.connection.query(sql, newUser_1.email, function (error, results) { return __awaiter(void 0, void 0, void 0, function () {
+                            var hashedPassword, sql_1;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        if (error)
+                                            throw error;
+                                        if (!(results[0].contador == 0)) return [3 /*break*/, 2];
+                                        hashedPassword = bcrypt.hashSync(newUser_1.password, bcrypt.genSaltSync(10));
+                                        sql_1 = 'INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion, contrasena) VALUES(?,?,?,?,?,?,?,?)';
+                                        return [4 /*yield*/, dbconfig_1.connection.query(sql_1, [newUser_1.nombres, newUser_1.apellidos, newUser_1.rut, newUser_1.email, newUser_1.region, newUser_1.comuna, newUser_1.direccion, hashedPassword], function (error, results) {
+                                                if (error)
+                                                    if (error)
+                                                        throw error;
+                                                console.log("1 usuario registrado");
+                                                var token = jwt.sign({ _id: newUser_1.password }, 'secretKey');
+                                                res.send({
+                                                    "code": 201,
+                                                    "error": "Registrado con exito"
+                                                });
+                                            })];
+                                    case 1:
+                                        _a.sent();
+                                        return [3 /*break*/, 3];
+                                    case 2:
+                                        res.send({
+                                            "code": 204,
+                                            "error": "USUARIO YA REGISTRADO"
+                                        });
+                                        _a.label = 3;
+                                    case 3: return [2 /*return*/];
+                                }
+                            });
+                        }); });
+                    }
+                    else {
+                        res.send({
+                            "code": 204,
+                            "error": "Contraseña invalida"
+                        });
+                    }
+                }
+                else {
+                    res.send({
+                        "code": 204,
+                        "error": "RUT INVALIDO"
+                    });
+                }
+            }
+            else {
+                res.send({
+                    "code": 204,
+                    "error": "error al registrar el usuario, verifique los campos"
+                });
+            }
+        }
+        return [2 /*return*/];
     });
 }); });
 app.get('/categoria/:categoria', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -597,7 +710,7 @@ app.get('/categoria/:categoria', function (req, res) { return __awaiter(void 0, 
         switch (_a.label) {
             case 0:
                 categoria = req.params.categoria;
-                sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock FROM producto INNER JOIN categoria ON categoria.nombreCategoria = ? WHERE producto.idCategoria = categoria.idCategoria';
+                sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock,valoracion FROM producto INNER JOIN categoria ON categoria.nombreCategoria = ? WHERE producto.idCategoria = categoria.idCategoria';
                 return [4 /*yield*/, dbconfig_1.connection.query(sql, categoria, function (error, results) {
                         if (error)
                             throw error;
@@ -724,4 +837,73 @@ function mailer(email) {
             return [2 /*return*/];
         });
     });
+}
+function validarDatos(newUser) {
+    if (newUser.nombres === '') {
+        return false;
+    }
+    if (newUser.apellidos === '') {
+        return false;
+    }
+    if (newUser.direccion === '') {
+        return false;
+    }
+    if (newUser.comuna === '') {
+        return false;
+    }
+    if (newUser.region === '') {
+        return false;
+    }
+    return true;
+}
+function verificarContrasena(password) {
+    if (password.length < 8 || password === '') {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+function verificarRut(rut) {
+    if (rut === '') {
+        return false;
+    }
+    else {
+        return digitoVerificador(rut);
+    }
+}
+function digitoVerificador(rut) {
+    var serie = [2, 3, 4, 5, 6, 7, 2, 3];
+    var _a = rut.split("-"), numRut = _a[0], numVerificador = _a[1];
+    var numeros = numRut.split("");
+    var suma = 0;
+    numeros.reverse().map(function (num, i) {
+        suma += Number(num) * serie[i];
+    });
+    var module = suma % 11;
+    var Verificador = 11 - module;
+    var k = "k";
+    var zero = "0";
+    if (Verificador == Number(numVerificador)) {
+        return true;
+    }
+    else if (Verificador == 11) {
+        if (numVerificador != zero) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    else if (Verificador == 10) {
+        if (numVerificador != k) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    else {
+        return false;
+    }
 }

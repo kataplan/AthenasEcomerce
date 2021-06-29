@@ -17,24 +17,12 @@ export class LoginUsuarioService {
     direccion: '',
     region: '',
     comuna: '',
+    email: ''
   };
 
 
   constructor(private servicio: HttpClient, private router: Router) {}
-  /*getUserId(){
-    let idUsuario;
-    const tokenString={
-      token:sessionStorage.getItem('whoami')
-    }
-
-    this.servicio.post(`${this.server}getUserId`,tokenString).subscribe(
-      (response:any)=>{
-        console.log(response.result);
-        return response.result
-      }
-    )
-  }*/
-
+  
   logUser(user: any) {
     return this.servicio.post(`${this.server}login`, user).subscribe(
       (response: any) => {
@@ -84,12 +72,6 @@ export class LoginUsuarioService {
     }
     
   }
-
-  /*getAdmin(user:any){
-    this.servicio.get(`${this.server}admin`,{headers:{'Authorization':`${this.token}`}}).subscribe(
-      (response) => console.log(response)
-    )
-  }*/
 
   passReset(email: string) {
     this.servicio.post(`${this.server}passReset/${email}`, email).subscribe(

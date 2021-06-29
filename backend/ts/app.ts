@@ -135,6 +135,30 @@ app.get('/obtenerPedidos',async(req:any,res:any)=>{
     })
 })
 
+app.post('/verificarComentario',(req:any,res:any)=>{    
+    const token = req.body.tokenValue
+    const email = jwt.verify(token,'secretKey')
+
+    const sql = 'SELECT COUNT(idComentario) as contador FROM comentario WHERE idUsuario = (SELECT idUsuario FROM usuario WHERE email = ?) AND idProducto = ?'
+
+    connection.query(sql,[email._id,req.body.idProducto],(error:any,results:any)=>{
+        if(error) throw error
+        if(results.length>0){
+            if(results[0].contador != 0){
+                res.send({
+                    "code":200,                 
+                    "hasComment":"true"
+                })
+            }else{
+                res.send({
+                    "code":200,                 
+                    "hasComment":"false"  
+                })
+            } 
+        }
+    })
+})
+
 app.post('/guardarPedido',async(req:any,res:any)=>{
     let dataToSave:Pedido = req.body;
     const email = jwt.verify(dataToSave.token,'secretKey');
@@ -145,8 +169,7 @@ app.post('/guardarPedido',async(req:any,res:any)=>{
     const sqlUpdateStock = 'UPDATE producto SET stock = (SELECT stock from producto WHERE idProducto = ?)-? WHERE idProducto = ? AND idProducto > 0'
     let idUsuario ='';
     let idPedido = '';
-    
-    
+
     connection.query(sqlEmail,email._id, async(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
@@ -237,7 +260,7 @@ app.get ('/getUsers',async(req:any,res:any)=>{
 
 app.post('/getUserData' , async(req:any,res:any)=>{   
     const token = req.body.token
-    const sqlEmail = 'SELECT nombres,apellidos,rut,direccion,region,comuna FROM usuario WHERE email = ?';
+    const sqlEmail = 'SELECT nombres,apellidos,rut,direccion,region,comuna,email FROM usuario WHERE email = ?';
     const email = jwt.verify(token,'secretKey')
     let userData:Profile;
     await connection.query(sqlEmail,email._id,(error:any,results:any)=>{
@@ -265,7 +288,6 @@ app.post('/loadComments', async(req:any,res:any)=>{
         if (results.length > 0){           
             res.json(results);
         }else{
-
             res.send({                 
                 "code":204,                 
                 "error":"No hay resultados"            
@@ -275,28 +297,46 @@ app.post('/loadComments', async(req:any,res:any)=>{
 });
 
 app.post('/saveComment',async(req:any,res:any)=>{
-    console.log(req.body);
-    
+
     const { token , comment, valoration} = req.body;
     const productId= req.body.idProducto
    
     const sqlEmail = 'SELECT idUsuario FROM usuario WHERE email = ?';
-    const email = jwt.verify(token,'secretKey')
+    const email = jwt.verify(token,'secretKey');
     
-    const sqlComment = 'INSERT INTO comentario (comentario, valoracion, idProducto, idUsuario) VALUES(?,?,?,?)'
+    const sqlComment = 'INSERT INTO comentario (comentario, valoracion, idProducto, idUsuario) VALUES(?,?,?,?)';
     let userId;
 
-    connection.query(sqlEmail,email._id,(error:any,results:any)=>{
+    const sqlSelVal = 'SELECT valoracion FROM comentario WHERE idProducto = ?';
+    const sqlUpdateVal = 'UPDATE producto SET valoracion = ? WHERE producto.idProducto = ?';
+    let suma = 0;
+    let promedio = 0;
+
+    await connection.query(sqlEmail,email._id,async(error:any,results:any)=>{
         if (error) throw error;
         if (results.length > 0){
            userId = results[0].idUsuario
            
-            connection.query(sqlComment,[comment,valoration,productId,userId],(error:any,results:any)=>{
+            await connection.query(sqlComment,[comment,valoration,productId,userId],async(error:any,results:any)=>{
                 if (error) throw error;
-                res.send({                 
-                    "code":201,                 
-                    "response":"Comentario Guardado"            
-                })   
+                
+                await connection.query(sqlSelVal,productId,async(error:any,results:any)=>{
+                    let i = 0
+
+                    for(i=0;i<results.length;i++){
+                        suma = suma + results[i].valoracion
+                        
+                    }     
+
+                    promedio = suma/results.length                    
+                    await connection.query(sqlUpdateVal,[promedio,productId],async(error:any,results:any)=>{
+                        if(error) throw error
+                        res.send({                 
+                            "code":201,                 
+                            "response":"Comentario Guardado"            
+                        })  
+                    })
+                })
             })
         }else{
             res.send({                 
@@ -427,7 +467,7 @@ app.get('/search/:nombreProducto', async(req:any, res:any)=>{
     
     
     let prodBusqueda = "%"+req.params.nombreProducto+"%";
-    const sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock, valoracion FROM producto WHERE nombreProducto LIKE ? "
+    const sql = "SELECT idProducto, nombreProducto, descripcion, precio, stock,valoracion FROM producto WHERE nombreProducto LIKE ? "
     
     await connection.query(sql,prodBusqueda,(error:any,results:any)=>{
         if (error) throw error;
@@ -437,34 +477,70 @@ app.get('/search/:nombreProducto', async(req:any, res:any)=>{
         }else{
             res.send('No hay resultados')
         }
-    
     })
 })
 
 app.post('/registrar', async(req:any,res:any)=>{
+    const sql = 'SELECT COUNT(idUsuario) as contador FROM usuario WHERE email = ?'
+    
     if(req.body===''){
         res.status(500).json({ message: 'ERROR AL REGISTRAR' });
-    }else{
-        
-        const newUser:Usuario= req.body;
-        const hashedPassword:string = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
-        const sql = 'INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion, contrasena) VALUES(?,?,?,?,?,?,?,?)'   
-        await connection.query(sql,[newUser.nombres,newUser.apellidos,newUser.rut,newUser.email,newUser.region,newUser.comuna,newUser.direccion, hashedPassword],(error:any,results:any)=>{
-            if (error) if (error) throw error;
-            
-            console.log("1 usuario registrado");
-        })
+    }else{        
+        const newUser:Usuario= req.body;        
+        if(validarDatos(newUser)){
+            if(verificarRut(newUser.rut)){
+                if(verificarContrasena(newUser.password)){
+                    connection.query(sql,newUser.email,async(error:any,results:any)=>{
+                        if (error) throw error;
+                        if (results[0].contador == 0){
+                            const hashedPassword:string = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
+                            const sql = 'INSERT INTO usuario (nombres, apellidos, rut, email, region, comuna, direccion, contrasena) VALUES(?,?,?,?,?,?,?,?)'   
+                                    
+                            await connection.query(sql,[newUser.nombres,newUser.apellidos,newUser.rut,newUser.email,newUser.region,newUser.comuna,newUser.direccion, hashedPassword],(error:any,results:any)=>{
+                                if (error) if (error) throw error;
+                                console.log("1 usuario registrado");
+                                const token = jwt.sign({_id: newUser.password},'secretKey')
+                                res.send({                 
+                                    "code":201,                 
+                                    "error":"Registrado con exito"            
+                                })
+                            })
+                        }else{
+                            res.send({                 
+                                "code":204,                 
+                                "error":"USUARIO YA REGISTRADO"            
+                            })
+                        }
+                    })        
+                }else{
+                    res.send({                 
+                        "code":204,                 
+                        "error":"Contraseña invalida"            
+                    })
+                }  
+                
 
-        const token = jwt.sign({_id: newUser.password},'secretKey')
-        res.status(201).json({ message: token }); 
-        console.log(token);
+            }else{
+                res.send({                 
+                    "code":204,                 
+                    "error":"RUT INVALIDO"            
+                })
+            }
+        }else{
+            res.send({                 
+                "code":204,                 
+                "error":"error al registrar el usuario, verifique los campos"            
+            })
+        }
+ 
+        
     }
     
 })
 
 app.get('/categoria/:categoria', async(req:any, res:any)=>{
     let categoria=req.params.categoria;
-    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock FROM producto INNER JOIN categoria ON categoria.nombreCategoria = ? WHERE producto.idCategoria = categoria.idCategoria'
+    const sql = 'SELECT idProducto, nombreProducto, descripcion, precio, stock,valoracion FROM producto INNER JOIN categoria ON categoria.nombreCategoria = ? WHERE producto.idCategoria = categoria.idCategoria'
     
     await connection.query(sql,categoria,(error:any,results:any)=>{
         if (error) throw error;
@@ -487,7 +563,6 @@ app.get('/regiones', async(req:any, res:any)=>{
         }
     });
 })
-
 
 app.get('/producto/:id', async(req: any, res: any) => {
     let id=req.params.id;
@@ -562,4 +637,77 @@ async function mailer(email:string){
         };
     });
     
+}
+
+function validarDatos(newUser:Usuario){  
+    if(newUser.nombres === ''){
+        return false
+    }
+    if(newUser.apellidos === ''){
+        return false
+    }
+    if(newUser.direccion === ''){
+        return false
+    }
+    if(newUser.comuna === ''){
+        return false
+    }
+    if(newUser.region === ''){
+        return false
+    }
+
+    return true
+}
+
+function verificarContrasena(password:string){
+    if( password.length < 8 || password === ''){
+        return false
+    }else{
+        return true
+    }
+}
+
+function verificarRut(rut:string){
+    if (rut === ''){
+        return false
+    }else{
+        return digitoVerificador(rut)
+    }
+}
+
+function  digitoVerificador(rut:string){
+    const serie:number[]=[2,3,4,5,6,7,2,3];
+    const [numRut,numVerificador] = rut.split("-");
+    const numeros:string[] =numRut.split("")
+    let suma:number= 0
+    numeros.reverse().map(function (num, i) {
+        suma += Number(num) * serie[i];
+    });
+
+    const module = suma % 11;
+    const Verificador = 11 - module;
+
+    const k = "k";
+    const zero = "0";
+
+    if (Verificador == Number(numVerificador)) {
+        return true
+    } else if (Verificador == 11) {
+        if (numVerificador != zero) {
+            
+            return false
+        } else {
+            return true
+        }
+    } else if (Verificador == 10) {
+        if (numVerificador != k) {
+            
+            return false
+        } else {
+            return true
+        }
+    } else {
+        
+        return false
+    }
 }

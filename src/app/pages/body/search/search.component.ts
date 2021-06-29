@@ -35,7 +35,8 @@ export class SearchComponent implements OnInit {
   }
 
   rate(valor:number) {
-    this.servicioProductos.valorRating=valor;
+    this.servicioProductos.valorRating=Math.round(valor*10)/10;
+
   }
 
 }

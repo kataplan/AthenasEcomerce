@@ -10,7 +10,7 @@
 <div id="gallery-wrapper">
   <div class="gallery">
     <div>
-      <mat-card class="example-card">
+      <mat-card class="example-card" (click)="goCategory('football')">
         <img
           mat-card-image
           src="../../../assets/img/football.jpg"
@@ -22,7 +22,7 @@
       </mat-card>
     </div>
     <div>
-      <mat-card class="example-card">
+      <mat-card class="example-card" (click)="goCategory('basketball')">
         <img
           mat-card-image
           src="../../../assets/img/basketball.jpg"
@@ -34,7 +34,7 @@
       </mat-card>
     </div>
     <div>
-      <mat-card class="example-card">
+      <mat-card class="example-card" (click)="goCategory('ciclismo')">
         <img
           mat-card-image
           src="../../../assets/img/bicicleta.png"
@@ -46,7 +46,7 @@
       </mat-card>
     </div>
     <div>
-      <mat-card class="example-card">
+      <mat-card class="example-card" (click)="goCategory('boxeo')">
         <img
           mat-card-image
           src="../../../assets/img/boxeo.jpg"

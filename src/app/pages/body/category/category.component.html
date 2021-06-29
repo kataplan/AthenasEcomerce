@@ -26,8 +26,9 @@
               </button>
   
               <mat-card-content class="price"> $ {{moneyFormating(item.precio)}}</mat-card-content>   
-              
-              <app-star>{{rate(item.valoracion)}}</app-star>
+              <mat-card-content class="star"> 
+                <app-star>{{rate(item.valoracion)}}</app-star>
+              </mat-card-content>
             </mat-card>
           </div>
         </div>

@@ -33,6 +33,7 @@ export class CheckoutComponent implements OnInit {
     direccion: '',
     region: '',
     comuna: '',
+    email:'',
   };
   constructor(
     public fb: FormBuilder,

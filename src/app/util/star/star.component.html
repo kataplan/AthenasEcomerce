@@ -1,4 +1,4 @@
-<div class="rating">
+<div class="rating"  *ngIf="servicioProductos.valorRating > 0">
     <mat-icon class="star-rating" *ngIf="fullStar(0)">star</mat-icon>
     <mat-icon class="star-rating" *ngIf="fullStar(1)">star</mat-icon>
     <mat-icon class="star-rating" *ngIf="fullStar(2)">star</mat-icon>

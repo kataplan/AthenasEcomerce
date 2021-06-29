@@ -16,6 +16,7 @@ export interface Profile{
     direccion:string,
     region:string,
     comuna:string,
+    email:string
 }
 export interface ProfileAdmin{
     idUsuario:string,

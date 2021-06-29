@@ -56,10 +56,6 @@ export class HeaderComponent implements OnInit {
       this.display = true;
     }
   }
-  goProfile() {
-    this.router.navigate([`/perfil`]);
-  }
-
   closeSession() {
     this.servicioLogin.logOut();
   }

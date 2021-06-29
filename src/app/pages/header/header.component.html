@@ -78,12 +78,14 @@
         <div *ngIf="this.servicioLogin.loggedUser; else elseBlock" >
           
           <div class="user-data">
-            <h2>{{ this.servicioLogin.profile.nombres }} {{ this.servicioLogin.profile.apellidos }}</h2>
-            <h3>{{ this.servicioLogin.profile.direccion }}</h3>
-            <h3>{{ this.servicioLogin.profile.comuna }}, {{ this.servicioLogin.profile.region }}</h3>
+            <mat-icon id="icon-circle">account_circle</mat-icon>
+            <div class="user-data-text">
+              <p >{{ this.servicioLogin.profile.nombres }} {{ this.servicioLogin.profile.apellidos }}</p>
+              <p> {{this.servicioLogin.profile.email}}</p>
+            </div>
           </div>
-          <button mat-menu-item (click)="goProfile()">Mi Perfil</button>
-          <button mat-menu-item (click)="closeSession()">Cerrar Sesión</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="closeSession()"><mat-icon>logout</mat-icon>Cerrar Sesión</button>
         </div>
         <ng-template #elseBlock>
           <button mat-menu-item (click)="goLogin()">Iniciar Sesión</button>

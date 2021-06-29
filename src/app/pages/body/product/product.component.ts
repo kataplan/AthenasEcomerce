@@ -49,18 +49,8 @@ export class ProductComponent implements OnInit {
     return Intl.NumberFormat('de-DE').format(num);
   }
 
-  rate() {
-    if(this.servicioProductos.listaComentarios.length=0){
-      let suma = 0;
-      this.servicioProductos.listaComentarios.forEach((item)=>{
-        suma = suma + item.valoracion
-      })
-      const promedio = suma/this.servicioProductos.listaComentarios.length
-      this.servicioProductos.valorRating = promedio;
-    }else{
-      this.servicioProductos.valorRating = 0;
-    }
-  }
+  rate(valoracion:number) {
+    this.servicioProductos.valorRating=Math.round(valoracion*10)/10;  }
 
   stock(stock: number) {
     if (stock == 0) {

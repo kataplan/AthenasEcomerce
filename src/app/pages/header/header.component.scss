@@ -36,7 +36,20 @@ input {
 #sub-busqueda {
   display: none;
 }
-
+#icon-circle{
+  font-size: 3.4rem;
+  width: 3.4rem;
+  height: 3.4rem;
+}
+.user-data-text{
+  height: 2.98rem;
+}
+.user-data{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin:0.5rem;
+}
 .btn-icon-text,
 #btn-search,
 #hambuger-menu {

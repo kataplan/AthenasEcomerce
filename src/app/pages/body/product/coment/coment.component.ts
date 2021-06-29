@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductoService } from '../../../../services/producto.service';
+import { PedidosService } from '../../../../services/pedidos.service'
 import { LoginUsuarioService } from '../../../../services/login-usuario.service';
 import { ActivatedRoute } from '@angular/router';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-coment',
@@ -16,6 +18,7 @@ export class ComentComponent implements OnInit {
   constructor(
     public servicioProductos: ProductoService,
     public servicioLogin: LoginUsuarioService,
+    public servicioPedidos: PedidosService,
     private route: ActivatedRoute
   ) {
     this.formulario = this.createFormGroup();
@@ -46,11 +49,17 @@ export class ComentComponent implements OnInit {
       if (this.formulario.controls['rate'].value == '') {
         alert('Debe elegir valoración');
       } else {
-        this.servicioProductos.saveComment(this.formulario.controls['coment'].value,this.formulario.controls['rate'].value, this.idProducto)
+        const token = <string>sessionStorage.getItem('whoami');
+        if(token){    
+          const comentario = this.formulario.controls['coment'].value 
+          const valoracion = this.formulario.controls['rate'].value
+          this.servicioPedidos.verificarComentario(token,this.idProducto,comentario,valoracion)
+        }
+      }   
       }
     }
-  }
+  
   rate(valor: number) {
-    this.servicioProductos.valorRating = valor;
+     this.servicioProductos.valorRating=Math.round(valor*10)/10;
   }
 }

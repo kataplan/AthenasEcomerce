@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     this.formulario = fb.group({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      rut: new FormControl('', [Validators.required]),
+      rut: new FormControl('', [Validators.required, Validators.pattern("[0-9]+[-|‐]{1}[0-9kK]{1}"), Validators.maxLength(10), Validators.minLength(9)]), 
       address: new FormControl('', [Validators.required]),
       region: new FormControl('', [Validators.required]),
       comuna: new FormControl('', [Validators.required]),
@@ -71,8 +71,6 @@ export class RegisterComponent implements OnInit {
         };
 
         this.servicioRegistro.registrarUsuario(nuevoUsuario);
-        this.router.navigate(['login'])
-        alert('Registrado con éxito!!');
       } else {
         alert('Las contraseñas no coinciden');
       }

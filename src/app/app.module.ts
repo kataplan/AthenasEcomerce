@@ -40,7 +40,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {CheckoutComponent} from './pages/body/checkout/checkout.component';
 import { AdminComponent } from './pages/body/admin/admin.component';
-import { ProfileComponent } from './pages/body/profile/profile.component';
 import { ResetpasswordComponent } from './pages/body/resetpassword/resetpassword.component';
 import { PasswordRecoveryComponent } from './pages/body/password-recovery/password-recovery.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -66,7 +65,6 @@ import { DialogComponent } from './util/dialog/dialog.component';
     CategoryComponent,
     CheckoutComponent,
     AdminComponent,
-    ProfileComponent,
     ResetpasswordComponent,
     PasswordRecoveryComponent,
     DialogComponent,
