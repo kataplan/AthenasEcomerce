@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2021 a las 03:46:11
+-- Tiempo de generación: 29-06-2021 a las 04:06:40
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -39,7 +39,8 @@ CREATE TABLE `administrador` (
 
 INSERT INTO `administrador` (`idAdmin`, `email`, `contrasena`) VALUES
 (1, 'dcatalanmarchese@gmail.com', '$2y$10$sIKl47vavY1gZe/uQgkWv.u4XmKIr9Jr7U14hU2WDFeVeTOayDyJG'),
-(2, 'ignavaldecace98@gmail.com', '$2y$10$77.ryPQS8zAnpLEMmb0FiuYozdXYc53h8qiPgmcxPKwPtRk6aRsxy');
+(2, 'ignavaldecace98@gmail.com', '$2y$10$77.ryPQS8zAnpLEMmb0FiuYozdXYc53h8qiPgmcxPKwPtRk6aRsxy'),
+(3, 'sandra.cano@pucv.cl', '$2y$10$qOaD4sQ1qFZVBigiDCvAwOR.vnHMSk8suM.T2o048tSMsunpw/7jS');
 
 -- --------------------------------------------------------
 
@@ -341,7 +342,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
